@@ -1,0 +1,13 @@
+.button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid rgba(28, 52, 84, 0.26);
+    border-radius: 4px;
+    background-color: transparent;
+    :not(:last-child) {
+        margin: 0 10px 0 0;
+    }
+}

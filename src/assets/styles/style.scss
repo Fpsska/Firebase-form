@@ -33,3 +33,13 @@ button {
 }
 
 // /. NULL-STYLES
+
+#root,
+.App,
+.page {
+    height: 100%;
+}
+
+.page {
+    padding: 28px;
+}

@@ -14,25 +14,19 @@
         }
         margin: 0 0 28px 0;
     }
+    &__title {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 125.3%;
+    }
     &__subtitle {
+        font-weight: 400;
+        line-height: 134%;
         margin: 0;
     }
     &__image {
         width: 168px;
         height: 92px;
         object-fit: cover;
-    }
-    &__button {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px 15px;
-        border: 1px solid rgba(28, 52, 84, 0.26);
-        border-radius: 4px;
-        background-color: transparent;
-        :not(:last-child) {
-            margin: 0 10px 0 0;
-        }
     }
 }

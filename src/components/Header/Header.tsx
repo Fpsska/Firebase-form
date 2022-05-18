@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { FcGoogle } from 'react-icons/fc';
+import ButtonTemplate from '../Button/ButtonTemplate';
 
-import logo from '../../assets/images/logo_icon.svg';
+import logo from '../../assets/images/logo_icon.png';
 
 import './header.scss';
 
@@ -19,10 +19,8 @@ const Header: React.FC = () => {
                     <p className="header__subtitle">Welcome back, please enter your details.</p>
                 </div>
 
-                <button className="header__button">
-                    <FcGoogle size={19} />
-                    <span>Continue with Google</span>
-                </button>
+                <ButtonTemplate/>
+
             </div>
         </header>
     );
