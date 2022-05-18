@@ -1,0 +1,38 @@
+.header {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        :not(:last-child) {
+            margin: 0 0 5px 0;
+        }
+        margin: 0 0 28px 0;
+    }
+    &__subtitle {
+        margin: 0;
+    }
+    &__image {
+        width: 168px;
+        height: 92px;
+        object-fit: cover;
+    }
+    &__button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 15px;
+        border: 1px solid rgba(28, 52, 84, 0.26);
+        border-radius: 4px;
+        background-color: transparent;
+        :not(:last-child) {
+            margin: 0 10px 0 0;
+        }
+    }
+}
