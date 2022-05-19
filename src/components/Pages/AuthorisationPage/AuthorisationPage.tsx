@@ -2,7 +2,6 @@ import React from 'react';
 
 import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
-import Relocate from '../../Relocate/Relocate';
 
 // /. imports
 
@@ -12,7 +11,6 @@ const AuthorisationPage: React.FC = () => {
             <div className="authorisation__wrapper">
                 <SectionMark />
                 <Form />
-                <Relocate/>
             </div>
         </div>
     );
