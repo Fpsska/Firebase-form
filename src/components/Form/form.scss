@@ -16,10 +16,16 @@
             margin: 0 0 15px 0;
         }
     }
+    &__label-required {
+        color: red;
+        margin: 0 0 0 1px;
+    }
     &__label--terms {
         flex-direction: row;
-        justify-content: center;
         align-items: center;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 122%;
     }
     &__input {
         margin: 5px 0 0 0;
@@ -48,6 +54,7 @@
         -moz-appearance: none;
         -ms-appearance: none;
         border: none;
+        // opacity: 0;
         padding: 0;
         margin: 0;
         &:checked + .form__fake-checkbox {
@@ -83,14 +90,25 @@
         font-size: 16px;
         font-weight: 600;
         color: #fff;
+        transform: scale(1);
+        transition: transform .35s linear;
+        &:active {
+            transform: scale(1.1);
+        }
     }
     &__terms {
         display: flex;
+        align-items: flex-start;
         justify-content: space-between;
+    }
+    &__terms-link {
+        text-decoration: underline;
+        color: #1676f3;
     }
     &__restore {
         font-size: 13px;
         font-weight: 600;
+        line-height: 16.38px;
         color: #333;
         margin: 0 0 0 10px;
     }

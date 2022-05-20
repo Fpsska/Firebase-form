@@ -7,6 +7,7 @@
     border: 1px solid rgba(28, 52, 84, 0.26);
     border-radius: 4px;
     background-color: transparent;
+    cursor: not-allowed;
     :not(:last-child) {
         margin: 0 10px 0 0;
     }

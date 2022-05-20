@@ -38,9 +38,14 @@ const Form: React.FC = () => {
     const inputTermsHandler = (): void => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
     };
+
+    const handleFormSubmit = (e: any): void => {
+        e.preventDefault();
+        alert('Form Submitted!');
+    };
     // 
     return (
-        <form className="form">
+        <form className="form" onSubmit={handleFormSubmit}>
             <div className="form__wrapper">
 
                 {currentFieldsData.map(item => {
@@ -59,7 +64,12 @@ const Form: React.FC = () => {
                     ?
                     <div className="form__terms">
                         <label className="form__label form__label--terms" htmlFor="remember" >
-                            <input className="form__input form__input--checkbox" type="checkbox" id="remember" onClick={inputRememberHandler} />
+                            <input
+                                className="form__input form__input--checkbox"
+                                type="checkbox"
+                                id="remember"
+                                onClick={inputRememberHandler}
+                            />
                             <span className="form__fake-checkbox"></span>
                             Remember me
                         </label>
@@ -67,7 +77,13 @@ const Form: React.FC = () => {
                     </div>
                     :
                     <label className="form__label form__label--terms" htmlFor="terms" >
-                        <input className="form__input form__input--checkbox" type="checkbox" id="terms" onClick={inputTermsHandler} />
+                        <input
+                            className="form__input form__input--checkbox"
+                            type="checkbox"
+                            id="terms"
+                            onClick={inputTermsHandler}
+                            required
+                        />
                         <span className="form__fake-checkbox"></span>
                         <span className="form__terms-text"> I have read and agree to the{' '}
                             <a href="#" className="form__terms-link">Terms of Service</a>

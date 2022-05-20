@@ -8,7 +8,8 @@ interface formSliceTypes {
     formAuthFields: formFieldsTypes[],
     formRegistrationFields: formFieldsTypes[],
     isUserRemembered: boolean,
-    isTermsAccepted: boolean
+    isTermsAccepted: boolean,
+    isPasswordHidden: boolean
 }
 
 // /. interfaces
@@ -61,7 +62,8 @@ const initialState: formSliceTypes = {
         }
     ],
     isUserRemembered: false,
-    isTermsAccepted: false
+    isTermsAccepted: false,
+    isPasswordHidden: true
 };
 
 // /. initialState
@@ -75,13 +77,17 @@ const formSlice = createSlice({
         },
         switchTermsAcceptedStatus(state, actions: PayloadAction<boolean>) {
             state.isTermsAccepted = actions.payload;
+        },
+        switchPasswordHiddenStatus(state, actions: PayloadAction<boolean>) {
+            state.isPasswordHidden = actions.payload;
         }
     }
 });
 
 export const {
     switchUserRememberedStatus,
-    switchTermsAcceptedStatus
+    switchTermsAcceptedStatus,
+    switchPasswordHiddenStatus
 } = formSlice.actions;
 
 

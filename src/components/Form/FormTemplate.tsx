@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { BsEye } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+
+import { RootState } from '../../app/store';
+
+import { switchPasswordHiddenStatus } from '../../app/slices/formSlice';
 
 // /. imports
 
@@ -15,6 +21,9 @@ interface FormTemplatePropTypes {
 
 const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
 
+    const { isPasswordHidden } = useSelector((state: RootState) => state.formSlice);
+    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+
     const {
         type,
         htmlFor,
@@ -22,18 +31,33 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
         placeholder
     } = props;
 
+    const dispatch = useDispatch();
+    // 
     return (
         <label className="form__label" htmlFor={htmlFor}>
-            {label}
+            <span className="form__label-text">
+                {label}
+                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+            </span>
             <input
                 className={`form__input ${type === 'password' ? 'form__input--password' : 'form__input--email'}`}
                 id={htmlFor}
-                type={type}
+                type={!isPasswordHidden ? 'text' : type}
                 placeholder={placeholder}
                 required />
             {type === 'password'
-                ? <BsEye className="form__icon-password" size={20} />
-                : <></>
+                ?
+                <>
+                    {
+                        isPasswordHidden
+                            ?
+                            <BsEye className="form__icon-password" size={20} onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                            :
+                            <BsEyeSlash className="form__icon-password" size={20} onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                    }
+                </>
+                :
+                <></>
             }
         </label>
     );
