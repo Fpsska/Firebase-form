@@ -44,7 +44,7 @@ const initialState: formSliceTypes = {
             type: 'text',
             htmlFor: 'email',
             label: 'Email Addres',
-            placeholder: 'Password'
+            placeholder: 'johndoe@gmail.com'
         },
         {
             id: 3,
