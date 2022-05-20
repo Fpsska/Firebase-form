@@ -6,7 +6,9 @@ import { formFieldsTypes } from '../../Types/formSliceTypes';
 
 interface formSliceTypes {
     formAuthFields: formFieldsTypes[],
-    formRegistrationFields: formFieldsTypes[]
+    formRegistrationFields: formFieldsTypes[],
+    isUserRemembered: boolean,
+    isTermsAccepted: boolean
 }
 
 // /. interfaces
@@ -57,7 +59,9 @@ const initialState: formSliceTypes = {
             label: 'Confirm Password',
             placeholder: ''
         }
-    ]
+    ],
+    isUserRemembered: false,
+    isTermsAccepted: false
 };
 
 // /. initialState
@@ -66,10 +70,18 @@ const formSlice = createSlice({
     name: 'formSlice',
     initialState,
     reducers: {
+        switchUserRememberedStatus(state, actions: PayloadAction<boolean>) {
+            state.isUserRemembered = actions.payload;
+        },
+        switchTermsAcceptedStatus(state, actions: PayloadAction<boolean>) {
+            state.isTermsAccepted = actions.payload;
+        }
     }
 });
 
 export const {
+    switchUserRememberedStatus,
+    switchTermsAcceptedStatus
 } = formSlice.actions;
 
 
