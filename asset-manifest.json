@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Authorisation-Form/static/css/main.221b364e.css",
-    "main.js": "/Authorisation-Form/static/js/main.010de376.js",
+    "main.js": "/Authorisation-Form/static/js/main.fda50640.js",
     "static/js/787.3a790d7a.chunk.js": "/Authorisation-Form/static/js/787.3a790d7a.chunk.js",
     "index.html": "/Authorisation-Form/index.html",
     "static/media/checkbox_icon.svg": "/Authorisation-Form/static/media/checkbox_icon.9eb7cccc4ea1077dbedf.svg",
     "main.221b364e.css.map": "/Authorisation-Form/static/css/main.221b364e.css.map",
-    "main.010de376.js.map": "/Authorisation-Form/static/js/main.010de376.js.map",
+    "main.fda50640.js.map": "/Authorisation-Form/static/js/main.fda50640.js.map",
     "787.3a790d7a.chunk.js.map": "/Authorisation-Form/static/js/787.3a790d7a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.221b364e.css",
-    "static/js/main.010de376.js"
+    "static/js/main.fda50640.js"
   ]
 }
