@@ -41,7 +41,12 @@ button {
 }
 
 .page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 28px;
+    max-width: 392px;
+    margin: 0 auto;
 }
 
 input {
