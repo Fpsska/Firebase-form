@@ -15,38 +15,44 @@ const initialState: formSliceTypes = {
     formAuthFields: [
         {
             id: 1,
+            type: 'text',
             htmlFor: 'email',
             label: 'Email Addres',
-            placeholder: 'Password'
+            placeholder: 'johndoe@gmail.com'
         },
         {
             id: 2,
+            type: 'password',
             htmlFor: 'password',
-            label: 'Email Addres',
-            placeholder: 'Password'
+            label: 'Password',
+            placeholder: ''
         }
     ],
     formRegistrationFields: [
         {
             id: 1,
+            type: 'text',
             htmlFor: 'fullName',
             label: 'Full Name',
             placeholder: 'John Doe'
         },
         {
             id: 2,
+            type: 'text',
             htmlFor: 'email',
             label: 'Email Addres',
             placeholder: 'Password'
         },
         {
             id: 3,
+            type: 'password',
             htmlFor: 'password',
             label: 'Password',
             placeholder: ''
         },
         {
             id: 4,
+            type: 'password',
             htmlFor: 'confirm-password',
             label: 'Confirm Password',
             placeholder: ''

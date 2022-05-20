@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 import mainSlice from './slices/mainSlice';
+import formSlice from './slices/formSlice';
 
 export const store = configureStore({
   reducer: {
-    mainSlice: mainSlice
+    mainSlice: mainSlice,
+    formSlice: formSlice
   }
 });
 

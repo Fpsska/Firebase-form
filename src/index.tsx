@@ -6,6 +6,8 @@ import { store } from './app/store';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
+// /. imports
+
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
