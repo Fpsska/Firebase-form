@@ -3,13 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // /. imports
 
 interface mainSliceTypes {
-    isAuthorisationPage: boolean
+    isAuthorisationPage: boolean,
+    isHomePage: boolean
 }
 
 // /. interfaces
 
 const initialState: mainSliceTypes = {
-    isAuthorisationPage: true
+    isAuthorisationPage: true,
+    isHomePage: false
 };
 
 // /. initialState
@@ -20,12 +22,16 @@ const mainSlice = createSlice({
     reducers: {
         switchAuthorisationPageStatus(state, action: PayloadAction<boolean>) {
             state.isAuthorisationPage = action.payload;
+        },
+        switchHomePageStatus(state, action: PayloadAction<boolean>) {
+            state.isHomePage = action.payload;
         }
     }
 });
 
 export const {
-    switchAuthorisationPageStatus
+    switchAuthorisationPageStatus,
+    switchHomePageStatus
 } = mainSlice.actions;
 
 

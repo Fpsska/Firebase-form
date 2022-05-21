@@ -1,0 +1,35 @@
+.home {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    &__button {
+        background-color: transparent;
+        border: 1px solid #000;
+        font-size: 13px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        transform: scale(1);
+        transition: transform 0.15s linear;
+        &:hover {
+            transform: scale(1.025);
+            border: 1px solid #FF3300;
+            color: #FF3300;
+        }
+    }
+}
+
+.user-data {
+    margin: 0 0 40px 0;
+    text-align: center;
+    :not(:last-child) {
+        margin: 0 0 5px 0;
+    }
+    &__template {
+        font-style: italic;
+    }
+    &__info {
+        font-weight: 600;
+        font-style: normal;
+    }
+}

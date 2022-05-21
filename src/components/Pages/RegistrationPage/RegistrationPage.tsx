@@ -10,6 +10,7 @@ import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
 
 import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
+import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
 
 // /. imports
 
@@ -26,9 +27,12 @@ const RegistrationPage: React.FC = () => {
                 dispatch(saveNewUser({
                     email: user.email,
                     token: user.refreshToken,
-                    id: user.uid
+                    id: user.uid,
+                    lastSignInTime: user.metadata.lastSignInTime
                 }));
                 dispatch(switchUserAuthoriseStatus(true));
+                dispatch(switchAuthorisationPageStatus(false));
+                dispatch(switchHomePageStatus(true));
                 navigate('/Authorisation-Form/home');
             })
             .catch((err) => {
