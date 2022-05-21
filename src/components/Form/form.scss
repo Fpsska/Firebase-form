@@ -11,7 +11,7 @@
         font-size: 12px;
         font-weight: 500;
         line-height: 15px;
-        color: rgba(27, 43, 65, 0.72);
+        color: #fff;
         &:not(:last-child) {
             margin: 0 0 15px 0;
         }
@@ -91,7 +91,7 @@
         font-weight: 600;
         color: #fff;
         transform: scale(1);
-        transition: transform .35s linear;
+        transition: transform 0.35s linear;
         &:active {
             transform: scale(1.1);
         }
@@ -104,12 +104,18 @@
     &__terms-link {
         text-decoration: underline;
         color: #1676f3;
+        &:hover {
+            color: #0666e4;
+        }
     }
     &__restore {
         font-size: 13px;
         font-weight: 600;
         line-height: 16.38px;
-        color: #333;
+        color: #fff;
         margin: 0 0 0 10px;
+        &:hover {
+            cursor: not-allowed;
+        }
     }
 }

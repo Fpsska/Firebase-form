@@ -68,9 +68,9 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
                     {
                         isPasswordHidden
                             ?
-                            <BsEye className="form__icon-password" size={20} onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                            <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
                             :
-                            <BsEyeSlash className="form__icon-password" size={20} onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                            <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
                     }
                 </>
                 :

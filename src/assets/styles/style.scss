@@ -7,10 +7,10 @@ html {
 }
 
 body {
-    background-color: #fff;
+    background-color: #000099;
     font-family: Plus Jakarta Sans, sans-serif;
     font-size: 14px;
-    color: #000;
+    color: #fff;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -38,6 +38,13 @@ button {
 .App,
 .page {
     height: 100%;
+}
+
+.App {
+    background-image: url(../images/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .page {
