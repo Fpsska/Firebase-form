@@ -3,6 +3,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
 ###### _powered by :_
+
+- [firebase](https://firebase.google.com/)
 - [react-icons](https://react-icons.github.io/react-icons/)
 
 ### `Watch demo` _[Authorisation-Form](https://fpsska.github.io/Authorisation-Form/)_
