@@ -9,7 +9,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
 
-import { saveNewUser } from '../../../app/slices/userSlice';
+import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
 
 // /. imports
 
@@ -28,6 +28,7 @@ const RegistrationPage: React.FC = () => {
                     token: user.refreshToken,
                     id: user.uid
                 }));
+                dispatch(switchUserAuthoriseStatus(true));
                 navigate('/Authorisation-Form/home');
             })
             .catch((err) => {

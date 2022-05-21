@@ -1,11 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // /. imports
 
 interface userSliceTypes {
     currentEmail: null,
     currentToken: null,
-    currentID: null
+    currentID: null,
+    isUserAuthorise: boolean
 }
 
 // /. interfaces
@@ -13,7 +14,8 @@ interface userSliceTypes {
 const initialState: userSliceTypes = {
     currentEmail: null,
     currentToken: null,
-    currentID: null
+    currentID: null,
+    isUserAuthorise: false
 };
 
 const userSlice = createSlice({
@@ -30,13 +32,17 @@ const userSlice = createSlice({
             state.currentEmail = null;
             state.currentToken = null;
             state.currentID = null;
+        },
+        switchUserAuthoriseStatus(state, action: PayloadAction<boolean>) {
+            state.isUserAuthorise = action.payload;
         }
     }
 });
 
 export const {
     saveNewUser,
-    deleteCurrentUser
+    deleteCurrentUser,
+    switchUserAuthoriseStatus
 } = userSlice.actions;
 
 export default userSlice.reducer;
