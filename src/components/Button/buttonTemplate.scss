@@ -8,7 +8,11 @@
     color: #fff;
     border-radius: 4px;
     background-color: transparent;
-    cursor: not-allowed;
+    transition: all 0.35s linear;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(0,0,0, 0.3);
+    }
     :not(:last-child) {
         margin: 0 10px 0 0;
     }

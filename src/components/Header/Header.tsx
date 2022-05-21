@@ -7,6 +7,8 @@ import logo from '../../assets/images/logo_icon.png';
 
 import { RootState } from '../../app/store';
 
+import Modal from '../Modal/Modal';
+
 import './header.scss';
 
 // /. imports 
@@ -36,6 +38,15 @@ const Header: React.FC = () => {
                 {isHomePage ? <></> : <ButtonTemplate />}
 
             </div>
+
+            <Modal>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora repudiandae commodi saepe ipsam fuga possimus voluptas cumque velit nihil. Nisi architecto illo fugit assumenda consequatur sequi similique placeat illum provident?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora repudiandae commodi saepe ipsam fuga possimus voluptas cumque velit nihil. Nisi architecto illo fugit assumenda consequatur sequi similique placeat illum provident?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora repudiandae commodi saepe ipsam fuga possimus voluptas cumque velit nihil. Nisi architecto illo fugit assumenda consequatur sequi similique placeat illum provident?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora repudiandae commodi saepe ipsam fuga possimus voluptas cumque velit nihil. Nisi architecto illo fugit assumenda consequatur sequi similique placeat illum provident?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora repudiandae commodi saepe ipsam fuga possimus voluptas cumque velit nihil. Nisi architecto illo fugit assumenda consequatur sequi similique placeat illum provident?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora repudiandae commodi saepe ipsam fuga possimus voluptas cumque velit nihil. Nisi architecto illo fugit assumenda consequatur sequi similique placeat illum provident?
+            </Modal>
         </header>
     );
 };

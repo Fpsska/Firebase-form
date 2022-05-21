@@ -54,6 +54,14 @@ button {
     padding: 28px;
     max-width: 392px;
     margin: 0 auto;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 input {
