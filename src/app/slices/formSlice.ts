@@ -9,7 +9,9 @@ interface formSliceTypes {
     formRegistrationFields: formFieldsTypes[],
     isUserRemembered: boolean,
     isTermsAccepted: boolean,
-    isPasswordHidden: boolean
+    isPasswordHidden: boolean,
+    currentEmail: string,
+    currentPassword: string
 }
 
 // /. interfaces
@@ -63,7 +65,9 @@ const initialState: formSliceTypes = {
     ],
     isUserRemembered: false,
     isTermsAccepted: false,
-    isPasswordHidden: true
+    isPasswordHidden: true,
+    currentEmail: '',
+    currentPassword: ''
 };
 
 // /. initialState
@@ -80,6 +84,12 @@ const formSlice = createSlice({
         },
         switchPasswordHiddenStatus(state, actions: PayloadAction<boolean>) {
             state.isPasswordHidden = actions.payload;
+        },
+        setCurrentEmail(state, action: PayloadAction<string>) {
+            state.currentEmail = action.payload;
+        },
+        setCurrentPassword(state, action: PayloadAction<string>) {
+            state.currentPassword = action.payload;
         }
     }
 });
@@ -87,7 +97,9 @@ const formSlice = createSlice({
 export const {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus,
-    switchPasswordHiddenStatus
+    switchPasswordHiddenStatus,
+    setCurrentEmail,
+    setCurrentPassword
 } = formSlice.actions;
 
 

@@ -6,7 +6,11 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 import { RootState } from '../../app/store';
 
-import { switchPasswordHiddenStatus } from '../../app/slices/formSlice';
+import {
+    switchPasswordHiddenStatus,
+    setCurrentEmail,
+    setCurrentPassword
+} from '../../app/slices/formSlice';
 
 // /. imports
 
@@ -21,9 +25,6 @@ interface FormTemplatePropTypes {
 
 const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
 
-    const { isPasswordHidden } = useSelector((state: RootState) => state.formSlice);
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
-
     const {
         type,
         htmlFor,
@@ -31,7 +32,21 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
         placeholder
     } = props;
 
+    const { isPasswordHidden } = useSelector((state: RootState) => state.formSlice);
+    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+
     const dispatch = useDispatch();
+
+    const inputHandler = (EventValue: string, inputType: string): void => {
+        switch (inputType) {
+            case 'text':
+                dispatch(setCurrentEmail(EventValue));
+                break;
+            case 'password':
+                dispatch(setCurrentPassword(EventValue));
+                break;
+        }
+    };
     // 
     return (
         <label className="form__label" htmlFor={htmlFor}>
@@ -44,7 +59,9 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
                 id={htmlFor}
                 type={!isPasswordHidden ? 'text' : type}
                 placeholder={placeholder}
-                required />
+                required
+                onChange={(e) => inputHandler(e.target.value, type)}
+            />
             {type === 'password'
                 ?
                 <>

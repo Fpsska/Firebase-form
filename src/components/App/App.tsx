@@ -8,6 +8,7 @@ import '../../assets/styles/style.scss';
 import Layout from '../Common/Layout';
 import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
+import HomePage from '../Pages/HomePage/HomePage';
 
 // /. imports
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/Authorisation-Form" element={<Layout />}>
           <Route index element={<AuthorisationPage />} />
           <Route path="registration" element={<RegistrationPage />} />
+          <Route path="home" element={<HomePage />} />
         </Route>
       </Routes>
     </div>

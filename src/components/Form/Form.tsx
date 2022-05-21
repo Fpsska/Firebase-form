@@ -14,14 +14,22 @@ import './form.scss';
 
 // /. imports
 
-const Form: React.FC = () => {
+interface FormPropTypes {
+    formActionHandler: (arg1: string, arg2: string) => void
+}
+
+const Form: React.FC<FormPropTypes> = (props) => {
+
+    const { formActionHandler } = props;
 
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const {
         formAuthFields,
         formRegistrationFields,
         isUserRemembered,
-        isTermsAccepted
+        isTermsAccepted,
+        currentEmail,
+        currentPassword
     } = useSelector((state: RootState) => state.formSlice);
     const [currentFieldsData, setCurrentFieldsData] = useState<formFieldsTypes[]>(formAuthFields);
 
@@ -39,13 +47,13 @@ const Form: React.FC = () => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
     };
 
-    const handleFormSubmit = (e: any): void => {
+    const FormSubmitHandler = (e: any): void => {
         e.preventDefault();
-        alert('Form Submitted!');
+        formActionHandler(currentEmail, currentPassword);
     };
     // 
     return (
-        <form className="form" onSubmit={handleFormSubmit}>
+        <form className="form" onSubmit={FormSubmitHandler}>
             <div className="form__wrapper">
 
                 {currentFieldsData.map(item => {
@@ -91,7 +99,9 @@ const Form: React.FC = () => {
                     </label>
                 }
 
-                <button className="form__button">{isAuthorisationPage ? 'Log in' : 'Get Started'}</button>
+                <button
+                    className="form__button">{isAuthorisationPage ? 'Log in' : 'Get Started'}
+                </button>
 
             </div>
         </form>
