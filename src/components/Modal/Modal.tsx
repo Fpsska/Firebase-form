@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -6,38 +6,62 @@ import { IoMdClose } from 'react-icons/io';
 
 import { RootState } from '../../app/store';
 
-import { switchModalVisibleStatus } from '../../app/slices/mainSlice';
+import { switchModalAuthVisibleStatus, switchModalRegistrVisibleStatus } from '../../app/slices/mainSlice';
 
 import logo from '../../assets/images/react-logo_icon.svg';
+
 
 import './modal.scss';
 
 // /. imports
 
 interface ModalPropsTypes {
-    children: any
+    title: string,
+    children: any,
+    visibleStatus: boolean,
 }
 
 // /. interfaces
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { isModalVisible } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const dispatch = useDispatch();
+    const modalRef = useRef<HTMLDivElement>(null!);
 
     const {
-        children
+        title,
+        children,
+        visibleStatus
     } = props;
 
+    const areaHandler = useCallback((e: any): void => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+            dispatch(switchModalAuthVisibleStatus(false));
+            dispatch(switchModalRegistrVisibleStatus(false));
+        }
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener('click', areaHandler, true);
+        return () => {
+            document.removeEventListener('click', areaHandler, true);
+        };
+    }, [areaHandler]);
+
+    const modalButtonHandler = (): void => {
+        isAuthorisationPage ? dispatch(switchModalAuthVisibleStatus(false)) : dispatch(switchModalRegistrVisibleStatus(false));
+    };
+    // 
     return (
-        <div className={isModalVisible ? 'modal' : 'modal hidden'}>
+        <div className={visibleStatus ? 'modal' : 'modal hidden'} ref={modalRef}>
             <div className="modal__wrapper">
-                <h2 className="modal__title">This is modal</h2>
+                <h2 className="modal__title">{title}</h2>
                 <hr />
                 <div className="modal__body">
                     {children}
                 </div>
-                <button className="modal__button" onClick={() => dispatch(switchModalVisibleStatus(!isModalVisible))}>
+                <button className="modal__button" onClick={modalButtonHandler}>
                     <IoMdClose size={24} />
                 </button>
                 <img className="modal__image" src={logo} alt="logo" />

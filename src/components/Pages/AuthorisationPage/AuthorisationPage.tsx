@@ -1,26 +1,32 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
+import { RootState } from '../../../app/store';
+
 import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
+import Modal from '../../Modal/Modal';
 
 import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
 import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
+
 // /. imports
 
+
 const AuthorisationPage: React.FC = () => {
+
+    const { isModalAuthVisible } = useSelector((state: RootState) => state.mainSlice);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLogin = (email: string, password: string): void => {
         const auth = getAuth();
-        console.log(auth);
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 console.log(user);
@@ -43,6 +49,15 @@ const AuthorisationPage: React.FC = () => {
     return (
         <div className="authorisation">
             <div className="authorisation__wrapper">
+                <Modal
+                    title={'Authorisation modal!'}
+                    visibleStatus={isModalAuthVisible}
+                >
+                    Sorry, this method is temporarily unavailable
+                    <br />
+                    <br />
+                    Stasy privet ;)
+                </Modal>
                 <SectionMark />
                 <Form formActionHandler={handleLogin} />
             </div>

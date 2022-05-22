@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom';
 
 import { RootState } from '../../app/store';
 
-import { switchAuthorisationPageStatus } from '../../app/slices/mainSlice';
+import {
+    switchAuthorisationPageStatus,
+    switchModalAuthVisibleStatus,
+    switchModalRegistrVisibleStatus
+} from '../../app/slices/mainSlice';
 
 import './relocate.scss';
 
@@ -18,10 +22,16 @@ const Relocate: React.FC = () => {
 
     const relocateToAuthPage = (): void => {
         dispatch(switchAuthorisationPageStatus(false));
+
+        dispatch(switchModalAuthVisibleStatus(false));
+        dispatch(switchModalRegistrVisibleStatus(false));
     };
 
     const relocateToLoginPage = (): void => {
         dispatch(switchAuthorisationPageStatus(true));
+
+        dispatch(switchModalAuthVisibleStatus(false));
+        dispatch(switchModalRegistrVisibleStatus(false));
     };
     // 
     return (

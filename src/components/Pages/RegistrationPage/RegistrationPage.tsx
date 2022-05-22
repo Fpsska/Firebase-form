@@ -1,13 +1,16 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router';
 
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
+import { RootState } from '../../../app/store';
+
 import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
+import Modal from '../../Modal/Modal';
 
 import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
 import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
@@ -15,6 +18,8 @@ import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../ap
 // /. imports
 
 const RegistrationPage: React.FC = () => {
+
+    const { isModalRegistrVisible } = useSelector((state: RootState) => state.mainSlice);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -43,6 +48,12 @@ const RegistrationPage: React.FC = () => {
     return (
         <div className="registration">
             <div className="registration__wrapper">
+                <Modal
+                    title={'Rigistration modal!'}
+                    visibleStatus={isModalRegistrVisible}
+                >
+                    Technical works..In progess..
+                </Modal>
                 <SectionMark />
                 <Form formActionHandler={handleRegistration} />
             </div>

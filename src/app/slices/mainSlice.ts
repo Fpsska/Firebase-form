@@ -5,7 +5,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface mainSliceTypes {
     isAuthorisationPage: boolean,
     isHomePage: boolean,
-    isModalVisible: boolean
+    isModalAuthVisible: boolean,
+    isModalRegistrVisible: boolean
 }
 
 // /. interfaces
@@ -13,7 +14,8 @@ interface mainSliceTypes {
 const initialState: mainSliceTypes = {
     isAuthorisationPage: true,
     isHomePage: false,
-    isModalVisible: false
+    isModalAuthVisible: false,
+    isModalRegistrVisible: false
 };
 
 // /. initialState
@@ -28,8 +30,11 @@ const mainSlice = createSlice({
         switchHomePageStatus(state, action: PayloadAction<boolean>) {
             state.isHomePage = action.payload;
         },
-        switchModalVisibleStatus(state, action: PayloadAction<boolean>) {
-            state.isModalVisible = action.payload;
+        switchModalAuthVisibleStatus(state, action: PayloadAction<boolean>) {
+            state.isModalAuthVisible = action.payload;
+        },
+        switchModalRegistrVisibleStatus(state, action: PayloadAction<boolean>) {
+            state.isModalRegistrVisible = action.payload;
         }
     }
 });
@@ -37,7 +42,8 @@ const mainSlice = createSlice({
 export const {
     switchAuthorisationPageStatus,
     switchHomePageStatus,
-    switchModalVisibleStatus
+    switchModalAuthVisibleStatus,
+    switchModalRegistrVisibleStatus
 } = mainSlice.actions;
 
 

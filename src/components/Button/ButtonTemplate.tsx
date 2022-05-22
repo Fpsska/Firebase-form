@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../app/store';
 
-import { switchModalVisibleStatus } from '../../app/slices/mainSlice';
+import { switchModalAuthVisibleStatus, switchModalRegistrVisibleStatus } from '../../app/slices/mainSlice';
 
 
 import './buttonTemplate.scss';
@@ -14,11 +14,15 @@ import './buttonTemplate.scss';
 
 const ButtonTemplate: React.FC = () => {
 
-    const { isAuthorisationPage, isModalVisible } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage, isModalAuthVisible, isModalRegistrVisible } = useSelector((state: RootState) => state.mainSlice);
     const dispatch = useDispatch();
+
+    const generalButtonHandler = (): void => {
+        isAuthorisationPage ? dispatch(switchModalAuthVisibleStatus(true)) : dispatch(switchModalRegistrVisibleStatus(true));
+    };
     // 
     return (
-        <button className="button" onClick={() => dispatch(switchModalVisibleStatus(!isModalVisible))}>
+        <button className="button" onClick={generalButtonHandler}>
             <FcGoogle size={19} />
             <span>{isAuthorisationPage ? 'Continue with Google' : 'Sign up with Google'}</span>
         </button>
