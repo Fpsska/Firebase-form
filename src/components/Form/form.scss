@@ -93,7 +93,10 @@
         transform: scale(1);
         transition: transform 0.35s linear;
         &:active {
-            transform: scale(1.1);
+            transform: scale(1.05);
+        }
+        &:disabled {
+            opacity: 0.6;
         }
     }
     &__terms {
@@ -117,5 +120,9 @@
         &:hover {
             cursor: not-allowed;
         }
+    }
+    &__error {
+        color: red;
+        margin: 5px 0 0 0;
     }
 }

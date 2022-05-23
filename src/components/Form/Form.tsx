@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { useForm } from 'react-hook-form';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../app/store';
@@ -8,7 +10,7 @@ import { formFieldsTypes } from '../../Types/formSliceTypes';
 
 import { switchUserRememberedStatus, switchTermsAcceptedStatus } from '../../app/slices/formSlice';
 
-import FormTemplate from './FormTemplate';
+// import FormTemplate from './FormTemplate';
 
 import './form.scss';
 
@@ -46,28 +48,148 @@ const Form: React.FC<FormPropTypes> = (props) => {
     const inputTermsHandler = (): void => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
     };
+    //
+    const {
+        register,
+        formState: {
+            errors,
+            isValid
+        },
+        handleSubmit,
+        reset
+    } = useForm({
+        mode: 'onBlur'
+    });
 
-    const FormSubmitHandler = (e: any): void => {
-        e.preventDefault();
-        formActionHandler(currentEmail, currentPassword);
+    const FormSubmitHandler = (data: any): void => {
+        alert(JSON.stringify(data));
+        reset();
+        // formActionHandler(currentEmail, currentPassword);
+        // e.preventDefault();
     };
     // 
     return (
-        <form className="form" onSubmit={FormSubmitHandler}>
+        <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
             <div className="form__wrapper">
 
-                {currentFieldsData.map(item => {
-                    return (
-                        <FormTemplate
-                            key={item.id}
-                            type={item.type}
-                            htmlFor={item.htmlFor}
-                            label={item.label}
-                            placeholder={item.placeholder}
-                        />
-                    );
-                })}
-
+                {isAuthorisationPage
+                    ?
+                    <>
+                        <label className="form__label" htmlFor="email">
+                            Email Addres
+                            <input
+                                id="email"
+                                type="text"
+                                className="form__input form__input--email"
+                                placeholder="johndoe@gmail.com"
+                                {...register('email', {
+                                    required: 'Field is required!',
+                                    pattern: {
+                                        value: /\S+@\S+\.\S+/,
+                                        message: 'Entered value does not match email format'
+                                    }
+                                })}
+                            />
+                            {errors.email && <span className="form__error">{errors.email.message}</span>}
+                        </label>
+                        <label className="form__label" htmlFor="password">
+                            Password
+                            <input
+                                id="password"
+                                type="password"
+                                className="form__input form__input--password"
+                                {...register('password', {
+                                    required: 'Field is required!',
+                                    minLength: {
+                                        value: 5,
+                                        message: 'Minimum length is should be 5 symbols'
+                                    }
+                                })}
+                            />
+                            {errors?.password && <p className="form__error">{errors?.password?.message}</p>}
+                        </label>
+                    </>
+                    :
+                    <>
+                        <label className="form__label" htmlFor="fullName">
+                            <span className="form__label-text">
+                                FullName
+                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                            </span>
+                            <input
+                                className="form__input form__input--email"
+                                id="fullName"
+                                type="text"
+                                placeholder="John Doe"
+                                {...register('fullName', {
+                                    required: true,
+                                    maxLength: 10
+                                })}
+                            />
+                            {errors.fullName && errors.fullName.type === 'required' && <span className="form__error">Field is required!</span>}
+                            {errors.fullName && errors.fullName.type === 'maxLength' && <span className="form__error">Max length exceeded</span>}
+                        </label>
+                        <label className="form__label" htmlFor="email">
+                            <span className="form__label-text">
+                                Email Addres
+                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                            </span>
+                            <input
+                                id="email"
+                                type="text"
+                                className="form__input form__input--email"
+                                placeholder="johndoe@gmail.com"
+                                {...register('email', {
+                                    required: 'Field is required!',
+                                    pattern: {
+                                        value: /\S+@\S+\.\S+/,
+                                        message: 'Entered value does not match email format'
+                                    }
+                                })}
+                            />
+                            {errors.email && <span className="form__error">{errors.email.message}</span>}
+                        </label>
+                        <label className="form__label" htmlFor="passwor">
+                            <span className="form__label-text">
+                                Password
+                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                            </span>
+                            <input
+                                id="password"
+                                type="password"
+                                className="form__input form__input--password"
+                                {...register('password', {
+                                    required: 'Field is required!',
+                                    minLength: {
+                                        value: 5,
+                                        message: 'Minimum length is should be 5 symbols'
+                                    }
+                                })}
+                            />
+                            {errors?.password && <p className="form__error">{errors?.password?.message}</p>}
+                        </label>
+                        <label className="form__label" htmlFor="confirm-password">
+                            <span className="form__label-text">
+                                Confirm Password
+                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                            </span>
+                            <input
+                                id="confirm-password"
+                                type="password"
+                                className="form__input form__input--password"
+                                {...register('confirmPassword', {
+                                    required: 'Field is required!',
+                                    minLength: {
+                                        value: 5,
+                                        message: 'Minimum length is should be 5 symbols'
+                                    }
+                                })}
+                            />
+                            {errors?.confirmPassword && <p className="form__error">{errors?.confirmPassword?.message}</p>}
+                        </label>
+                    </>
+                }
+                {/*  */}
                 {isAuthorisationPage
                     ?
                     <div className="form__terms">
@@ -100,7 +222,10 @@ const Form: React.FC<FormPropTypes> = (props) => {
                 }
 
                 <button
-                    className="form__button">{isAuthorisationPage ? 'Log in' : 'Get Started'}
+                    className="form__button"
+                    disabled={!isValid}
+                >
+                    {isAuthorisationPage ? 'Log in' : 'Get Started'}
                 </button>
 
             </div>
