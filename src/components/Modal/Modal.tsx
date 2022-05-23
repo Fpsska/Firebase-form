@@ -28,6 +28,10 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
 
     const { isAuthorisationPage, modalAuthPosition, modalRegistrPosition } = useSelector((state: RootState) => state.mainSlice);
     const [modalPosition, setModalPosition] = useState<any>(modalAuthPosition);
+    const [initOffsetPosition, setInitOffsetPosition] = useState<any>({
+        offsetY: 0,
+        offsetX: 0
+    });
 
     const dispatch = useDispatch();
     const modalRef = useRef<HTMLDivElement>(null!);
@@ -71,12 +75,40 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     const modalButtonHandler = (): void => {
         isAuthorisationPage ? dispatch(switchModalAuthVisibleStatus(false)) : dispatch(switchModalRegistrVisibleStatus(false));
     };
+
+    const modalDragStart = (e: any): void => {
+        setTimeout(() => {
+            modalRef.current.classList.add('hidden');
+        }, 0);
+        setInitOffsetPosition({
+            offsetY: e.offsetY,
+            offsetX: e.offsetY
+        });
+    };
+
+    const modalDragEnd = useCallback( (e: any): void => {
+        modalRef.current.classList.remove('hidden');
+        modalRef.current.style.top = `${e.pageY - initOffsetPosition.offsetY}px`;
+        modalRef.current.style.left = `${e.pageX - initOffsetPosition.offsetX}px`;
+    },[]);
+
+
+    useEffect(() => {
+        modalRef.current.addEventListener('dragstart', modalDragStart);
+        modalRef.current.addEventListener('dragend', modalDragEnd);
+        return () => {
+            modalRef.current?.removeEventListener('dragstart', modalDragStart);
+            modalRef.current?.removeEventListener('dragend', modalDragEnd);
+        };
+    }, [modalDragEnd]);
     // 
     return (
         <div
             ref={modalRef}
             className={visibleStatus ? 'modal' : 'modal hidden'}
-            style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}>
+            draggable="true"
+        style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}
+        >
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>
                 <hr />
