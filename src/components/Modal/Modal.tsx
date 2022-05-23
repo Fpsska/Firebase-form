@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -19,13 +19,16 @@ interface ModalPropsTypes {
     title: string,
     children: any,
     visibleStatus: boolean,
+
 }
 
 // /. interfaces
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage, modalAuthPosition, modalRegistrPosition } = useSelector((state: RootState) => state.mainSlice);
+    const [modalPosition, setModalPosition] = useState<any>(modalAuthPosition);
+
     const dispatch = useDispatch();
     const modalRef = useRef<HTMLDivElement>(null!);
 
@@ -36,7 +39,17 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     } = props;
 
     const areaHandler = useCallback((e: any): void => {
-        if (modalRef.current && !modalRef.current.contains(e.target)) {
+        const validModalArea = e.target === modalRef.current || modalRef.current.contains(e.target);
+        const validElements = e.target.className === 'button';
+
+        if (!validModalArea && !validElements) {
+            dispatch(switchModalAuthVisibleStatus(false));
+            dispatch(switchModalRegistrVisibleStatus(false));
+        }
+    }, []);
+
+    const keyHandler = useCallback((e: KeyboardEvent): void => {
+        if (e.code === 'Escape') {
             dispatch(switchModalAuthVisibleStatus(false));
             dispatch(switchModalRegistrVisibleStatus(false));
         }
@@ -44,17 +57,26 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
 
     useEffect(() => {
         document.addEventListener('click', areaHandler, true);
+        document.addEventListener('keydown', keyHandler);
         return () => {
             document.removeEventListener('click', areaHandler, true);
+            document.removeEventListener('keydown', keyHandler);
         };
-    }, [areaHandler]);
+    }, [areaHandler, keyHandler]);
+
+    useEffect(() => {
+        isAuthorisationPage ? setModalPosition(modalAuthPosition) : setModalPosition(modalRegistrPosition);
+    }, [isAuthorisationPage, modalAuthPosition, modalRegistrPosition]);
 
     const modalButtonHandler = (): void => {
         isAuthorisationPage ? dispatch(switchModalAuthVisibleStatus(false)) : dispatch(switchModalRegistrVisibleStatus(false));
     };
     // 
     return (
-        <div className={visibleStatus ? 'modal' : 'modal hidden'} ref={modalRef}>
+        <div
+            ref={modalRef}
+            className={visibleStatus ? 'modal' : 'modal hidden'}
+            style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}>
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>
                 <hr />

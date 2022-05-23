@@ -13,6 +13,9 @@
     &:hover {
         background-color: rgba(0,0,0, 0.3);
     }
+    &:active {
+        border: 1px solid rgba(#1676f3, 1);
+    }
     :not(:last-child) {
         margin: 0 10px 0 0;
     }

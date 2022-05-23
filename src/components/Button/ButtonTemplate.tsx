@@ -5,8 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../app/store';
 
-import { switchModalAuthVisibleStatus, switchModalRegistrVisibleStatus } from '../../app/slices/mainSlice';
+import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
+import {
+    switchModalAuthVisibleStatus,
+    switchModalRegistrVisibleStatus,
+    setNewModalAuthPosition,
+    setNewModalRegistrPosition
+} from '../../app/slices/mainSlice';
 
 import './buttonTemplate.scss';
 
@@ -14,11 +20,23 @@ import './buttonTemplate.scss';
 
 const ButtonTemplate: React.FC = () => {
 
-    const { isAuthorisationPage, isModalAuthVisible, isModalRegistrVisible } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const dispatch = useDispatch();
 
     const generalButtonHandler = (): void => {
-        isAuthorisationPage ? dispatch(switchModalAuthVisibleStatus(true)) : dispatch(switchModalRegistrVisibleStatus(true));
+        if (isAuthorisationPage) {
+            dispatch(switchModalAuthVisibleStatus(true));
+            dispatch(setNewModalAuthPosition({
+                top: getRandomItgrNumber(50, 10),
+                left: getRandomItgrNumber(50, 10)
+            }));
+        } else {
+            dispatch(switchModalRegistrVisibleStatus(true));
+            dispatch(setNewModalRegistrPosition({
+                top: getRandomItgrNumber(50, 10),
+                left: getRandomItgrNumber(50, 10)
+            }));
+        }
     };
     // 
     return (

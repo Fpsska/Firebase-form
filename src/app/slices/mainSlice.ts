@@ -6,7 +6,9 @@ interface mainSliceTypes {
     isAuthorisationPage: boolean,
     isHomePage: boolean,
     isModalAuthVisible: boolean,
-    isModalRegistrVisible: boolean
+    isModalRegistrVisible: boolean,
+    modalAuthPosition: any,
+    modalRegistrPosition: any
 }
 
 // /. interfaces
@@ -15,7 +17,9 @@ const initialState: mainSliceTypes = {
     isAuthorisationPage: true,
     isHomePage: false,
     isModalAuthVisible: false,
-    isModalRegistrVisible: false
+    isModalRegistrVisible: false,
+    modalAuthPosition: { top: 10, left: 10 },
+    modalRegistrPosition: { top: 20, left: 20 }
 };
 
 // /. initialState
@@ -35,6 +39,12 @@ const mainSlice = createSlice({
         },
         switchModalRegistrVisibleStatus(state, action: PayloadAction<boolean>) {
             state.isModalRegistrVisible = action.payload;
+        },
+        setNewModalAuthPosition(state, action: PayloadAction<any>) {
+            state.modalAuthPosition = action.payload;
+        },
+        setNewModalRegistrPosition(state, action: PayloadAction<any>) {
+            state.modalRegistrPosition = action.payload;
         }
     }
 });
@@ -43,7 +53,9 @@ export const {
     switchAuthorisationPageStatus,
     switchHomePageStatus,
     switchModalAuthVisibleStatus,
-    switchModalRegistrVisibleStatus
+    switchModalRegistrVisibleStatus,
+    setNewModalAuthPosition,
+    setNewModalRegistrPosition
 } = mainSlice.actions;
 
 
