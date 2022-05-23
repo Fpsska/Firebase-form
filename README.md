@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - [firebase](https://firebase.google.com/)
 - [react-icons](https://react-icons.github.io/react-icons/)
+- [react-hook-form](https://react-hook-form.com/)
 
 ### `Watch demo` _[Authorisation-Form](https://fpsska.github.io/Authorisation-Form/)_
 
