@@ -6,10 +6,13 @@ import { IoMdClose } from 'react-icons/io';
 
 import { RootState } from '../../app/store';
 
-import { switchModalAuthVisibleStatus, switchModalRegistrVisibleStatus } from '../../app/slices/mainSlice';
+import {
+    switchModalAuthVisibleStatus,
+    switchModalRegistrVisibleStatus,
+    switchModalTermsVisibleStatus
+} from '../../app/slices/mainSlice';
 
 import logo from '../../assets/images/react-logo_icon.svg';
-
 
 import './modal.scss';
 
@@ -19,7 +22,6 @@ interface ModalPropsTypes {
     title: string,
     children: any,
     visibleStatus: boolean,
-
 }
 
 // /. interfaces
@@ -49,6 +51,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         if (!validModalArea && !validElements) {
             dispatch(switchModalAuthVisibleStatus(false));
             dispatch(switchModalRegistrVisibleStatus(false));
+            dispatch(switchModalTermsVisibleStatus(false));
         }
     }, []);
 
@@ -56,6 +59,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         if (e.code === 'Escape') {
             dispatch(switchModalAuthVisibleStatus(false));
             dispatch(switchModalRegistrVisibleStatus(false));
+            dispatch(switchModalTermsVisibleStatus(false));
         }
     }, []);
 
@@ -73,7 +77,9 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     }, [isAuthorisationPage, modalAuthPosition, modalRegistrPosition]);
 
     const modalButtonHandler = (): void => {
-        isAuthorisationPage ? dispatch(switchModalAuthVisibleStatus(false)) : dispatch(switchModalRegistrVisibleStatus(false));
+        dispatch(switchModalAuthVisibleStatus(false));
+        dispatch(switchModalRegistrVisibleStatus(false));
+        dispatch(switchModalTermsVisibleStatus(false));
     };
 
     const modalDragStart = (e: any): void => {
@@ -86,11 +92,11 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         });
     };
 
-    const modalDragEnd = useCallback( (e: any): void => {
+    const modalDragEnd = useCallback((e: any): void => {
         modalRef.current.classList.remove('hidden');
         modalRef.current.style.top = `${e.pageY - initOffsetPosition.offsetY}px`;
         modalRef.current.style.left = `${e.pageX - initOffsetPosition.offsetX}px`;
-    },[]);
+    }, []);
 
 
     useEffect(() => {
@@ -107,7 +113,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
             ref={modalRef}
             className={visibleStatus ? 'modal' : 'modal hidden'}
             draggable="true"
-        style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}
+            style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}
         >
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>

@@ -23,7 +23,7 @@ const ButtonTemplate: React.FC = () => {
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const dispatch = useDispatch();
 
-    const generalButtonHandler = (): void => {
+    const generalButtonHandler = (): void => {  // need to fix call all of disptchs
         if (isAuthorisationPage) {
             dispatch(switchModalAuthVisibleStatus(true));
             dispatch(setNewModalAuthPosition({

@@ -17,6 +17,10 @@ import {
     switchPasswordHiddenStatus
 } from '../../app/slices/formSlice';
 
+import { switchModalTermsVisibleStatus } from '../../app/slices/mainSlice';
+
+import Modal from '../Modal/Modal';
+
 import './form.scss';
 
 // /. imports
@@ -38,7 +42,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const { formActionHandler } = props;
 
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage, isModalTermsVisible } = useSelector((state: RootState) => state.mainSlice);
     const {
         formAuthFields,
         formRegistrationFields,
@@ -177,7 +181,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             />
                             {errors.email && <span className="form__error">{errors.email.message}</span>}
                         </label>
-                        <label className="form__label" htmlFor="passwor">
+                        <label className="form__label" htmlFor="password">
                             <span className="form__label-text">
                                 Password
                                 {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
@@ -258,7 +262,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                         />
                         <span className="form__fake-checkbox"></span>
                         <span className="form__terms-text"> I have read and agree to the{' '}
-                            <a href="#" className="form__terms-link">Terms of Service</a>
+                            <a href="#" className="form__terms-link" onClick={() => dispatch(switchModalTermsVisibleStatus(true))}>Terms of Service</a>
                         </span>
                     </label>
                 }
@@ -270,6 +274,20 @@ const Form: React.FC<FormPropTypes> = (props) => {
                     {isAuthorisationPage ? 'Log in' : 'Get Started'}
                 </button>
 
+                <Modal
+                    title={'Terms modal!'}
+                    visibleStatus={isModalTermsVisible}
+                >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                    id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                    id, quam non fugit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                    id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                    id, quam non fugit.
+                </Modal>
             </div>
         </form>
     );

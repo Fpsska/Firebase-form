@@ -15,6 +15,7 @@
     &__body {
         overflow-y: scroll;
         min-height: 100px;
+        height: 150px;
         &::-webkit-scrollbar {
             width: 0;
             background: transparent;

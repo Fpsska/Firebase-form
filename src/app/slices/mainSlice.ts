@@ -7,6 +7,7 @@ interface mainSliceTypes {
     isHomePage: boolean,
     isModalAuthVisible: boolean,
     isModalRegistrVisible: boolean,
+    isModalTermsVisible: boolean,
     modalAuthPosition: any,
     modalRegistrPosition: any
 }
@@ -18,6 +19,7 @@ const initialState: mainSliceTypes = {
     isHomePage: false,
     isModalAuthVisible: false,
     isModalRegistrVisible: false,
+    isModalTermsVisible: false,
     modalAuthPosition: { top: 10, left: 10 },
     modalRegistrPosition: { top: 20, left: 20 }
 };
@@ -45,6 +47,9 @@ const mainSlice = createSlice({
         },
         setNewModalRegistrPosition(state, action: PayloadAction<any>) {
             state.modalRegistrPosition = action.payload;
+        },
+        switchModalTermsVisibleStatus(state, action: PayloadAction<boolean>) {
+            state.isModalTermsVisible = action.payload;
         }
     }
 });
@@ -54,6 +59,7 @@ export const {
     switchHomePageStatus,
     switchModalAuthVisibleStatus,
     switchModalRegistrVisibleStatus,
+    switchModalTermsVisibleStatus,
     setNewModalAuthPosition,
     setNewModalRegistrPosition
 } = mainSlice.actions;
