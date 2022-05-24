@@ -14,6 +14,7 @@ import Modal from '../../Modal/Modal';
 
 import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
 import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
+import { switchAuthErrorStatus } from '../../../app/slices/formSlice';
 
 // /. imports
 
@@ -40,9 +41,11 @@ const AuthorisationPage: React.FC = () => {
                 dispatch(switchAuthorisationPageStatus(false));
                 dispatch(switchHomePageStatus(true));
                 navigate('/Authorisation-Form/home');
+
+                dispatch(switchAuthErrorStatus(false)); // reset auth-error status
             })
             .catch((err) => {
-                alert(err.message);
+                dispatch(switchAuthErrorStatus(true));
             });
     };
     // 

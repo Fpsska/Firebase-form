@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+
 import { useForm } from 'react-hook-form';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,9 +10,12 @@ import { RootState } from '../../app/store';
 
 import { formFieldsTypes } from '../../Types/formSliceTypes';
 
-import { switchUserRememberedStatus, switchTermsAcceptedStatus } from '../../app/slices/formSlice';
-
-// import FormTemplate from './FormTemplate';
+import {
+    switchUserRememberedStatus,
+    switchTermsAcceptedStatus,
+    switchAuthErrorStatus,
+    switchPasswordHiddenStatus
+} from '../../app/slices/formSlice';
 
 import './form.scss';
 
@@ -19,6 +24,15 @@ import './form.scss';
 interface FormPropTypes {
     formActionHandler: (arg1: string, arg2: string) => void
 }
+
+interface useFormTypes {
+    email: string,
+    password: string,
+    confirmPassword: string,
+    fullName: string
+}
+
+// /. interfaces
 
 const Form: React.FC<FormPropTypes> = (props) => {
 
@@ -30,8 +44,8 @@ const Form: React.FC<FormPropTypes> = (props) => {
         formRegistrationFields,
         isUserRemembered,
         isTermsAccepted,
-        currentEmail,
-        currentPassword
+        isAuthError,
+        isPasswordHidden
     } = useSelector((state: RootState) => state.formSlice);
     const [currentFieldsData, setCurrentFieldsData] = useState<formFieldsTypes[]>(formAuthFields);
 
@@ -57,21 +71,18 @@ const Form: React.FC<FormPropTypes> = (props) => {
         },
         handleSubmit,
         reset
-    } = useForm({
-        mode: 'onBlur'
+    } = useForm<useFormTypes>({
+        mode: 'onChange'
     });
 
-    const FormSubmitHandler = (data: any): void => {
-        alert(JSON.stringify(data));
+    const FormSubmitHandler = (userData: any): void => {
+        formActionHandler(userData.email, userData.password);
         reset();
-        // formActionHandler(currentEmail, currentPassword);
-        // e.preventDefault();
     };
     // 
     return (
         <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
             <div className="form__wrapper">
-
                 {isAuthorisationPage
                     ?
                     <>
@@ -90,23 +101,38 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     }
                                 })}
                             />
-                            {errors.email && <span className="form__error">{errors.email.message}</span>}
+                            {errors.email
+                                ? <span className="form__error">{errors.email.message}</span>
+                                : isAuthError
+                                    ? <span className="form__error">incorrect email or password</span> : <></>
+                            }
                         </label>
                         <label className="form__label" htmlFor="password">
                             Password
                             <input
                                 id="password"
-                                type="password"
+                                type={!isPasswordHidden ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
                                     minLength: {
-                                        value: 5,
-                                        message: 'Minimum length is should be 5 symbols'
+                                        value: 2,
+                                        message: 'Minimum length is should be 2 symbols'
                                     }
                                 })}
                             />
-                            {errors?.password && <p className="form__error">{errors?.password?.message}</p>}
+                            {
+                                isPasswordHidden
+                                    ?
+                                    <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                                    :
+                                    <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                            }
+                            {errors.password
+                                ? <span className="form__error">{errors.password.message}</span>
+                                : isAuthError
+                                    ? <span className="form__error">incorrect email or password</span> : <></>
+                            }
                         </label>
                     </>
                     :
@@ -122,12 +148,14 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 type="text"
                                 placeholder="John Doe"
                                 {...register('fullName', {
-                                    required: true,
-                                    maxLength: 10
+                                    required: 'Field is required!',
+                                    maxLength: {
+                                        value: 10,
+                                        message: 'Max length exceeded'
+                                    }
                                 })}
                             />
-                            {errors.fullName && errors.fullName.type === 'required' && <span className="form__error">Field is required!</span>}
-                            {errors.fullName && errors.fullName.type === 'maxLength' && <span className="form__error">Max length exceeded</span>}
+                            {errors.fullName && <span className="form__error">{errors.fullName.message}</span>}
                         </label>
                         <label className="form__label" htmlFor="email">
                             <span className="form__label-text">
@@ -156,17 +184,24 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="password"
-                                type="password"
+                                type={!isPasswordHidden ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
                                     minLength: {
-                                        value: 5,
-                                        message: 'Minimum length is should be 5 symbols'
+                                        value: 6,
+                                        message: 'Minimum length is should be 6 symbols'
                                     }
                                 })}
                             />
-                            {errors?.password && <p className="form__error">{errors?.password?.message}</p>}
+                            {
+                                isPasswordHidden
+                                    ?
+                                    <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                                    :
+                                    <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                            }
+                            {errors.password && <p className="form__error">{errors.password?.message}</p>}
                         </label>
                         <label className="form__label" htmlFor="confirm-password">
                             <span className="form__label-text">
@@ -175,17 +210,24 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="confirm-password"
-                                type="password"
+                                type={!isPasswordHidden ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('confirmPassword', {
                                     required: 'Field is required!',
                                     minLength: {
-                                        value: 5,
-                                        message: 'Minimum length is should be 5 symbols'
+                                        value: 6,
+                                        message: 'Minimum length is should be 6 symbols'
                                     }
                                 })}
                             />
-                            {errors?.confirmPassword && <p className="form__error">{errors?.confirmPassword?.message}</p>}
+                            {
+                                isPasswordHidden
+                                    ?
+                                    <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                                    :
+                                    <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                            }
+                            {errors.confirmPassword && <p className="form__error">{errors.confirmPassword.message}</p>}
                         </label>
                     </>
                 }

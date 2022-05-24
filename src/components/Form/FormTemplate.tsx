@@ -7,9 +7,7 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { RootState } from '../../app/store';
 
 import {
-    switchPasswordHiddenStatus,
-    setCurrentEmail,
-    setCurrentPassword
+    switchPasswordHiddenStatus
 } from '../../app/slices/formSlice';
 
 // /. imports
@@ -36,17 +34,6 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
 
     const dispatch = useDispatch();
-
-    const inputHandler = (EventValue: string, inputType: string): void => {
-        switch (inputType) {
-            case 'text':
-                dispatch(setCurrentEmail(EventValue));
-                break;
-            case 'password':
-                dispatch(setCurrentPassword(EventValue));
-                break;
-        }
-    };
     // 
     return (
         <label className="form__label" htmlFor={htmlFor}>
@@ -60,7 +47,6 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
                 type={!isPasswordHidden ? 'text' : type}
                 placeholder={placeholder}
                 required
-                onChange={(e) => inputHandler(e.target.value, type)}
             />
             {type === 'password'
                 ?
