@@ -12,7 +12,7 @@ import {
     switchModalRegistrVisibleStatus,
     setNewModalAuthPosition,
     setNewModalRegistrPosition
-} from '../../app/slices/mainSlice';
+} from '../../app/slices/modalSlice';
 
 import './buttonTemplate.scss';
 

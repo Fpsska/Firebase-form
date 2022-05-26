@@ -10,7 +10,7 @@ import {
     switchModalAuthVisibleStatus,
     switchModalRegistrVisibleStatus,
     switchModalTermsVisibleStatus
-} from '../../app/slices/mainSlice';
+} from '../../app/slices/modalSlice';
 
 import logo from '../../assets/images/react-logo_icon.svg';
 
@@ -28,7 +28,8 @@ interface ModalPropsTypes {
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { isAuthorisationPage, modalAuthPosition, modalRegistrPosition } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const { modalAuthPosition, modalRegistrPosition } = useSelector((state: RootState) => state.modalSlice);
     const [modalPosition, setModalPosition] = useState<any>(modalAuthPosition);
     const [initOffsetPosition, setInitOffsetPosition] = useState<any>({
         offsetY: 0,

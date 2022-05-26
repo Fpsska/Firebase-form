@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom';
 
 import { RootState } from '../../app/store';
 
+import { switchAuthorisationPageStatus } from '../../app/slices/mainSlice';
+
 import {
-    switchAuthorisationPageStatus,
     switchModalAuthVisibleStatus,
     switchModalRegistrVisibleStatus
-} from '../../app/slices/mainSlice';
+} from '../../app/slices/modalSlice';
 
 import './relocate.scss';
 

@@ -3,12 +3,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import mainSlice from './slices/mainSlice';
 import formSlice from './slices/formSlice';
 import userSlice from './slices/userSlice';
+import modalSlice from './slices/modalSlice';
 
 export const store = configureStore({
   reducer: {
     mainSlice: mainSlice,
     formSlice: formSlice,
-    userSlice: userSlice
+    userSlice: userSlice,
+    modalSlice: modalSlice
   }
 });
 

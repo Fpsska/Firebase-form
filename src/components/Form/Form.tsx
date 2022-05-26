@@ -17,7 +17,7 @@ import {
     switchPasswordHiddenStatus
 } from '../../app/slices/formSlice';
 
-import { switchModalTermsVisibleStatus } from '../../app/slices/mainSlice';
+import { switchModalTermsVisibleStatus } from '../../app/slices/modalSlice';
 
 import Modal from '../Modal/Modal';
 
@@ -42,7 +42,8 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const { formActionHandler } = props;
 
-    const { isAuthorisationPage, isModalTermsVisible } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const { isModalTermsVisible } = useSelector((state: RootState) => state.modalSlice);
     const {
         formAuthFields,
         formRegistrationFields,

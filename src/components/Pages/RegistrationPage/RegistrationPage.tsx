@@ -19,7 +19,7 @@ import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../ap
 
 const RegistrationPage: React.FC = () => {
 
-    const { isModalRegistrVisible } = useSelector((state: RootState) => state.mainSlice);
+    const { isModalRegistrVisible } = useSelector((state: RootState) => state.modalSlice);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
