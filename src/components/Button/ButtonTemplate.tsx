@@ -5,13 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../app/store';
 
-import { getRandomItgrNumber } from '../../helpers/getRandomNum';
-
 import {
-    switchModalAuthVisibleStatus,
-    switchModalRegistrVisibleStatus,
-    setNewModalAuthPosition,
-    setNewModalRegistrPosition
+    switchModalVisibleStatus
 } from '../../app/slices/modalSlice';
 
 import './buttonTemplate.scss';
@@ -23,26 +18,16 @@ const ButtonTemplate: React.FC = () => {
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const dispatch = useDispatch();
 
-    const generalButtonHandler = (): void => {  // need to fix call all of disptchs
-        if (isAuthorisationPage) {
-            dispatch(switchModalAuthVisibleStatus(true));
-            dispatch(setNewModalAuthPosition({
-                top: getRandomItgrNumber(50, 10),
-                left: getRandomItgrNumber(50, 10)
-            }));
-        } else {
-            dispatch(switchModalRegistrVisibleStatus(true));
-            dispatch(setNewModalRegistrPosition({
-                top: getRandomItgrNumber(50, 10),
-                left: getRandomItgrNumber(50, 10)
-            }));
-        }
+    const generalButtonHandler = (): void => {
+        isAuthorisationPage
+            ? dispatch(switchModalVisibleStatus({ name: 'auth-modal', status: true }))
+            : dispatch(switchModalVisibleStatus({ name: 'registr-modal', status: true }));
     };
     // 
     return (
         <button className="button" onClick={generalButtonHandler}>
             <FcGoogle size={19} />
-            <span>{isAuthorisationPage ? 'Continue with Google' : 'Sign up with Google'}</span>
+            <span className="button__text">{isAuthorisationPage ? 'Continue with Google' : 'Sign up with Google'}</span>
         </button>
     );
 };

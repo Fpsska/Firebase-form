@@ -21,7 +21,7 @@ import { switchAuthErrorStatus } from '../../../app/slices/formSlice';
 
 const AuthorisationPage: React.FC = () => {
 
-    const { isModalAuthVisible } = useSelector((state: RootState) => state.modalSlice);
+    const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -53,8 +53,9 @@ const AuthorisationPage: React.FC = () => {
         <div className="authorisation">
             <div className="authorisation__wrapper">
                 <Modal
+                    name={'auth-modal'}
                     title={'Authorisation modal!'}
-                    visibleStatus={isModalAuthVisible}
+                    status={modalStatus.isModalAuthVisible}
                 >
                     Sorry, this method is temporarily unavailable
                     <br />

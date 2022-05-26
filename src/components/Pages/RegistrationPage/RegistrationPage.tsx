@@ -19,7 +19,7 @@ import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../ap
 
 const RegistrationPage: React.FC = () => {
 
-    const { isModalRegistrVisible } = useSelector((state: RootState) => state.modalSlice);
+    const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -49,8 +49,9 @@ const RegistrationPage: React.FC = () => {
         <div className="registration">
             <div className="registration__wrapper">
                 <Modal
+                    name={'registr-modal'}
                     title={'Rigistration modal!'}
-                    visibleStatus={isModalRegistrVisible}
+                    status={modalStatus.isModalRegistrVisible}
                 >
                     Technical works..In progess..
                 </Modal>

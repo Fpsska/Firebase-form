@@ -1,16 +1,14 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { IoMdClose } from 'react-icons/io';
 
 import { RootState } from '../../app/store';
 
-import {
-    switchModalAuthVisibleStatus,
-    switchModalRegistrVisibleStatus,
-    switchModalTermsVisibleStatus
-} from '../../app/slices/modalSlice';
+import { modalPositionTypes } from '../../Types/modalSliceTypes';
+
+import { useDefineModal } from '../../hooks/defineModal';
 
 import logo from '../../assets/images/react-logo_icon.svg';
 
@@ -19,9 +17,10 @@ import './modal.scss';
 // /. imports
 
 interface ModalPropsTypes {
+    name: string,
     title: string,
     children: any,
-    visibleStatus: boolean,
+    status: boolean,
 }
 
 // /. interfaces
@@ -30,39 +29,43 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
 
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const { modalAuthPosition, modalRegistrPosition } = useSelector((state: RootState) => state.modalSlice);
-    const [modalPosition, setModalPosition] = useState<any>(modalAuthPosition);
+    const [modalPosition, setModalPosition] = useState<modalPositionTypes>(modalAuthPosition);
+    const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
     const [initOffsetPosition, setInitOffsetPosition] = useState<any>({
         offsetY: 0,
         offsetX: 0
     });
 
-    const dispatch = useDispatch();
     const modalRef = useRef<HTMLDivElement>(null!);
+    const { handleModalName } = useDefineModal();
 
     const {
+        name,
         title,
         children,
-        visibleStatus
+        status
     } = props;
+
+    useEffect(() => {  // set current status-prop like visibleStatus initial value
+        setVisibleStatus(status);
+    }, [status]);
 
     const areaHandler = useCallback((e: any): void => {
         const validModalArea = e.target === modalRef.current || modalRef.current.contains(e.target);
-        const validElements = e.target.className === 'button';
+        const validElements = e.target.className === 'button' || e.target.className === 'button__icon' || e.target.className === 'button__text';
 
         if (!validModalArea && !validElements) {
-            dispatch(switchModalAuthVisibleStatus(false));
-            dispatch(switchModalRegistrVisibleStatus(false));
-            dispatch(switchModalTermsVisibleStatus(false));
+            handleModalName(name);
+            setVisibleStatus(false);
         }
-    }, []);
+    }, [name]);
 
     const keyHandler = useCallback((e: KeyboardEvent): void => {
-        if (e.code === 'Escape') {
-            dispatch(switchModalAuthVisibleStatus(false));
-            dispatch(switchModalRegistrVisibleStatus(false));
-            dispatch(switchModalTermsVisibleStatus(false));
+        if (visibleStatus && e.code === 'Escape') {
+            handleModalName(name);
+            setVisibleStatus(false);
         }
-    }, []);
+    }, [name, visibleStatus]);
 
     useEffect(() => {
         document.addEventListener('click', areaHandler, true);
@@ -78,9 +81,8 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     }, [isAuthorisationPage, modalAuthPosition, modalRegistrPosition]);
 
     const modalButtonHandler = (): void => {
-        dispatch(switchModalAuthVisibleStatus(false));
-        dispatch(switchModalRegistrVisibleStatus(false));
-        dispatch(switchModalTermsVisibleStatus(false));
+        handleModalName(name);
+        setVisibleStatus(false);
     };
 
     const modalDragStart = (e: any): void => {
@@ -112,6 +114,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     return (
         <div
             ref={modalRef}
+            id={name}
             className={visibleStatus ? 'modal' : 'modal hidden'}
             draggable="true"
             style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}

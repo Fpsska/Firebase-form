@@ -7,11 +7,6 @@ import { RootState } from '../../app/store';
 
 import { switchAuthorisationPageStatus } from '../../app/slices/mainSlice';
 
-import {
-    switchModalAuthVisibleStatus,
-    switchModalRegistrVisibleStatus
-} from '../../app/slices/modalSlice';
-
 import './relocate.scss';
 
 // /. imports
@@ -23,16 +18,10 @@ const Relocate: React.FC = () => {
 
     const relocateToAuthPage = (): void => {
         dispatch(switchAuthorisationPageStatus(false));
-
-        dispatch(switchModalAuthVisibleStatus(false));
-        dispatch(switchModalRegistrVisibleStatus(false));
     };
 
     const relocateToLoginPage = (): void => {
         dispatch(switchAuthorisationPageStatus(true));
-
-        dispatch(switchModalAuthVisibleStatus(false));
-        dispatch(switchModalRegistrVisibleStatus(false));
     };
     // 
     return (
