@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
@@ -7,8 +7,6 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../app/store';
-
-import { formFieldsTypes } from '../../Types/formSliceTypes';
 
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
@@ -38,7 +36,8 @@ interface useFormTypes {
     email: string,
     password: string,
     confirmPassword: string,
-    fullName: string
+    fullName: string,
+    termsCheckbox: string
 }
 
 // /. interfaces
@@ -50,20 +49,13 @@ const Form: React.FC<FormPropTypes> = (props) => {
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
     const {
-        formAuthFields,
-        formRegistrationFields,
         isUserRemembered,
         isTermsAccepted,
         isAuthError,
         isPasswordHidden
     } = useSelector((state: RootState) => state.formSlice);
-    // const [currentFieldsData, setCurrentFieldsData] = useState<formFieldsTypes[]>(formAuthFields);
 
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     isAuthorisationPage ? setCurrentFieldsData(formAuthFields) : setCurrentFieldsData(formRegistrationFields);
-    // }, [isAuthorisationPage]);
 
     const inputRememberHandler = (): void => {
         dispatch(switchUserRememberedStatus(!isUserRemembered));
@@ -153,6 +145,20 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ? <span className="form__error">incorrect email or password</span> : <></>
                             }
                         </label>
+
+                        <div className="form__terms">
+                            <label className="form__label form__label--remember" htmlFor="remember" >
+                                <input
+                                    className="form__input form__input--checkbox"
+                                    type="checkbox"
+                                    id="remember"
+                                    onClick={inputRememberHandler}
+                                />
+                                <span className="form__fake-checkbox"></span>
+                                Remember me
+                            </label>
+                            <span className="form__restore">Forgot Password?</span>
+                        </div>
                     </>
                     :
                     <>
@@ -248,44 +254,29 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             }
                             {errors.confirmPassword && <p className="form__error">{errors.confirmPassword.message}</p>}
                         </label>
-                    </>
-                }
-                {/*  */}
-                {isAuthorisationPage
-                    ?
-                    <div className="form__terms">
-                        <label className="form__label form__label--remember" htmlFor="remember" >
+
+                        <label className="form__label form__label--terms" htmlFor="terms" >
                             <input
                                 className="form__input form__input--checkbox"
                                 type="checkbox"
-                                id="remember"
-                                onClick={inputRememberHandler}
+                                id="terms"
+                                onClick={inputTermsHandler}
+                                {...register('termsCheckbox', {
+                                    required: true
+                                })}
                             />
                             <span className="form__fake-checkbox"></span>
-                            Remember me
+                            <span className="form__terms-text"> I have read and agree to the{' '}
+                                <a
+                                    href="#"
+                                    className="form__terms-link"
+                                    onClick={linkTermsHandler}
+                                >
+                                    Terms of Service
+                                </a>
+                            </span>
                         </label>
-                        <span className="form__restore">Forgot Password?</span>
-                    </div>
-                    :
-                    <label className="form__label form__label--terms" htmlFor="terms" >
-                        <input
-                            className="form__input form__input--checkbox"
-                            type="checkbox"
-                            id="terms"
-                            onClick={inputTermsHandler}
-                            required
-                        />
-                        <span className="form__fake-checkbox"></span>
-                        <span className="form__terms-text"> I have read and agree to the{' '}
-                            <a
-                                href="#"
-                                className="form__terms-link"
-                                onClick={linkTermsHandler}
-                            >
-                                Terms of Service
-                            </a>
-                        </span>
-                    </label>
+                    </>
                 }
 
                 <button
