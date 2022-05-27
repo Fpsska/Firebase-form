@@ -6,9 +6,9 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 import { RootState } from '../../app/store';
 
-import {
-    switchPasswordHiddenStatus
-} from '../../app/slices/formSlice';
+// import {
+//     switchPasswordVisibleStatuses
+// } from '../../app/slices/formSlice';
 
 // /. imports
 
@@ -30,7 +30,7 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
         placeholder
     } = props;
 
-    const { isPasswordHidden } = useSelector((state: RootState) => state.formSlice);
+    const { passwordStatuses } = useSelector((state: RootState) => state.formSlice);
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
 
     const dispatch = useDispatch();
@@ -44,20 +44,20 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
             <input
                 className={`form__input ${type === 'password' ? 'form__input--password' : 'form__input--email'}`}
                 id={htmlFor}
-                type={!isPasswordHidden ? 'text' : type}
+                type={!passwordStatuses ? 'text' : type}
                 placeholder={placeholder}
                 required
             />
             {type === 'password'
                 ?
                 <>
-                    {
-                        isPasswordHidden
+                    {/* {
+                        passwordStatuses
                             ?
                             <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
                             :
                             <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
-                    }
+                    } */}
                 </>
                 :
                 <></>

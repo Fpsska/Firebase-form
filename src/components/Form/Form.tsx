@@ -14,7 +14,7 @@ import {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus,
     switchAuthErrorStatus,
-    switchPasswordHiddenStatus
+    switchPasswordVisibleStatuses
 } from '../../app/slices/formSlice';
 
 import {
@@ -52,7 +52,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
         isUserRemembered,
         isTermsAccepted,
         isAuthError,
-        isPasswordHidden
+        passwordStatuses
     } = useSelector((state: RootState) => state.formSlice);
 
     const dispatch = useDispatch();
@@ -125,7 +125,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             Password
                             <input
                                 id="password"
-                                type={!isPasswordHidden ? 'text' : 'password'}
+                                type={!passwordStatuses.isPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
@@ -136,11 +136,29 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {
-                                isPasswordHidden
+                                passwordStatuses.isPasswordVisible
                                     ?
-                                    <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                                    <BsEye
+                                        className="form__icon-password"
+                                        size={20} color="#000"
+                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
+                                            {
+                                                name: 'password',
+                                                status: false
+                                            }
+                                        ))}
+                                    />
                                     :
-                                    <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                                    <BsEyeSlash
+                                        className="form__icon-password"
+                                        size={20} color="#000"
+                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
+                                            {
+                                                name: 'password',
+                                                status: true
+                                            }
+                                        ))}
+                                    />
                             }
                             {errors.password
                                 ? <span className="form__error">{errors.password.message}</span>
@@ -212,7 +230,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="password"
-                                type={!isPasswordHidden ? 'text' : 'password'}
+                                type={!passwordStatuses.isPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
@@ -223,11 +241,29 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {
-                                isPasswordHidden
+                                passwordStatuses.isPasswordVisible
                                     ?
-                                    <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                                    <BsEye
+                                        className="form__icon-password"
+                                        size={20} color="#000"
+                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
+                                            {
+                                                name: 'password',
+                                                status: false
+                                            }
+                                        ))}
+                                    />
                                     :
-                                    <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                                    <BsEyeSlash
+                                        className="form__icon-password"
+                                        size={20} color="#000"
+                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
+                                            {
+                                                name: 'password',
+                                                status: true
+                                            }
+                                        ))}
+                                    />
                             }
                             {errors.password && <p className="form__error">{errors.password?.message}</p>}
                         </label>
@@ -238,7 +274,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="confirm-password"
-                                type={!isPasswordHidden ? 'text' : 'password'}
+                                type={!passwordStatuses.isConfirmPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 onPaste={(e) => {
                                     e.preventDefault();
@@ -254,11 +290,29 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {
-                                isPasswordHidden
+                                passwordStatuses.isConfirmPasswordVisible
                                     ?
-                                    <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
+                                    <BsEye
+                                        className="form__icon-password"
+                                        size={20} color="#000"
+                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
+                                            {
+                                                name: 'confirm-password',
+                                                status: false
+                                            }
+                                        ))}
+                                    />
                                     :
-                                    <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
+                                    <BsEyeSlash
+                                        className="form__icon-password"
+                                        size={20} color="#000"
+                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
+                                            {
+                                                name: 'confirm-password',
+                                                status: true
+                                            }
+                                        ))}
+                                    />
                             }
                             {errors.confirmPassword && <p className="form__error">{errors.confirmPassword.message}</p>}
                         </label>

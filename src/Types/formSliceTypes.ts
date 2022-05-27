@@ -5,3 +5,8 @@ export interface formFieldsTypes {
     label: string,
     placeholder: string
 }
+
+export interface passwordStatusesTypes {
+    isPasswordVisible: boolean;
+    isConfirmPasswordVisible: boolean
+}

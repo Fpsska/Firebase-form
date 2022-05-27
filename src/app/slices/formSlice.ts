@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { formFieldsTypes } from '../../Types/formSliceTypes';
+import { formFieldsTypes, passwordStatusesTypes } from '../../Types/formSliceTypes';
 
 // /. imports
 
@@ -9,7 +9,7 @@ interface formSliceTypes {
     formRegistrationFields: formFieldsTypes[],
     isUserRemembered: boolean,
     isTermsAccepted: boolean,
-    isPasswordHidden: boolean,
+    passwordStatuses: passwordStatusesTypes,
     isAuthError: boolean
 }
 
@@ -64,7 +64,10 @@ const initialState: formSliceTypes = {
     ],
     isUserRemembered: false,
     isTermsAccepted: false,
-    isPasswordHidden: true,
+    passwordStatuses: {
+        isPasswordVisible: false,
+        isConfirmPasswordVisible: false
+    },
     isAuthError: false
 };
 
@@ -80,10 +83,20 @@ const formSlice = createSlice({
         switchTermsAcceptedStatus(state, actions: PayloadAction<boolean>) {
             state.isTermsAccepted = actions.payload;
         },
-        switchPasswordHiddenStatus(state, actions: PayloadAction<boolean>) {
-            state.isPasswordHidden = actions.payload;
+        switchPasswordVisibleStatuses(state, actions: PayloadAction<{ name: string, status: boolean }>) {
+            const { name, status } = actions.payload;
+            switch (name) {
+                case 'password':
+                    state.passwordStatuses.isPasswordVisible = status;
+                    console.log('password')
+                    break;
+                case 'confirm-password':
+                    state.passwordStatuses.isConfirmPasswordVisible = status;
+                    console.log('confirm-password')
+                    break;
+            }
         },
-        switchAuthErrorStatus(state, action:PayloadAction<boolean>) {
+        switchAuthErrorStatus(state, action: PayloadAction<boolean>) {
             state.isAuthError = action.payload;
         }
     }
@@ -92,7 +105,7 @@ const formSlice = createSlice({
 export const {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus,
-    switchPasswordHiddenStatus,
+    switchPasswordVisibleStatuses,
     switchAuthErrorStatus
 } = formSlice.actions;
 
