@@ -81,10 +81,13 @@ const Form: React.FC<FormPropTypes> = (props) => {
             isValid
         },
         handleSubmit,
-        reset
+        reset,
+        watch
     } = useForm<useFormTypes>({
         mode: 'onChange'
     });
+
+    const passwordValue = watch('password');
 
     const FormSubmitHandler = (userData: any): void => {
         formActionHandler(userData.email, userData.password);
@@ -237,12 +240,17 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 id="confirm-password"
                                 type={!isPasswordHidden ? 'text' : 'password'}
                                 className="form__input form__input--password"
+                                onPaste={(e) => {
+                                    e.preventDefault();
+                                    return false;
+                                }}
                                 {...register('confirmPassword', {
                                     required: 'Field is required!',
                                     minLength: {
                                         value: 6,
                                         message: 'Minimum length is should be 6 symbols'
-                                    }
+                                    },
+                                    validate: (value) => value === passwordValue || 'The password do not match'
                                 })}
                             />
                             {
