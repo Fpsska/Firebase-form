@@ -125,7 +125,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             Password
                             <input
                                 id="password"
-                                type={!passwordStatuses.isPasswordVisible ? 'text' : 'password'}
+                                type={passwordStatuses.isPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
@@ -138,7 +138,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             {
                                 passwordStatuses.isPasswordVisible
                                     ?
-                                    <BsEye
+                                    <BsEyeSlash
                                         className="form__icon-password"
                                         size={20} color="#000"
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
@@ -149,7 +149,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                         ))}
                                     />
                                     :
-                                    <BsEyeSlash
+                                    <BsEye
                                         className="form__icon-password"
                                         size={20} color="#000"
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
@@ -230,7 +230,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="password"
-                                type={!passwordStatuses.isPasswordVisible ? 'text' : 'password'}
+                                type={passwordStatuses.isPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
@@ -243,7 +243,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             {
                                 passwordStatuses.isPasswordVisible
                                     ?
-                                    <BsEye
+                                    <BsEyeSlash
                                         className="form__icon-password"
                                         size={20} color="#000"
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
@@ -254,7 +254,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                         ))}
                                     />
                                     :
-                                    <BsEyeSlash
+                                    <BsEye
                                         className="form__icon-password"
                                         size={20} color="#000"
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
@@ -274,7 +274,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="confirm-password"
-                                type={!passwordStatuses.isConfirmPasswordVisible ? 'text' : 'password'}
+                                type={passwordStatuses.isConfirmPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 onPaste={(e) => {
                                     e.preventDefault();
@@ -292,7 +292,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             {
                                 passwordStatuses.isConfirmPasswordVisible
                                     ?
-                                    <BsEye
+                                    <BsEyeSlash
                                         className="form__icon-password"
                                         size={20} color="#000"
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
@@ -303,7 +303,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                         ))}
                                     />
                                     :
-                                    <BsEyeSlash
+                                    <BsEye
                                         className="form__icon-password"
                                         size={20} color="#000"
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
