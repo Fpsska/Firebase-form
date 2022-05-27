@@ -72,11 +72,11 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
             e.target.className === 'button__text' ||
             e.target.className === 'form__terms-link';
 
-        if (!validModalArea && !validElements) {
+        if (visibleStatus && !validModalArea && !validElements) {
             handleModalCase(name);
             setVisibleStatus(false);
         }
-    }, [name]);
+    }, [name, visibleStatus]);
 
     const keyHandler = useCallback((e: KeyboardEvent): void => {
         if (visibleStatus && e.code === 'Escape') {
