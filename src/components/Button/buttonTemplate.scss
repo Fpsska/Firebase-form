@@ -10,6 +10,13 @@
     background-color: transparent;
     transition: all 0.35s linear;
     cursor: pointer;
+
+    position: relative;
+
+    &:disabled {
+        border: 1px solid rgba($color: #ff0000, $alpha: 0.5);
+        cursor: not-allowed;
+    }
     &:hover {
         background-color: rgba(0,0,0, 0.3);
     }

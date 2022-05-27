@@ -31,7 +31,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     const { modalPositions } = useSelector((state: RootState) => state.modalSlice);
     const [modalPosition, setModalPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
     const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
-    const [initOffsetPosition, setInitOffsetPosition] = useState<any>({
+    const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
         offsetY: 0,
         offsetX: 0
     });

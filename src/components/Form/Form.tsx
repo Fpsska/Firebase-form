@@ -19,7 +19,10 @@ import {
     switchPasswordHiddenStatus
 } from '../../app/slices/formSlice';
 
-import { setNewModalPosition } from '../../app/slices/modalSlice';
+import {
+    setNewModalPosition,
+    switchModalVisibleStatus
+} from '../../app/slices/modalSlice';
 
 import Modal from '../Modal/Modal';
 
@@ -54,13 +57,13 @@ const Form: React.FC<FormPropTypes> = (props) => {
         isAuthError,
         isPasswordHidden
     } = useSelector((state: RootState) => state.formSlice);
-    const [currentFieldsData, setCurrentFieldsData] = useState<formFieldsTypes[]>(formAuthFields);
+    // const [currentFieldsData, setCurrentFieldsData] = useState<formFieldsTypes[]>(formAuthFields);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        isAuthorisationPage ? setCurrentFieldsData(formAuthFields) : setCurrentFieldsData(formRegistrationFields);
-    }, [isAuthorisationPage]);
+    // useEffect(() => {
+    //     isAuthorisationPage ? setCurrentFieldsData(formAuthFields) : setCurrentFieldsData(formRegistrationFields);
+    // }, [isAuthorisationPage]);
 
     const inputRememberHandler = (): void => {
         dispatch(switchUserRememberedStatus(!isUserRemembered));
@@ -71,6 +74,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
     };
 
     const linkTermsHandler = (): void => {
+        dispatch(switchModalVisibleStatus({ name: 'terms-modal', status: true }));
         dispatch(setNewModalPosition(
             {
                 name: 'terms-modal',

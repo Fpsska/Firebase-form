@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FcGoogle } from 'react-icons/fc';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,6 +19,7 @@ import './buttonTemplate.scss';
 const ButtonTemplate: React.FC = () => {
 
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
     const dispatch = useDispatch();
 
     const generalButtonHandler = (): void => {
@@ -39,10 +40,14 @@ const ButtonTemplate: React.FC = () => {
                 }
             ));
         }
+        setDisabledStatus(true);
+        setTimeout(() => {
+            setDisabledStatus(false);
+        }, 20000);
     };
     // 
     return (
-        <button className="button" onClick={generalButtonHandler}>
+        <button className="button" disabled={disabledStatus} onClick={generalButtonHandler} >
             <FcGoogle size={19} />
             <span className="button__text">{isAuthorisationPage ? 'Continue with Google' : 'Sign up with Google'}</span>
         </button>
