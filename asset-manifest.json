@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Authorisation-Form/static/css/main.01fcd802.css",
-    "main.js": "/Authorisation-Form/static/js/main.7ad4cffb.js",
+    "main.css": "/Authorisation-Form/static/css/main.f4561a44.css",
+    "main.js": "/Authorisation-Form/static/js/main.cb31b341.js",
     "static/js/787.3a790d7a.chunk.js": "/Authorisation-Form/static/js/787.3a790d7a.chunk.js",
     "static/media/background.jpg": "/Authorisation-Form/static/media/background.5e907e91e271cca69c24.jpg",
     "static/media/react-logo_icon.svg": "/Authorisation-Form/static/media/react-logo_icon.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/Authorisation-Form/index.html",
     "static/media/checkbox_icon.svg": "/Authorisation-Form/static/media/checkbox_icon.9eb7cccc4ea1077dbedf.svg",
-    "main.01fcd802.css.map": "/Authorisation-Form/static/css/main.01fcd802.css.map",
-    "main.7ad4cffb.js.map": "/Authorisation-Form/static/js/main.7ad4cffb.js.map",
+    "main.f4561a44.css.map": "/Authorisation-Form/static/css/main.f4561a44.css.map",
+    "main.cb31b341.js.map": "/Authorisation-Form/static/js/main.cb31b341.js.map",
     "787.3a790d7a.chunk.js.map": "/Authorisation-Form/static/js/787.3a790d7a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.01fcd802.css",
-    "static/js/main.7ad4cffb.js"
+    "static/css/main.f4561a44.css",
+    "static/js/main.cb31b341.js"
   ]
 }
