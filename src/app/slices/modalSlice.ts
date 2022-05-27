@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { modalPositionTypes, modalStatusTypes } from '../../Types/modalSliceTypes';
+import { coordinatesTypes, modalPositionsTypes, modalStatusTypes } from '../../Types/modalSliceTypes';
 
 // /. imports
 
 interface modalSliceTypes {
     modalStatus: modalStatusTypes,
-    modalAuthPosition: modalPositionTypes,
-    modalRegistrPosition: modalPositionTypes
+    modalPositions: modalPositionsTypes
 }
 
 // /. interfaces
@@ -18,8 +17,11 @@ const initialState: modalSliceTypes = {
         isModalRegistrVisible: false,
         isModalTermsVisible: false
     },
-    modalAuthPosition: { top: 0, left: 0 },
-    modalRegistrPosition: { top: 0, left: 0 }
+    modalPositions: {
+        modalAuthPosition: { top: 0, left: 0 },
+        modalRegistrPosition: { top: 0, left: 0 },
+        modalTermsPosition: { top: 0, left: 0 }
+    }
 };
 
 // /. initialState
@@ -42,19 +44,29 @@ const modalSlice = createSlice({
                     break;
             }
         },
-        setNewModalAuthPosition(state, action: PayloadAction<modalPositionTypes>) {
-            state.modalAuthPosition = action.payload;
-        },
-        setNewModalRegistrPosition(state, action: PayloadAction<modalPositionTypes>) {
-            state.modalRegistrPosition = action.payload;
+        setNewModalPosition(state, action: PayloadAction<{ name: string, coordinates: coordinatesTypes }>) {
+            const { name, coordinates } = action.payload;
+            switch (name) {
+                case 'auth-modal':
+                    state.modalPositions.modalAuthPosition = coordinates;
+                    console.log('auth-modal')
+                    break;
+                case 'registr-modal':
+                    state.modalPositions.modalRegistrPosition = coordinates;
+                    console.log('registr-modal')
+                    break;
+                case 'terms-modal':
+                    state.modalPositions.modalTermsPosition = coordinates;
+                    console.log('terms-modal')
+                    break;
+            }
         }
     }
 });
 
 export const {
     switchModalVisibleStatus,
-    setNewModalAuthPosition,
-    setNewModalRegistrPosition
+    setNewModalPosition
 } = modalSlice.actions;
 
 

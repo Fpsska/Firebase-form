@@ -5,8 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '../../app/store';
 
+import { getRandomItgrNumber } from '../../helpers/getRandomNum';
+
 import {
-    switchModalVisibleStatus
+    switchModalVisibleStatus,
+    setNewModalPosition
 } from '../../app/slices/modalSlice';
 
 import './buttonTemplate.scss';
@@ -19,9 +22,23 @@ const ButtonTemplate: React.FC = () => {
     const dispatch = useDispatch();
 
     const generalButtonHandler = (): void => {
-        isAuthorisationPage
-            ? dispatch(switchModalVisibleStatus({ name: 'auth-modal', status: true }))
-            : dispatch(switchModalVisibleStatus({ name: 'registr-modal', status: true }));
+        if (isAuthorisationPage) {
+            dispatch(switchModalVisibleStatus({ name: 'auth-modal', status: true }));
+            dispatch(setNewModalPosition(
+                {
+                    name: 'auth-modal',
+                    coordinates: { top: getRandomItgrNumber(50, 10), left: getRandomItgrNumber(50, 10) }
+                }
+            ));
+        } else {
+            dispatch(switchModalVisibleStatus({ name: 'registr-modal', status: true }));
+            dispatch(setNewModalPosition(
+                {
+                    name: 'registr-modal',
+                    coordinates: { top: getRandomItgrNumber(90, 10), left: getRandomItgrNumber(90, 10) }
+                }
+            ));
+        }
     };
     // 
     return (

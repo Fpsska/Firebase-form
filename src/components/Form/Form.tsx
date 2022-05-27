@@ -10,6 +10,8 @@ import { RootState } from '../../app/store';
 
 import { formFieldsTypes } from '../../Types/formSliceTypes';
 
+import { getRandomItgrNumber } from '../../helpers/getRandomNum';
+
 import {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus,
@@ -17,7 +19,7 @@ import {
     switchPasswordHiddenStatus
 } from '../../app/slices/formSlice';
 
-import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
+import { setNewModalPosition } from '../../app/slices/modalSlice';
 
 import Modal from '../Modal/Modal';
 
@@ -66,6 +68,15 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const inputTermsHandler = (): void => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
+    };
+
+    const linkTermsHandler = (): void => {
+        dispatch(setNewModalPosition(
+            {
+                name: 'terms-modal',
+                coordinates: { top: getRandomItgrNumber(30, 10), left: getRandomItgrNumber(30, 10) }
+            }
+        ));
     };
     //
     const {
@@ -266,7 +277,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             <a
                                 href="#"
                                 className="form__terms-link"
-                                onClick={() => dispatch(switchModalVisibleStatus({ name: 'terms-modal', status: true }))}
+                                onClick={linkTermsHandler}
                             >
                                 Terms of Service
                             </a>

@@ -1,6 +1,12 @@
-export interface modalPositionTypes {
+export interface coordinatesTypes {
     top: number,
     left: number
+}
+
+export interface modalPositionsTypes {
+    modalAuthPosition: coordinatesTypes,
+    modalRegistrPosition: coordinatesTypes
+    modalTermsPosition: coordinatesTypes
 }
 
 export interface modalStatusTypes {
@@ -8,3 +14,5 @@ export interface modalStatusTypes {
     isModalRegistrVisible: boolean,
     isModalTermsVisible: boolean,
 }
+
+

@@ -6,7 +6,7 @@ import { IoMdClose } from 'react-icons/io';
 
 import { RootState } from '../../app/store';
 
-import { modalPositionTypes } from '../../Types/modalSliceTypes';
+import { coordinatesTypes } from '../../Types/modalSliceTypes';
 
 import { useDefineModal } from '../../hooks/defineModal';
 
@@ -28,8 +28,8 @@ interface ModalPropsTypes {
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
-    const { modalAuthPosition, modalRegistrPosition } = useSelector((state: RootState) => state.modalSlice);
-    const [modalPosition, setModalPosition] = useState<modalPositionTypes>(modalAuthPosition);
+    const { modalPositions } = useSelector((state: RootState) => state.modalSlice);
+    const [modalPosition, setModalPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
     const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
     const [initOffsetPosition, setInitOffsetPosition] = useState<any>({
         offsetY: 0,
@@ -49,6 +49,12 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     useEffect(() => {  // set current status-prop like visibleStatus initial value
         setVisibleStatus(status);
     }, [status]);
+
+    useEffect(() => { // set current handled modal of modalPositions state
+        isAuthorisationPage
+            ? setModalPosition(modalPositions.modalAuthPosition)
+            : setModalPosition(modalPositions.modalRegistrPosition);
+    }, [isAuthorisationPage, modalPositions]);
 
     const areaHandler = useCallback((e: any): void => {
         const validModalArea = e.target === modalRef.current || modalRef.current.contains(e.target);
@@ -76,10 +82,6 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         };
     }, [areaHandler, keyHandler]);
 
-    useEffect(() => {
-        isAuthorisationPage ? setModalPosition(modalAuthPosition) : setModalPosition(modalRegistrPosition);
-    }, [isAuthorisationPage, modalAuthPosition, modalRegistrPosition]);
-
     const modalButtonHandler = (): void => {
         handleModalName(name);
         setVisibleStatus(false);
@@ -100,7 +102,6 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         modalRef.current.style.top = `${e.pageY - initOffsetPosition.offsetY}px`;
         modalRef.current.style.left = `${e.pageX - initOffsetPosition.offsetX}px`;
     }, []);
-
 
     useEffect(() => {
         modalRef.current.addEventListener('dragstart', modalDragStart);
