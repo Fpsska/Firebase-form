@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
@@ -68,13 +68,12 @@ const Form: React.FC<FormPropTypes> = (props) => {
     const inputRememberHandler = (): void => {
         dispatch(switchUserRememberedStatus(!isUserRemembered));
     };
-
     const inputTermsHandler = (): void => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
     };
 
     const linkTermsHandler = (): void => {
-        dispatch(switchModalVisibleStatus({ name: 'terms-modal', status: true }));
+        dispatch(switchModalVisibleStatus({ name: 'terms-modal', status: !modalStatus.isModalTermsVisible }));
         dispatch(setNewModalPosition(
             {
                 name: 'terms-modal',
@@ -255,7 +254,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                 {isAuthorisationPage
                     ?
                     <div className="form__terms">
-                        <label className="form__label form__label--terms" htmlFor="remember" >
+                        <label className="form__label form__label--remember" htmlFor="remember" >
                             <input
                                 className="form__input form__input--checkbox"
                                 type="checkbox"

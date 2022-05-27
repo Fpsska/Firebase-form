@@ -8,7 +8,7 @@ import { RootState } from '../../app/store';
 
 import { coordinatesTypes } from '../../Types/modalSliceTypes';
 
-import { useDefineModal } from '../../hooks/defineModal';
+import { useDefineModalStatus } from '../../hooks/useDefineModalStatus';
 
 import logo from '../../assets/images/react-logo_icon.svg';
 
@@ -37,7 +37,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     });
 
     const modalRef = useRef<HTMLDivElement>(null!);
-    const { handleModalName } = useDefineModal();
+    const { handleModalCase } = useDefineModalStatus();
 
     const {
         name,
@@ -51,24 +51,36 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     }, [status]);
 
     useEffect(() => { // set current handled modal of modalPositions state
-        isAuthorisationPage
-            ? setModalPosition(modalPositions.modalAuthPosition)
-            : setModalPosition(modalPositions.modalRegistrPosition);
-    }, [isAuthorisationPage, modalPositions]);
+        switch (name) {
+            case 'auth-modal':
+                setModalPosition(modalPositions.modalAuthPosition);
+                break;
+            case 'registr-modal':
+                setModalPosition(modalPositions.modalRegistrPosition);
+                break;
+            case 'terms-modal':
+                setModalPosition(modalPositions.modalTermsPosition);
+                break;
+        }
+    }, [modalPositions, name]);
 
     const areaHandler = useCallback((e: any): void => {
         const validModalArea = e.target === modalRef.current || modalRef.current.contains(e.target);
-        const validElements = e.target.className === 'button' || e.target.className === 'button__icon' || e.target.className === 'button__text';
+        const validElements =
+            e.target.className === 'button' ||
+            e.target.className === 'button__icon' ||
+            e.target.className === 'button__text' ||
+            e.target.className === 'form__terms-link';
 
         if (!validModalArea && !validElements) {
-            handleModalName(name);
+            handleModalCase(name);
             setVisibleStatus(false);
         }
     }, [name]);
 
     const keyHandler = useCallback((e: KeyboardEvent): void => {
         if (visibleStatus && e.code === 'Escape') {
-            handleModalName(name);
+            handleModalCase(name);
             setVisibleStatus(false);
         }
     }, [name, visibleStatus]);
@@ -83,7 +95,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     }, [areaHandler, keyHandler]);
 
     const modalButtonHandler = (): void => {
-        handleModalName(name);
+        handleModalCase(name);
         setVisibleStatus(false);
     };
 

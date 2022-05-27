@@ -4,10 +4,10 @@ import { switchModalVisibleStatus } from '../app/slices/modalSlice';
 
 // /. imports
 
-export function useDefineModal() {  // add return type
+export function useDefineModalStatus() {  // add return type
     const dispatch = useDispatch();
 
-    const handleModalName = (name: string) => {
+    const handleModalCase = (name: string) => {
         switch (name) {
             case 'auth-modal':
                 dispatch(switchModalVisibleStatus({ name: 'auth-modal', status: false }));
@@ -24,5 +24,5 @@ export function useDefineModal() {  // add return type
         }
     };
 
-    return { handleModalName };
+    return { handleModalCase };
 };
