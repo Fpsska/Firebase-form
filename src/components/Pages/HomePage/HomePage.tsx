@@ -46,6 +46,7 @@ const HomePage: React.FC = () => {
         dispatch(switchAuthorisationPageStatus(true));
         dispatch(switchUserAuthoriseStatus(false));
         dispatch(switchHomePageStatus(false));
+        dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: false }));
     };
 
     const candelHandler = (): void => {
