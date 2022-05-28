@@ -138,7 +138,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
                 <div className="modal__body">
                     {children}
                 </div>
-                <button className="modal__button" onClick={modalButtonHandler}>
+                <button className="modal__button modal__button--close" onClick={modalButtonHandler}>
                     <IoMdClose size={24} />
                 </button>
                 <img className="modal__image" src={logo} alt="logo" />

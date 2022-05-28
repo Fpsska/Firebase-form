@@ -2,8 +2,9 @@
     position: fixed;
     display: block;
     cursor: grab;
-    left: 0;
-    top: 0;
+    // left: 50%;
+    // top: 50%;
+    // transform: translate(-50%, -50%);
     z-index: 5;
     &__wrapper {
         max-width: 500px;
@@ -13,6 +14,9 @@
         background-color: rgba(0, 0, 0, 0.6);
     }
     &__body {
+        min-height: 80px;
+    }
+    &__scroll-content {
         overflow-y: scroll;
         min-height: 100px;
         height: 150px;
@@ -22,18 +26,30 @@
         }
     }
     &__button {
+        background-color: transparent;
+        transition: all 0.15s linear;
+        color: #fff;
+        padding: 0;
+    }
+    &__button--close {
         position: absolute;
         right: 0;
         top: 0;
         margin: 10px 5px 10px 5px;
-        padding: 0;
-        background-color: transparent;
-        color: #fff;
-        transition: all 0.15s linear;
         transform: scale(1);
         &:hover {
             color: red;
             transform: scale(1.1);
+        }
+    }
+    &__button--accept {
+        &:hover {
+            color: green;
+        }
+    }
+    &__button--cancel {
+        &:hover {
+            color: red;
         }
     }
     &__image {
@@ -55,6 +71,17 @@
     &__title {
         margin: 0 0 10px 0;
         padding: 0 10px 0 0;
+    }
+    &__text {
+        margin: 0 0 30px 0;
+    }
+    &__controls {
+        margin: 0 0 20px 0;
+        position: absolute;
+        bottom: 0;
+        :not(:last-child) {
+            margin: 0 10px 0 0;
+        }
     }
 }
 

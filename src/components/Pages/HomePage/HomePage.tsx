@@ -6,8 +6,22 @@ import { Navigate } from 'react-router';
 
 import { RootState } from '../../../app/store';
 
-import { deleteCurrentUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
-import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
+import {
+    deleteCurrentUser,
+    switchUserAuthoriseStatus
+} from '../../../app/slices/userSlice';
+import {
+    switchAuthorisationPageStatus,
+    switchHomePageStatus
+} from '../../../app/slices/mainSlice';
+import {
+    switchModalVisibleStatus,
+    setNewModalPosition
+} from '../../../app/slices/modalSlice';
+
+import { getRandomItgrNumber } from '../../../helpers/getRandomNum';
+
+import Modal from '../../Modal/Modal';
 
 import './homePage.scss';
 
@@ -16,13 +30,28 @@ import './homePage.scss';
 const HomePage: React.FC = () => {
 
     const { currentEmail, isUserAuthorise, lastSignInTime } = useSelector((state: RootState) => state.userSlice);
+    const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
     const dispatch = useDispatch();
 
     const logOutHandler = (): void => {
+        dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: !modalStatus.isModalExitVisible }));
+        dispatch(setNewModalPosition(
+            {
+                name: 'exit-modal',
+                coordinates: { top: getRandomItgrNumber(50, 10), left: getRandomItgrNumber(50, 10) }
+            }
+        ));
+    };
+
+    const acceptHandler = (): void => {
         dispatch(deleteCurrentUser());
-        dispatch(switchUserAuthoriseStatus(false));
         dispatch(switchAuthorisationPageStatus(true));
+        dispatch(switchUserAuthoriseStatus(false));
         dispatch(switchHomePageStatus(false));
+    };
+
+    const candelHandler = (): void => {
+        dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: false }));
     };
     // 
     return isUserAuthorise ? (
@@ -33,6 +62,17 @@ const HomePage: React.FC = () => {
                     <li className="user-data__template">email: <span className="user-data__info">{currentEmail}</span></li>
                 </ul>
                 <button className="home__button" onClick={logOutHandler}>Log out from {currentEmail}</button>
+                <Modal
+                    name={'exit-modal'}
+                    title={'Exit modal!'}
+                    status={modalStatus.isModalExitVisible}
+                >
+                    <p className="modal__text">Are you sure to want exit?</p>
+                    <div className="modal__controls">
+                        <button className="modal__button modal__button--accept" onClick={acceptHandler}>Ok</button>
+                        <button className="modal__button modal__button--cancel" onClick={candelHandler}>Cancel</button>
+                    </div>
+                </Modal>
             </div>
         </div>
     ) : (

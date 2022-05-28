@@ -359,15 +359,17 @@ const Form: React.FC<FormPropTypes> = (props) => {
                     title={'Terms modal!'}
                     status={modalStatus.isModalTermsVisible}
                 >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                    id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                    id, quam non fugit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                    id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                    quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                    id, quam non fugit.
+                    <div className="modal__scroll-content">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                        id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                        id, quam non fugit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                        id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
+                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
+                        id, quam non fugit.
+                    </div>
                 </Modal>
             </div>
         </form>
