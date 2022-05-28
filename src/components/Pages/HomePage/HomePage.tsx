@@ -19,8 +19,6 @@ import {
     setNewModalPosition
 } from '../../../app/slices/modalSlice';
 
-import { getRandomItgrNumber } from '../../../helpers/getRandomNum';
-
 import Modal from '../../Modal/Modal';
 
 import './homePage.scss';
@@ -38,7 +36,7 @@ const HomePage: React.FC = () => {
         dispatch(setNewModalPosition(
             {
                 name: 'exit-modal',
-                coordinates: { top: getRandomItgrNumber(50, 10), left: getRandomItgrNumber(50, 10) }
+                coordinates: { top: 15, left: 20 }
             }
         ));
     };

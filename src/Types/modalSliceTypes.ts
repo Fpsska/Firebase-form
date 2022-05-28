@@ -1,14 +1,13 @@
 export interface coordinatesTypes {
-    // top: number,
-    // left: number
-    top: number | string,
-    left: number | string
+    top: number,
+    left: number
 }
 
 export interface modalPositionsTypes {
     modalAuthPosition: coordinatesTypes,
     modalRegistrPosition: coordinatesTypes
-    modalTermsPosition: coordinatesTypes
+    modalTermsPosition: coordinatesTypes,
+    modalExitPosition: coordinatesTypes
 }
 
 export interface modalStatusTypes {

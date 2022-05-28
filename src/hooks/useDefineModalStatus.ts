@@ -21,6 +21,10 @@ export function useDefineModalStatus() {  // add return type
                 dispatch(switchModalVisibleStatus({ name: 'terms-modal', status: false }));
                 console.log('terms-modal');
                 break;
+            case 'exit-modal':
+                dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: false }));
+                console.log('exit-modal');
+                break;
         }
     };
 

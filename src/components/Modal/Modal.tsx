@@ -29,7 +29,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
 
     const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
     const { modalPositions } = useSelector((state: RootState) => state.modalSlice);
-    const [modalPosition, setModalPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
+    const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
     const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
     const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
         offsetY: 0,
@@ -53,13 +53,16 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     useEffect(() => { // set current handled modal of modalPositions state
         switch (name) {
             case 'auth-modal':
-                setModalPosition(modalPositions.modalAuthPosition);
+                setPosition(modalPositions.modalAuthPosition);
                 break;
             case 'registr-modal':
-                setModalPosition(modalPositions.modalRegistrPosition);
+                setPosition(modalPositions.modalRegistrPosition);
                 break;
             case 'terms-modal':
-                setModalPosition(modalPositions.modalTermsPosition);
+                setPosition(modalPositions.modalTermsPosition);
+                break;
+            case 'exit-modal':
+                setPosition(modalPositions.modalExitPosition);
                 break;
         }
     }, [modalPositions, name]);
@@ -130,7 +133,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
             id={name}
             className={visibleStatus ? 'modal' : 'modal hidden'}
             draggable="true"
-            style={{ top: `${modalPosition.top}%`, left: `${modalPosition.left}%` }}
+            style={{ top: `${position.top}%`, left: `${position.left}%` }}
         >
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>

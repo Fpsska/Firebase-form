@@ -21,7 +21,8 @@ const initialState: modalSliceTypes = {
     modalPositions: {
         modalAuthPosition: { top: 0, left: 0 },
         modalRegistrPosition: { top: 0, left: 0 },
-        modalTermsPosition: { top: 0, left: 0 }
+        modalTermsPosition: { top: 0, left: 0 },
+        modalExitPosition: { top: 0, left: 0 }
     }
 };
 
@@ -36,19 +37,15 @@ const modalSlice = createSlice({
             switch (name) {
                 case 'auth-modal':
                     state.modalStatus.isModalAuthVisible = status;
-                    console.log('auth-modal')
                     break;
                 case 'registr-modal':
                     state.modalStatus.isModalRegistrVisible = status;
-                    console.log('registr-modal')
                     break;
                 case 'terms-modal':
                     state.modalStatus.isModalTermsVisible = status;
-                    console.log('terms-modal')
                     break;
                 case 'exit-modal':
                     state.modalStatus.isModalExitVisible = status;
-                    console.log('exit-modal')
                     break;
             }
         },
@@ -57,19 +54,15 @@ const modalSlice = createSlice({
             switch (name) {
                 case 'auth-modal':
                     state.modalPositions.modalAuthPosition = coordinates;
-                    console.log('auth-modal')
                     break;
                 case 'registr-modal':
                     state.modalPositions.modalRegistrPosition = coordinates;
-                    console.log('registr-modal')
                     break;
                 case 'terms-modal':
                     state.modalPositions.modalTermsPosition = coordinates;
-                    console.log('terms-modal')
                     break;
                 case 'exit-modal':
-                    state.modalPositions.modalTermsPosition = coordinates;
-                    console.log('exit-modal')
+                    state.modalPositions.modalExitPosition = coordinates;
                     break;
             }
         }
