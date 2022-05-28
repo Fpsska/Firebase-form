@@ -5,13 +5,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface mainSliceTypes {
     isAuthorisationPage: boolean,
     isHomePage: boolean,
+    isPreloaderVisible: boolean
 }
 
 // /. interfaces
 
 const initialState: mainSliceTypes = {
     isAuthorisationPage: true,
-    isHomePage: false
+    isHomePage: false,
+    isPreloaderVisible: false
 };
 
 // /. initialState
@@ -25,13 +27,17 @@ const mainSlice = createSlice({
         },
         switchHomePageStatus(state, action: PayloadAction<boolean>) {
             state.isHomePage = action.payload;
+        },
+        switchPreloaderVisibleStatus(state, action: PayloadAction<boolean>) {
+            state.isPreloaderVisible = action.payload;
         }
     }
 });
 
 export const {
     switchAuthorisationPageStatus,
-    switchHomePageStatus
+    switchHomePageStatus,
+    switchPreloaderVisibleStatus
 } = mainSlice.actions;
 
 

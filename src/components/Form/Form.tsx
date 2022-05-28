@@ -22,6 +22,8 @@ import {
     switchModalVisibleStatus
 } from '../../app/slices/modalSlice';
 
+import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
+
 import Modal from '../Modal/Modal';
 
 import './form.scss';
@@ -90,8 +92,12 @@ const Form: React.FC<FormPropTypes> = (props) => {
     const passwordValue = watch('password');
 
     const FormSubmitHandler = (userData: any): void => {
+        dispatch(switchPreloaderVisibleStatus(true));
         formActionHandler(userData.email, userData.password);
-        reset();
+        setTimeout(() => {
+            dispatch(switchPreloaderVisibleStatus(false));
+            reset();
+        }, 2000);
     };
     // 
     return (
