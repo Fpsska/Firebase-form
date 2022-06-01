@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import { useNavigate } from 'react-router-dom';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+import { useAppDispatch , useAppSelector } from '../../../app/hooks';
 
 import { RootState } from '../../../app/store';
 
@@ -21,9 +21,9 @@ import { switchAuthErrorStatus } from '../../../app/slices/formSlice';
 
 const AuthorisationPage: React.FC = () => {
 
-    const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
+    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleLogin = (email: string, password: string): void => {

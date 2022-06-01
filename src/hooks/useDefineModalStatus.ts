@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../app/hooks';
 
 import { switchModalVisibleStatus } from '../app/slices/modalSlice';
 
 // /. imports
 
 export function useDefineModalStatus() {  // add return type
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleModalCase = (name: string) => {
         switch (name) {

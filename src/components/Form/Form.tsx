@@ -4,7 +4,7 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 import { useForm } from 'react-hook-form';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import { RootState } from '../../app/store';
 
@@ -48,16 +48,16 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const { formActionHandler } = props;
 
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
-    const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
+    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
+    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
     const {
         isUserRemembered,
         isTermsAccepted,
         isAuthError,
         passwordStatuses
-    } = useSelector((state: RootState) => state.formSlice);
+    } = useAppSelector((state: RootState) => state.formSlice);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const inputRememberHandler = (): void => {
         dispatch(switchUserRememberedStatus(!isUserRemembered));

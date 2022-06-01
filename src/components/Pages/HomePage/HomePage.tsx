@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-
 import { Navigate } from 'react-router';
+
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
 import { RootState } from '../../../app/store';
 
@@ -27,9 +27,9 @@ import './homePage.scss';
 
 const HomePage: React.FC = () => {
 
-    const { currentEmail, isUserAuthorise, lastSignInTime } = useSelector((state: RootState) => state.userSlice);
-    const { modalStatus } = useSelector((state: RootState) => state.modalSlice);
-    const dispatch = useDispatch();
+    const { currentEmail, isUserAuthorise, lastSignInTime } = useAppSelector((state: RootState) => state.userSlice);
+    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
+    const dispatch = useAppDispatch();
 
     const logOutHandler = (): void => {
         dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: !modalStatus.isModalExitVisible }));

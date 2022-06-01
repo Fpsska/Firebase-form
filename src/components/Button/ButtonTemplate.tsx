@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { FcGoogle } from 'react-icons/fc';
-import { useSelector, useDispatch } from 'react-redux';
+
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { RootState } from '../../app/store';
 
@@ -18,9 +19,9 @@ import './buttonTemplate.scss';
 
 const ButtonTemplate: React.FC = () => {
 
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
     const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const generalButtonHandler = (): void => {
         if (isAuthorisationPage) {

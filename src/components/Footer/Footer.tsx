@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
 
 import Relocate from '../Relocate/Relocate';
 
@@ -12,7 +12,7 @@ import './footer.scss';
 
 const Footer: React.FC = () => {
 
-    const { isHomePage } = useSelector((state: RootState) => state.mainSlice);
+    const { isHomePage } = useAppSelector((state: RootState) => state.mainSlice);
 
     return (
         <footer className="footer">

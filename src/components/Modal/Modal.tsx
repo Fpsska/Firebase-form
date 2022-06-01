@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 
-import { useSelector } from 'react-redux';
-
 import { IoMdClose } from 'react-icons/io';
+
+import { useAppSelector } from '../../app/hooks';
 
 import { RootState } from '../../app/store';
 
@@ -27,8 +27,8 @@ interface ModalPropsTypes {
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
-    const { modalPositions } = useSelector((state: RootState) => state.modalSlice);
+    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
+    const { modalPositions } = useAppSelector((state: RootState) => state.modalSlice);
     const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
     const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
     const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({

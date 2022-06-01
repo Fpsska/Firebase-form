@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+
+import { useAppSelector } from '../../app/hooks';
 
 import ButtonTemplate from '../Button/ButtonTemplate';
 
@@ -13,8 +14,8 @@ import './header.scss';
 
 const Header: React.FC = () => {
 
-    const { isAuthorisationPage, isHomePage } = useSelector((state: RootState) => state.mainSlice);
-    const { isUserAuthorise } = useSelector((state: RootState) => state.userSlice);
+    const { isAuthorisationPage, isHomePage } = useAppSelector((state: RootState) => state.mainSlice);
+    const { isUserAuthorise } = useAppSelector((state: RootState) => state.userSlice);
     // 
     return (
         <header className="header">
