@@ -27,7 +27,6 @@ interface ModalPropsTypes {
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
     const { modalPositions } = useAppSelector((state: RootState) => state.modalSlice);
     const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
     const [visibleStatus, setVisibleStatus] = useState<boolean>(false);

@@ -88,11 +88,9 @@ const formSlice = createSlice({
             switch (name) {
                 case 'password':
                     state.passwordStatuses.isPasswordVisible = status;
-                    console.log('password')
                     break;
                 case 'confirm-password':
                     state.passwordStatuses.isConfirmPasswordVisible = status;
-                    console.log('confirm-password')
                     break;
             }
         },

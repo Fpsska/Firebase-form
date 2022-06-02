@@ -4,10 +4,11 @@
     justify-content: center;
     align-items: center;
     padding: 14px 15px;
-    border: 1px solid rgba(255, 255, 255, 0.726);
-    color: #fff;
+    border: 1px solid;
+    border-color: var(--buttonConnect-border-color);
     border-radius: 4px;
-    background-color: transparent;
+    color: var(--buttonConnect-text-color);
+    background-color: var(--buttonConnect-background-color);
     transition: all 0.35s linear;
     cursor: pointer;
 
@@ -18,7 +19,7 @@
         cursor: not-allowed;
     }
     &:hover {
-        background-color: rgba(0,0,0, 0.3);
+        background-color: rgba(0, 0, 0, 0.3);
     }
     &:active {
         border: 1px solid rgba(#1676f3, 1);

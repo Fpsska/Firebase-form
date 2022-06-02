@@ -1,4 +1,5 @@
 .header {
+    position: relative;
     &__wrapper {
         display: flex;
         flex-direction: column;
@@ -18,12 +19,14 @@
         font-weight: 600;
         line-height: 125.3%;
         text-align: center;
+        color: var(--header-text-color);
     }
     &__subtitle {
         font-weight: 400;
         line-height: 134%;
         margin: 0;
         text-align: center;
+        color: var(--header-text-color);
     }
     &__image {
         width: 168px;

@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router';
 
 import './App.css';
 import '../../assets/styles/style.scss';
+import '../../assets/styles/theme.scss';
 
 import Layout from '../Common/Layout';
 import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';

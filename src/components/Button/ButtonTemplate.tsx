@@ -42,9 +42,6 @@ const ButtonTemplate: React.FC = () => {
             ));
         }
         setDisabledStatus(true);
-        setTimeout(() => {
-            setDisabledStatus(false);
-        }, 20000);
     };
     // 
     return (
