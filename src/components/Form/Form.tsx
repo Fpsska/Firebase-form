@@ -146,7 +146,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
-                                        size={20} color="#000"
+                                        size={20} 
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -157,7 +157,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     :
                                     <BsEye
                                         className="form__icon-password"
-                                        size={20} color="#000"
+                                        size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -251,7 +251,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
-                                        size={20} color="#000"
+                                        size={20} 
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -262,7 +262,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     :
                                     <BsEye
                                         className="form__icon-password"
-                                        size={20} color="#000"
+                                        size={20} 
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -300,7 +300,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
-                                        size={20} color="#000"
+                                        size={20} 
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'confirm-password',
@@ -311,7 +311,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     :
                                     <BsEye
                                         className="form__icon-password"
-                                        size={20} color="#000"
+                                        size={20} 
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'confirm-password',

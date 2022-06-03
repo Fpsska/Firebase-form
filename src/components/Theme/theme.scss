@@ -1,0 +1,31 @@
+.theme {
+    cursor: pointer;
+    position: fixed;
+    margin: 15px;
+    right: 0;
+    width: 36px;
+    height: 18px;
+    border-radius: 55px;
+    background-color: #222;
+    box-shadow: inset 0 8px 60px rgba(0, 0, 0, 0.1), inset 0 8px 8px rgba(0, 0, 0, 0.1),
+        inset 0 -4px 4px rgba(0, 0, 0, 0.1);
+    &__indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        transform: scale(0.9);
+        transition: 0.2s linear;
+        background: linear-gradient(to bottom, #444, #222);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1), inset 0 4px 4px rgba(255, 255, 255, 0.1),
+            inset 0 -4px 4px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.theme.active {
+    .theme__indicator {
+        left: 18px;
+    }
+}

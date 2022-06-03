@@ -9,11 +9,9 @@
     border-radius: 4px;
     color: var(--buttonConnect-text-color);
     background-color: var(--buttonConnect-background-color);
-    transition: all 0.35s linear;
+    transition: background-color 0.35s linear;
     cursor: pointer;
-
     position: relative;
-
     &:disabled {
         border: 1px solid rgba($color: #ff0000, $alpha: 0.5);
         cursor: not-allowed;

@@ -3,8 +3,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router';
 
 import './App.css';
-import '../../assets/styles/style.scss';
-import '../../assets/styles/theme.scss';
+import '../../assets/styles/_style.scss';
+import '../../assets/styles/_theme.scss';
 
 import Layout from '../Common/Layout';
 import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';

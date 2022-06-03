@@ -39,7 +39,9 @@
     }
     &__input {
         margin: 5px 0 0 0;
-        border: 1px solid rgba(28, 55, 90, 0.16);
+        border: 1px solid;
+        border-color: var(--input-border-color);
+        background-color: var(--input-backgroun-color);
         border-radius: 3px;
         padding: 15px;
         color: var(--input-text-color);
@@ -53,6 +55,7 @@
         padding: 15px 45px 15px 15px;
     }
     &__icon-password {
+        color: var(--password-icon-color);
         position: absolute;
         right: 1.3rem;
         top: 2.7rem;
