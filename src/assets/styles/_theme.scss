@@ -28,6 +28,9 @@ html[data-theme="default"] {
     --modal-text-color: #fff;
     --modal-background-color: rgba(0, 0, 0, 0.6);
     --modal-button-color: #fff;
+
+    --theme-background-color: #111;
+    --theme-indicator-background: linear-gradient(to bottom, #333, #333);
 }
 
 html[data-theme="minimalism"] {
@@ -60,4 +63,7 @@ html[data-theme="minimalism"] {
     --modal-text-color: #fff;
     --modal-background-color: rgba(0, 0, 0, 0.6);
     --modal-button-color: #fff;
+
+    --theme-background-color: rgb(255, 255, 255, 0.7);
+    --theme-indicator-background: linear-gradient(to bottom, #000, #000);
 }

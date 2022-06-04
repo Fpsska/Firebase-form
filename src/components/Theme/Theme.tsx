@@ -8,15 +8,19 @@ import './theme.scss';
 
 const Theme: React.FC = () => {
 
-  const [isActive, setActiveStatus] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme({ currentTheme: 'default' });
+  const { theme, setTheme } = useTheme();
+  const [isActive, setActiveStatus] = useState<boolean>(theme === 'default' ? false : true);
 
   useEffect(() => {
-    isActive ? setTheme('minimalism') : setTheme('default')
-  }, [isActive])
+    isActive ? setTheme('minimalism') : setTheme('default');
+  }, [isActive]);
+
+  const themeHandler = (): void => {
+    setActiveStatus(!isActive);
+  };
 
   return (
-    <div className={isActive ? 'theme active' : 'theme'} onClick={() => setActiveStatus(!isActive)}>
+    <div className={isActive ? 'theme active' : 'theme'} onClick={themeHandler}>
       <span className="theme__indicator"></span>
     </div>
   );
