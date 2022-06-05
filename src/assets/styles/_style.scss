@@ -50,7 +50,6 @@ html {
 .page {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 28px;
     max-width: 392px;
     margin: 0 auto;
@@ -77,10 +76,11 @@ html {
 
 input {
     outline: none;
-}
-
-.theme {
-    width: 100%;
-    position: absolute;
-    top: 0;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+        transition: background-color 5000s;
+        -webkit-text-fill-color: #fff !important;
+    }
 }
