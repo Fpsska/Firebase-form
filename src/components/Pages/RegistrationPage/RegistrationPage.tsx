@@ -12,8 +12,18 @@ import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 
-import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
-import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
+import {
+    saveNewUser,
+    switchUserAuthoriseStatus
+
+} from '../../../app/slices/userSlice';
+import {
+    switchAuthorisationPageStatus,
+    switchHomePageStatus
+} from '../../../app/slices/mainSlice';
+import { switchRegistrErrorStatus } from '../../../app/slices/formSlice';
+
+
 
 // /. imports
 
@@ -41,7 +51,10 @@ const RegistrationPage: React.FC = () => {
                 navigate('/Authorisation-Form/home');
             })
             .catch((err) => {
-                console.log('err from registr', err.message);
+                dispatch(switchRegistrErrorStatus(true));
+                setTimeout(() => {
+                    dispatch(switchRegistrErrorStatus(false));
+                }, 5000);
             });
     };
     // 

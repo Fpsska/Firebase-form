@@ -46,6 +46,9 @@ const AuthorisationPage: React.FC = () => {
             })
             .catch((err) => {
                 dispatch(switchAuthErrorStatus(true));
+                setTimeout(() => {
+                    dispatch(switchAuthErrorStatus(false));
+                }, 5000);
             });
     };
     // 

@@ -54,6 +54,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
         isUserRemembered,
         isTermsAccepted,
         isAuthError,
+        isRegistrError,
         passwordStatuses
     } = useAppSelector((state: RootState) => state.formSlice);
 
@@ -121,11 +122,8 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     }
                                 })}
                             />
-                            {errors.email
-                                ? <span className="form__error">{errors.email.message}</span>
-                                : isAuthError
-                                    ? <span className="form__error">incorrect email or password</span> : <></>
-                            }
+                            {errors.email && <span className="form__error">{errors.email.message}</span>}
+                            {!errors.email && isAuthError ? <span className="form__error">Incorrect email or password</span> : <></>}
                         </label>
                         <label className="form__label" htmlFor="password">
                             Password
@@ -146,7 +144,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
-                                        size={20} 
+                                        size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -166,11 +164,8 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                         ))}
                                     />
                             }
-                            {errors.password
-                                ? <span className="form__error">{errors.password.message}</span>
-                                : isAuthError
-                                    ? <span className="form__error">incorrect email or password</span> : <></>
-                            }
+                            {errors.password && <span className="form__error">{errors.password.message}</span>}
+                            {!errors.password && isAuthError ? <span className="form__error">Incorrect email or password</span> : <></>}
                         </label>
 
                         <div className="form__terms">
@@ -209,6 +204,8 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             />
                             {errors.fullName && <span className="form__error">{errors.fullName.message}</span>}
                         </label>
+
+
                         <label className="form__label" htmlFor="email">
                             <span className="form__label-text">
                                 Email Addres
@@ -228,7 +225,10 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {errors.email && <span className="form__error">{errors.email.message}</span>}
+                            {!errors.email && isRegistrError ? <span className="form__error">Email already in use</span> : <></>}
                         </label>
+
+
                         <label className="form__label" htmlFor="password">
                             <span className="form__label-text">
                                 Password
@@ -251,7 +251,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
-                                        size={20} 
+                                        size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -262,7 +262,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     :
                                     <BsEye
                                         className="form__icon-password"
-                                        size={20} 
+                                        size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'password',
@@ -300,7 +300,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
-                                        size={20} 
+                                        size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'confirm-password',
@@ -311,7 +311,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     :
                                     <BsEye
                                         className="form__icon-password"
-                                        size={20} 
+                                        size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
                                                 name: 'confirm-password',

@@ -10,7 +10,8 @@ interface formSliceTypes {
     isUserRemembered: boolean,
     isTermsAccepted: boolean,
     passwordStatuses: passwordStatusesTypes,
-    isAuthError: boolean
+    isAuthError: boolean,
+    isRegistrError: boolean
 }
 
 // /. interfaces
@@ -68,7 +69,8 @@ const initialState: formSliceTypes = {
         isPasswordVisible: false,
         isConfirmPasswordVisible: false
     },
-    isAuthError: false
+    isAuthError: false,
+    isRegistrError: false
 };
 
 // /. initialState
@@ -96,6 +98,9 @@ const formSlice = createSlice({
         },
         switchAuthErrorStatus(state, action: PayloadAction<boolean>) {
             state.isAuthError = action.payload;
+        },
+        switchRegistrErrorStatus(state, action: PayloadAction<boolean>) {
+            state.isRegistrError = action.payload;
         }
     }
 });
@@ -104,7 +109,8 @@ export const {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus,
     switchPasswordVisibleStatuses,
-    switchAuthErrorStatus
+    switchAuthErrorStatus,
+    switchRegistrErrorStatus
 } = formSlice.actions;
 
 
