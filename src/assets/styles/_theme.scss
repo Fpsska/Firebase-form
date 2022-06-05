@@ -13,7 +13,7 @@ html[data-theme="default"] {
     --label-text-color: #fff;
     --password-icon-color: #000;
 
-    --input-backgroun-color: #fff;
+    --input-background-color: #fff;
     --input-border-color: rgba(28, 55, 90, 0.16);
     --input-text-color: rgba(27, 43, 65, 0.72);
     --input-placeholder-color: rgba(27, 43, 65, 0.72);
@@ -48,7 +48,7 @@ html[data-theme="minimalism"] {
     --label-text-color: #fff;
     --password-icon-color: rgba(255, 255, 255, 0.726);
 
-    --input-backgroun-color: transparent;
+    --input-background-color: transparent;
     --input-border-color: rgba(255, 255, 255, 0.226);
     --input-text-color: #fff;
     --input-placeholder-color: rgba(27, 43, 65, 0.72);
@@ -64,6 +64,6 @@ html[data-theme="minimalism"] {
     --modal-background-color: rgba(0, 0, 0, 0.6);
     --modal-button-color: #fff;
 
-    --theme-background-color: rgb(255, 255, 255, 0.7);
+    --theme-background-color: rgba(255, 255, 255, 0.35);
     --theme-indicator-background: linear-gradient(to bottom, #000, #000);
 }

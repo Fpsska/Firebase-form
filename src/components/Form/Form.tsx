@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { BsEye, BsEyeSlash, BsCheck2 } from 'react-icons/bs';
 
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +13,6 @@ import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 import {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus,
-    switchAuthErrorStatus,
     switchPasswordVisibleStatuses
 } from '../../app/slices/formSlice';
 
@@ -38,8 +37,7 @@ interface useFormTypes {
     email: string,
     password: string,
     confirmPassword: string,
-    fullName: string,
-    termsCheckbox: string
+    fullName: string
 }
 
 // /. interfaces
@@ -176,7 +174,9 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     id="remember"
                                     onClick={inputRememberHandler}
                                 />
-                                <span className="form__fake-checkbox"></span>
+                                <span className="form__fake-checkbox">
+                                    <BsCheck2 size={'14px'} color={'#fff'} />
+                                </span>
                                 Remember me
                             </label>
                             <span className="form__restore">Forgot Password?</span>
@@ -329,11 +329,11 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 type="checkbox"
                                 id="terms"
                                 onClick={inputTermsHandler}
-                                {...register('termsCheckbox', {
-                                    required: true
-                                })}
+                                required
                             />
-                            <span className="form__fake-checkbox"></span>
+                            <span className="form__fake-checkbox">
+                                <BsCheck2 size={'14px'} color={'#fff'} />
+                            </span>
                             <span className="form__terms-text"> I have read and agree to the{' '}
                                 <a
                                     href="#"
