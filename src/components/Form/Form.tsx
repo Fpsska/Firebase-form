@@ -127,7 +127,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             Password
                             <input
                                 id="password"
-                                type={passwordStatuses.isPasswordVisible ? 'text' : 'password'}
+                                type={passwordStatuses.isAuthPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
@@ -138,14 +138,14 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {
-                                passwordStatuses.isPasswordVisible
+                                passwordStatuses.isAuthPasswordVisible
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
                                         size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
-                                                name: 'password',
+                                                name: 'auth-password',
                                                 status: false
                                             }
                                         ))}
@@ -156,7 +156,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                         size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
-                                                name: 'password',
+                                                name: 'auth-password',
                                                 status: true
                                             }
                                         ))}
@@ -236,7 +236,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                             <input
                                 id="password"
-                                type={passwordStatuses.isPasswordVisible ? 'text' : 'password'}
+                                type={passwordStatuses.isRegistrPasswordVisible ? 'text' : 'password'}
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
@@ -247,14 +247,14 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {
-                                passwordStatuses.isPasswordVisible
+                                passwordStatuses.isRegistrPasswordVisible
                                     ?
                                     <BsEyeSlash
                                         className="form__icon-password"
                                         size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
-                                                name: 'password',
+                                                name: 'registr-password',
                                                 status: false
                                             }
                                         ))}
@@ -265,7 +265,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                         size={20}
                                         onClick={() => dispatch(switchPasswordVisibleStatuses(
                                             {
-                                                name: 'password',
+                                                name: 'registr-password',
                                                 status: true
                                             }
                                         ))}
@@ -273,6 +273,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             }
                             {errors.password && <p className="form__error">{errors.password?.message}</p>}
                         </label>
+
                         <label className="form__label" htmlFor="confirm-password">
                             <span className="form__label-text">
                                 Confirm Password

@@ -66,7 +66,8 @@ const initialState: formSliceTypes = {
     isUserRemembered: false,
     isTermsAccepted: false,
     passwordStatuses: {
-        isPasswordVisible: false,
+        isAuthPasswordVisible: false,
+        isRegistrPasswordVisible: false,
         isConfirmPasswordVisible: false
     },
     isAuthError: false,
@@ -88,8 +89,11 @@ const formSlice = createSlice({
         switchPasswordVisibleStatuses(state, actions: PayloadAction<{ name: string, status: boolean }>) {
             const { name, status } = actions.payload;
             switch (name) {
-                case 'password':
-                    state.passwordStatuses.isPasswordVisible = status;
+                case 'auth-password':
+                    state.passwordStatuses.isAuthPasswordVisible = status;
+                    break;
+                case 'registr-password':
+                    state.passwordStatuses.isRegistrPasswordVisible = status;
                     break;
                 case 'confirm-password':
                     state.passwordStatuses.isConfirmPasswordVisible = status;
