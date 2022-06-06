@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BsEye, BsEyeSlash, BsCheck2 } from 'react-icons/bs';
+import { BsCheck2 } from 'react-icons/bs';
 
 import { useForm } from 'react-hook-form';
 
@@ -24,6 +24,7 @@ import {
 import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
 
 import Modal from '../Modal/Modal';
+import PswrdIcon from '../PswrdIcon/PswrdIcon';
 
 import './form.scss';
 
@@ -137,31 +138,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     }
                                 })}
                             />
-                            {
-                                passwordStatuses.isAuthPasswordVisible
-                                    ?
-                                    <BsEyeSlash
-                                        className="form__icon-password"
-                                        size={20}
-                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                                            {
-                                                name: 'auth-password',
-                                                status: false
-                                            }
-                                        ))}
-                                    />
-                                    :
-                                    <BsEye
-                                        className="form__icon-password"
-                                        size={20}
-                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                                            {
-                                                name: 'auth-password',
-                                                status: true
-                                            }
-                                        ))}
-                                    />
-                            }
+                            <PswrdIcon inputName={'auth-password'} />
                             {errors.password && <span className="form__error">{errors.password.message}</span>}
                             {!errors.password && isAuthError ? <span className="form__error">Incorrect email or password</span> : <></>}
                         </label>
@@ -205,7 +182,6 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             {errors.fullName && <span className="form__error">{errors.fullName.message}</span>}
                         </label>
 
-
                         <label className="form__label" htmlFor="email">
                             <span className="form__label-text">
                                 Email Addres
@@ -228,7 +204,6 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             {!errors.email && isRegistrError ? <span className="form__error">Email already in use</span> : <></>}
                         </label>
 
-
                         <label className="form__label" htmlFor="password">
                             <span className="form__label-text">
                                 Password
@@ -246,31 +221,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     }
                                 })}
                             />
-                            {
-                                passwordStatuses.isRegistrPasswordVisible
-                                    ?
-                                    <BsEyeSlash
-                                        className="form__icon-password"
-                                        size={20}
-                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                                            {
-                                                name: 'registr-password',
-                                                status: false
-                                            }
-                                        ))}
-                                    />
-                                    :
-                                    <BsEye
-                                        className="form__icon-password"
-                                        size={20}
-                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                                            {
-                                                name: 'registr-password',
-                                                status: true
-                                            }
-                                        ))}
-                                    />
-                            }
+                            <PswrdIcon inputName={'registr-password'} />
                             {errors.password && <p className="form__error">{errors.password?.message}</p>}
                         </label>
 
@@ -296,31 +247,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     validate: (value) => value === passwordValue || 'The password do not match'
                                 })}
                             />
-                            {
-                                passwordStatuses.isConfirmPasswordVisible
-                                    ?
-                                    <BsEyeSlash
-                                        className="form__icon-password"
-                                        size={20}
-                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                                            {
-                                                name: 'confirm-password',
-                                                status: false
-                                            }
-                                        ))}
-                                    />
-                                    :
-                                    <BsEye
-                                        className="form__icon-password"
-                                        size={20}
-                                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                                            {
-                                                name: 'confirm-password',
-                                                status: true
-                                            }
-                                        ))}
-                                    />
-                            }
+                            <PswrdIcon inputName={'confirm-password'} />
                             {errors.confirmPassword && <p className="form__error">{errors.confirmPassword.message}</p>}
                         </label>
 
