@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
-import { RootState } from '../../app/store';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 // import {
 //     switchPasswordVisibleStatuses
@@ -30,10 +28,10 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
         placeholder
     } = props;
 
-    const { passwordStatuses } = useSelector((state: RootState) => state.formSlice);
-    const { isAuthorisationPage } = useSelector((state: RootState) => state.mainSlice);
+    const { passwordStatuses } = useAppSelector(state => state.formSlice);
+    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     // 
     return (
         <label className="form__label" htmlFor={htmlFor}>

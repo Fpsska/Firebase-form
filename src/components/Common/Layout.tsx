@@ -4,8 +4,6 @@ import { Outlet } from 'react-router';
 
 import { useAppSelector } from '../../app/hooks';
 
-import { RootState } from '../../app/store';
-
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
@@ -16,7 +14,7 @@ import Preloader from './Preloader/Preloader';
 
 const Layout: React.FC = () => {
 
-    const { isPreloaderVisible } = useAppSelector((state: RootState) => state.mainSlice);
+    const { isPreloaderVisible } = useAppSelector(state => state.mainSlice);
 
     return (
         <div className="page">

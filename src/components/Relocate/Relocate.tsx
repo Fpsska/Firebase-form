@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import { RootState } from '../../app/store';
-
 import { switchAuthorisationPageStatus } from '../../app/slices/mainSlice';
 
 import './relocate.scss';
@@ -14,7 +12,8 @@ import './relocate.scss';
 
 const Relocate: React.FC = () => {
 
-    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
+
     const dispatch = useAppDispatch();
 
     const relocateToAuthPage = (): void => {

@@ -4,8 +4,6 @@ import { Navigate } from 'react-router';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
-import { RootState } from '../../../app/store';
-
 import {
     deleteCurrentUser,
     switchUserAuthoriseStatus
@@ -27,8 +25,9 @@ import './homePage.scss';
 
 const HomePage: React.FC = () => {
 
-    const { currentEmail, isUserAuthorise, lastSignInTime } = useAppSelector((state: RootState) => state.userSlice);
-    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
+    const { currentEmail, isUserAuthorise, lastSignInTime } = useAppSelector(state => state.userSlice);
+    const { modalStatus } = useAppSelector(state => state.modalSlice);
+    
     const dispatch = useAppDispatch();
 
     const logOutHandler = (): void => {

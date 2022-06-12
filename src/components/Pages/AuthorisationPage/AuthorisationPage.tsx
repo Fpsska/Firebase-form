@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-import { useAppDispatch , useAppSelector } from '../../../app/hooks';
-
-import { RootState } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
 import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
@@ -21,13 +19,14 @@ import { switchAuthErrorStatus } from '../../../app/slices/formSlice';
 
 const AuthorisationPage: React.FC = () => {
 
-    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
+    const { modalStatus } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleLogin = (email: string, password: string): void => {
         const auth = getAuth();
+        
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 console.log(user);

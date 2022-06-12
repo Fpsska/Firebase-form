@@ -4,7 +4,6 @@ import { IoMdClose } from 'react-icons/io';
 
 import { useAppSelector } from '../../app/hooks';
 
-import { RootState } from '../../app/store';
 
 import { coordinatesTypes } from '../../Types/modalSliceTypes';
 
@@ -27,15 +26,19 @@ interface ModalPropsTypes {
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { modalPositions } = useAppSelector((state: RootState) => state.modalSlice);
+    const { modalPositions } = useAppSelector(state => state.modalSlice);
+
     const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
+
     const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
+
     const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
         offsetY: 0,
         offsetX: 0
     });
 
     const modalRef = useRef<HTMLDivElement>(null!);
+    
     const { handleModalCase } = useDefineModalStatus();
 
     const {

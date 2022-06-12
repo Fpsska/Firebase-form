@@ -4,7 +4,6 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import { RootState } from '../../app/store';
 
 import { switchPasswordVisibleStatuses } from '../../app/slices/formSlice';
 
@@ -18,7 +17,8 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = (props) => {
 
     const { inputName } = props;
 
-    const { passwordStatuses } = useAppSelector((state: RootState) => state.formSlice);
+    const { passwordStatuses } = useAppSelector(state => state.formSlice);
+    
     const [statusName, setStatusName] = useState<boolean>();
 
     const dispatch = useAppDispatch();

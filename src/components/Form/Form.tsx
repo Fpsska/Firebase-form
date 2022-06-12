@@ -6,8 +6,6 @@ import { useForm } from 'react-hook-form';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
-import { RootState } from '../../app/store';
-
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
 import {
@@ -47,15 +45,15 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const { formActionHandler } = props;
 
-    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
-    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
+    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
+    const { modalStatus } = useAppSelector(state => state.modalSlice);
     const {
         isUserRemembered,
         isTermsAccepted,
         isAuthError,
         isRegistrError,
         passwordStatuses
-    } = useAppSelector((state: RootState) => state.formSlice);
+    } = useAppSelector(state => state.formSlice);
 
     const dispatch = useAppDispatch();
 

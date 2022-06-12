@@ -6,8 +6,6 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
-import { RootState } from '../../../app/store';
-
 import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
@@ -23,19 +21,18 @@ import {
 } from '../../../app/slices/mainSlice';
 import { switchRegistrErrorStatus } from '../../../app/slices/formSlice';
 
-
-
 // /. imports
 
 const RegistrationPage: React.FC = () => {
 
-    const { modalStatus } = useAppSelector((state: RootState) => state.modalSlice);
+    const { modalStatus } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleRegistration = (email: string, password: string): void => {
         const auth = getAuth();
+
         createUserWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 console.log(user);

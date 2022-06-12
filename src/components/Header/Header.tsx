@@ -7,16 +7,14 @@ import Theme from '../Theme/Theme';
 
 import logo from '../../assets/images/logo_icon.png';
 
-import { RootState } from '../../app/store';
-
 import './header.scss';
 
 // /. imports 
 
 const Header: React.FC = () => {
 
-    const { isAuthorisationPage, isHomePage } = useAppSelector((state: RootState) => state.mainSlice);
-    const { isUserAuthorise } = useAppSelector((state: RootState) => state.userSlice);
+    const { isAuthorisationPage, isHomePage } = useAppSelector(state => state.mainSlice);
+    const { isUserAuthorise } = useAppSelector(state => state.userSlice);
     // 
     return (
         <header className="header">
@@ -39,7 +37,7 @@ const Header: React.FC = () => {
 
             </div>
 
-            <Theme/>
+            <Theme />
 
         </header>
     );

@@ -4,8 +4,6 @@ import { FcGoogle } from 'react-icons/fc';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-import { RootState } from '../../app/store';
-
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
 import {
@@ -19,7 +17,7 @@ import './buttonTemplate.scss';
 
 const ButtonTemplate: React.FC = () => {
 
-    const { isAuthorisationPage } = useAppSelector((state: RootState) => state.mainSlice);
+    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
     const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
