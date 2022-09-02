@@ -29,7 +29,7 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
         <label className="form__label" htmlFor={htmlFor}>
             <span className="form__label-text">
                 {label}
-                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                {!isAuthorisationPage && <span className="form__label-required">*</span>}
             </span>
             <input
                 className={`form__input ${type === 'password' ? 'form__input--password' : 'form__input--email'}`}

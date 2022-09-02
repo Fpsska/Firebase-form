@@ -10,8 +10,7 @@ import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
 import {
     switchUserRememberedStatus,
-    switchTermsAcceptedStatus,
-    switchPasswordVisibleStatuses
+    switchTermsAcceptedStatus
 } from '../../app/slices/formSlice';
 
 import {
@@ -120,7 +119,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {errors.email && <span className="form__error">{errors.email.message}</span>}
-                            {!errors.email && isAuthError ? <span className="form__error">Incorrect email or password</span> : <></>}
+                            {!errors.email && isAuthError && <span className="form__error">Incorrect email or password</span>}
                         </label>
                         <label className="form__label" htmlFor="password">
                             Password
@@ -138,7 +137,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             />
                             <PswrdIcon inputName={'auth-password'} />
                             {errors.password && <span className="form__error">{errors.password.message}</span>}
-                            {!errors.password && isAuthError ? <span className="form__error">Incorrect email or password</span> : <></>}
+                            {!errors.password && isAuthError && <span className="form__error">Incorrect email or password</span>}
                         </label>
 
                         <div className="form__terms">
@@ -162,7 +161,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                         <label className="form__label" htmlFor="fullName">
                             <span className="form__label-text">
                                 FullName
-                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
                             </span>
                             <input
                                 className="form__input form__input--email"
@@ -183,7 +182,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                         <label className="form__label" htmlFor="email">
                             <span className="form__label-text">
                                 Email Addres
-                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
                             </span>
                             <input
                                 id="email"
@@ -199,13 +198,13 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 })}
                             />
                             {errors.email && <span className="form__error">{errors.email.message}</span>}
-                            {!errors.email && isRegistrError ? <span className="form__error">Email already in use</span> : <></>}
+                            {!errors.email && isRegistrError && <span className="form__error">Email already in use</span>}
                         </label>
 
                         <label className="form__label" htmlFor="password">
                             <span className="form__label-text">
                                 Password
-                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
                             </span>
                             <input
                                 id="password"
@@ -226,7 +225,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                         <label className="form__label" htmlFor="confirm-password">
                             <span className="form__label-text">
                                 Confirm Password
-                                {isAuthorisationPage ? <></> : <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
                             </span>
                             <input
                                 id="confirm-password"

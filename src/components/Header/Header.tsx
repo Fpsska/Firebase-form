@@ -15,7 +15,7 @@ const Header: React.FC = () => {
 
     const { isAuthorisationPage, isHomePage } = useAppSelector(state => state.mainSlice);
     const { isUserAuthorise } = useAppSelector(state => state.userSlice);
-    // 
+
     return (
         <header className="header">
             <div className="header__wrapper">
@@ -25,15 +25,14 @@ const Header: React.FC = () => {
                     <h1 className="header__title">
                         {isAuthorisationPage ? 'Log in to your Account' : isHomePage && isUserAuthorise ? 'Welcome to your profile page!' : 'Create an Account'}
                     </h1>
-                    {isHomePage && isUserAuthorise
-                        ? <></>
-                        : <p className="header__subtitle">
+                    {!isHomePage && !isUserAuthorise &&
+                        <p className="header__subtitle">
                             {isAuthorisationPage ? 'Welcome back, please enter your details.' : 'Sign up now to get started with an account.'}
                         </p>
                     }
                 </div>
 
-                {isHomePage ? <></> : <ButtonTemplate />}
+                {!isHomePage && <ButtonTemplate />}
 
             </div>
 

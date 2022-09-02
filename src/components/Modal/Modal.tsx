@@ -4,7 +4,6 @@ import { IoMdClose } from 'react-icons/io';
 
 import { useAppSelector } from '../../app/hooks';
 
-
 import { coordinatesTypes } from '../../Types/modalSliceTypes';
 
 import { useDefineModalStatus } from '../../hooks/useDefineModalStatus';
@@ -26,27 +25,25 @@ interface ModalPropsTypes {
 
 const Modal: React.FC<ModalPropsTypes> = (props) => {
 
-    const { modalPositions } = useAppSelector(state => state.modalSlice);
-
-    const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
-
-    const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
-
-    const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
-        offsetY: 0,
-        offsetX: 0
-    });
-
-    const modalRef = useRef<HTMLDivElement>(null!);
-    
-    const { handleModalCase } = useDefineModalStatus();
-
     const {
         name,
         title,
         children,
         status
     } = props;
+
+    const { modalPositions } = useAppSelector(state => state.modalSlice);
+
+    const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
+    const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
+    const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
+        offsetY: 0,
+        offsetX: 0
+    });
+
+    const modalRef = useRef<HTMLDivElement>(null!);
+
+    const { handleModalCase } = useDefineModalStatus();
 
     useEffect(() => {  // set current status-prop like visibleStatus initial value
         setVisibleStatus(status);
@@ -128,7 +125,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
             modalRef.current?.removeEventListener('dragend', modalDragEnd);
         };
     }, [modalDragEnd]);
-    // 
+
     return (
         <div
             ref={modalRef}

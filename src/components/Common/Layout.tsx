@@ -22,11 +22,9 @@ const Layout: React.FC = () => {
             <main className="main">
                 <>
                     <Outlet />
-                    {isPreloaderVisible
-                        ? <div className="page__preloader">
-                            <Preloader />
-                        </div>
-                        : <></>}
+                    {isPreloaderVisible && <div className="page__preloader">
+                        <Preloader />
+                    </div>}
                 </>
             </main>
             <Footer />
