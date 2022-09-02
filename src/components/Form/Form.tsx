@@ -88,7 +88,9 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const passwordValue = watch('password');
 
-    const FormSubmitHandler = (userData: any): void => {
+    const formSubmitHandler = (userData: any, e: any): void => {
+        e.preventDefault();
+
         dispatch(switchPreloaderVisibleStatus(true));
         formActionHandler(userData.email, userData.password);
         setTimeout(() => {
@@ -98,7 +100,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
     };
     // 
     return (
-        <form className="form" onSubmit={handleSubmit(FormSubmitHandler)}>
+        <form className="form" onSubmit={handleSubmit(formSubmitHandler)}>
             <div className="form__wrapper">
                 {isAuthorisationPage
                     ?

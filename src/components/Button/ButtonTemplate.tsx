@@ -41,7 +41,7 @@ const ButtonTemplate: React.FC = () => {
         }
         setDisabledStatus(true);
     };
-    // 
+    
     return (
         <button className="button" disabled={disabledStatus} onClick={generalButtonHandler} >
             <FcGoogle size={19} />

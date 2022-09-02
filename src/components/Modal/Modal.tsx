@@ -33,9 +33,8 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     } = props;
 
     const { modalPositions } = useAppSelector(state => state.modalSlice);
-
     const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
-    const [visibleStatus, setVisibleStatus] = useState<boolean>(false);
+    const [isVisible, setVisibleStatus] = useState<boolean>(false);
     const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
         offsetY: 0,
         offsetX: 0
@@ -44,6 +43,12 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
     const modalRef = useRef<HTMLDivElement>(null!);
 
     const { handleModalCase } = useDefineModalStatus();
+
+    const closeModal = (): void => {
+        handleModalCase(name);
+        setVisibleStatus(false);
+    };
+
 
     useEffect(() => {  // set current status-prop like visibleStatus initial value
         setVisibleStatus(status);
@@ -66,71 +71,56 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         }
     }, [modalPositions, name]);
 
-    const areaHandler = useCallback((e: any): void => {
-        const validModalArea = e.target === modalRef.current || modalRef.current.contains(e.target);
-        const validElements =
-            e.target.className === 'button' ||
-            e.target.className === 'button__icon' ||
-            e.target.className === 'button__text' ||
-            e.target.className === 'form__terms-link';
-
-        if (visibleStatus && !validModalArea && !validElements) {
-            handleModalCase(name);
-            setVisibleStatus(false);
-        }
-    }, [name, visibleStatus]);
-
-    const keyHandler = useCallback((e: KeyboardEvent): void => {
-        if (visibleStatus && e.code === 'Escape') {
-            handleModalCase(name);
-            setVisibleStatus(false);
-        }
-    }, [name, visibleStatus]);
-
     useEffect(() => {
+        const modalDragStart = (e: any): void => {
+            setTimeout(() => {
+                modalRef.current.classList.add('hidden');
+            }, 0);
+            setInitOffsetPosition({
+                offsetY: e.offsetY,
+                offsetX: e.offsetY
+            });
+        };
+
+        const modalDragEnd = (e: any): void => {
+            modalRef.current.classList.remove('hidden');
+            modalRef.current.style.top = `${e.pageY - initOffsetPosition.offsetY}px`;
+            modalRef.current.style.left = `${e.pageX - initOffsetPosition.offsetX}px`;
+        };
+
+        const areaHandler = (e: any): void => {
+            if (isVisible && modalRef.current && !modalRef.current.contains(e.target)) {
+                handleModalCase(name);
+                setVisibleStatus(false);
+            }
+            // refEl.current HTML-el !== null/undefined && refEl.current.contains(e.target) === false =>
+            // => valid HTML-el is exist
+        };
+
+        const keyHandler = (e: KeyboardEvent): void => {
+            if (isVisible && e.code === 'Escape') {
+                handleModalCase(name);
+                setVisibleStatus(false);
+            }
+        };
+
+        modalRef.current?.addEventListener('dragstart', modalDragStart);
+        modalRef.current?.addEventListener('dragend', modalDragEnd);
         document.addEventListener('click', areaHandler, true);
         document.addEventListener('keydown', keyHandler);
         return () => {
+            modalRef.current?.removeEventListener('dragstart', modalDragStart);
+            modalRef.current?.removeEventListener('dragend', modalDragEnd);
             document.removeEventListener('click', areaHandler, true);
             document.removeEventListener('keydown', keyHandler);
         };
-    }, [areaHandler, keyHandler]);
-
-    const modalButtonHandler = (): void => {
-        handleModalCase(name);
-        setVisibleStatus(false);
-    };
-
-    const modalDragStart = (e: any): void => {
-        setTimeout(() => {
-            modalRef.current.classList.add('hidden');
-        }, 0);
-        setInitOffsetPosition({
-            offsetY: e.offsetY,
-            offsetX: e.offsetY
-        });
-    };
-
-    const modalDragEnd = useCallback((e: any): void => {
-        modalRef.current.classList.remove('hidden');
-        modalRef.current.style.top = `${e.pageY - initOffsetPosition.offsetY}px`;
-        modalRef.current.style.left = `${e.pageX - initOffsetPosition.offsetX}px`;
-    }, []);
-
-    useEffect(() => {
-        modalRef.current.addEventListener('dragstart', modalDragStart);
-        modalRef.current.addEventListener('dragend', modalDragEnd);
-        return () => {
-            modalRef.current?.removeEventListener('dragstart', modalDragStart);
-            modalRef.current?.removeEventListener('dragend', modalDragEnd);
-        };
-    }, [modalDragEnd]);
+    }, [isVisible, name]);
 
     return (
         <div
             ref={modalRef}
             id={name}
-            className={visibleStatus ? 'modal' : 'modal hidden'}
+            className={isVisible ? 'modal' : 'modal hidden'}
             draggable="true"
             style={{ top: `${position.top}%`, left: `${position.left}%` }}
         >
@@ -140,7 +130,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
                 <div className="modal__body">
                     {children}
                 </div>
-                <button className="modal__button modal__button--close" onClick={modalButtonHandler}>
+                <button className="modal__button modal__button--close" onClick={closeModal}>
                     <IoMdClose size={24} />
                 </button>
                 <img className="modal__image" src={logo} alt="logo" />

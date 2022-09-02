@@ -44,6 +44,7 @@ const AuthorisationPage: React.FC = () => {
                 dispatch(switchAuthErrorStatus(false)); // reset auth-error status
             })
             .catch((err) => {
+                console.error(err.message);
                 dispatch(switchAuthErrorStatus(true));
                 setTimeout(() => {
                     dispatch(switchAuthErrorStatus(false));
