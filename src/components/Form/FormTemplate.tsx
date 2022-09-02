@@ -1,12 +1,6 @@
 import React from 'react';
 
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
-
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-
-// import {
-//     switchPasswordVisibleStatuses
-// } from '../../app/slices/formSlice';
+import { useAppSelector } from '../../app/hooks';
 
 // /. imports
 
@@ -31,8 +25,6 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
     const { passwordStatuses } = useAppSelector(state => state.formSlice);
     const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
 
-    const dispatch = useAppDispatch();
-    // 
     return (
         <label className="form__label" htmlFor={htmlFor}>
             <span className="form__label-text">
@@ -46,20 +38,6 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = (props) => {
                 placeholder={placeholder}
                 required
             />
-            {type === 'password'
-                ?
-                <>
-                    {/* {
-                        passwordStatuses
-                            ?
-                            <BsEye className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(false))} />
-                            :
-                            <BsEyeSlash className="form__icon-password" size={20} color="#000" onClick={() => dispatch(switchPasswordHiddenStatus(true))} />
-                    } */}
-                </>
-                :
-                <></>
-            }
         </label>
     );
 };

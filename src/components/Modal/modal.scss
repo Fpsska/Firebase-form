@@ -1,6 +1,7 @@
 .modal {
     position: fixed;
     display: block;
+    cursor: -webkit-grab;
     cursor: grab;
     z-index: 5;
     &__wrapper {
@@ -56,7 +57,16 @@
         right: 0;
         width: 4rem;
         height: 4rem;
+        -webkit-animation: spin infinite 20s linear;
         animation: spin infinite 20s linear;
+        @-webkit-keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
         @keyframes spin {
             from {
                 transform: rotate(0deg);
