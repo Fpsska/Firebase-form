@@ -123,6 +123,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
             className={isVisible ? 'modal' : 'modal hidden'}
             draggable="true"
             style={{ top: `${position.top}%`, left: `${position.left}%` }}
+            role="alert"
         >
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>
@@ -130,7 +131,7 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
                 <div className="modal__body">
                     {children}
                 </div>
-                <button className="modal__button modal__button--close" onClick={closeModal}>
+                <button className="modal__button modal__button--close" onClick={closeModal} aria-label="close burger menu">
                     <IoMdClose size={24} />
                 </button>
                 <img className="modal__image" src={logo} alt="logo" />

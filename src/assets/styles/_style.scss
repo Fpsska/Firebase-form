@@ -1,5 +1,9 @@
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -54,12 +58,15 @@ html {
     max-width: 392px;
     margin: 0 auto;
     overflow-y: scroll;
+
     &::-webkit-scrollbar {
         width: 0;
         background: transparent;
     }
+
     -ms-overflow-style: none;
     scrollbar-width: none;
+
     &__preloader {
         position: fixed;
         top: 50%;
@@ -76,6 +83,7 @@ html {
 
 input {
     outline: none;
+
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,

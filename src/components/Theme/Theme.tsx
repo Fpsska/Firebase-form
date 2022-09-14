@@ -20,9 +20,9 @@ const Theme: React.FC = () => {
   };
 
   return (
-    <div className={isActive ? 'theme active' : 'theme'} onClick={themeHandler}>
+    <button className={isActive ? 'theme active' : 'theme'} onClick={themeHandler} aria-label="change theme color">
       <span className="theme__indicator"></span>
-    </div>
+    </button>
   );
 };
 

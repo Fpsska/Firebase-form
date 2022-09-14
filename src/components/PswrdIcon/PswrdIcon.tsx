@@ -51,6 +51,7 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = (props) => {
                                 status: false
                             }
                         ))}
+                        aria-label="show password"
                     />
                     :
                     <BsEye
@@ -62,6 +63,7 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = (props) => {
                                 status: true
                             }
                         ))}
+                        aria-label="hide password"
                     />
             }
         </>
