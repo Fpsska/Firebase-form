@@ -3,9 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // /. imports
 
 interface mainSliceTypes {
-    isAuthorisationPage: boolean,
-    isHomePage: boolean,
-    isPreloaderVisible: boolean
+    isAuthorisationPage: boolean;
+    isHomePage: boolean;
+    isPreloaderVisible: boolean;
 }
 
 // /. interfaces
@@ -39,6 +39,5 @@ export const {
     switchHomePageStatus,
     switchPreloaderVisibleStatus
 } = mainSlice.actions;
-
 
 export default mainSlice.reducer;

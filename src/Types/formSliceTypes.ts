@@ -1,13 +1,13 @@
 export interface formFieldsTypes {
-    id: number,
-    type: string,
-    htmlFor: string,
-    label: string,
-    placeholder: string
+    id: number;
+    type: string;
+    htmlFor: string;
+    label: string;
+    placeholder: string;
 }
 
 export interface passwordStatusesTypes {
-    isAuthPasswordVisible: boolean,
-    isRegistrPasswordVisible: boolean,
-    isConfirmPasswordVisible: boolean
+    isAuthPasswordVisible: boolean;
+    isRegistrPasswordVisible: boolean;
+    isConfirmPasswordVisible: boolean;
 }

@@ -28,20 +28,19 @@ import './form.scss';
 // /. imports
 
 interface FormPropTypes {
-    formActionHandler: (arg1: string, arg2: string) => void
+    formActionHandler: (arg1: string, arg2: string) => void;
 }
 
 interface useFormTypes {
-    email: string,
-    password: string,
-    confirmPassword: string,
-    fullName: string
+    email: string;
+    password: string;
+    confirmPassword: string;
+    fullName: string;
 }
 
 // /. interfaces
 
-const Form: React.FC<FormPropTypes> = (props) => {
-
+const Form: React.FC<FormPropTypes> = props => {
     const { formActionHandler } = props;
 
     const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
@@ -56,29 +55,9 @@ const Form: React.FC<FormPropTypes> = (props) => {
 
     const dispatch = useAppDispatch();
 
-    const inputRememberHandler = (): void => {
-        dispatch(switchUserRememberedStatus(!isUserRemembered));
-    };
-    const inputTermsHandler = (): void => {
-        dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
-    };
-
-    const linkTermsHandler = (): void => {
-        dispatch(switchModalVisibleStatus({ name: 'terms-modal', status: !modalStatus.isModalTermsVisible }));
-        dispatch(setNewModalPosition(
-            {
-                name: 'terms-modal',
-                coordinates: { top: getRandomItgrNumber(30, 10), left: getRandomItgrNumber(30, 10) }
-            }
-        ));
-    };
-    //
     const {
         register,
-        formState: {
-            errors,
-            isValid
-        },
+        formState: { errors, isValid },
         handleSubmit,
         reset,
         watch
@@ -87,6 +66,33 @@ const Form: React.FC<FormPropTypes> = (props) => {
     });
 
     const passwordValue = watch('password');
+
+    // /. hooks
+
+    const inputRememberHandler = (): void => {
+        dispatch(switchUserRememberedStatus(!isUserRemembered));
+    };
+    const inputTermsHandler = (): void => {
+        dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
+    };
+
+    const linkTermsHandler = (): void => {
+        dispatch(
+            switchModalVisibleStatus({
+                name: 'terms-modal',
+                status: !modalStatus.isModalTermsVisible
+            })
+        );
+        dispatch(
+            setNewModalPosition({
+                name: 'terms-modal',
+                coordinates: {
+                    top: getRandomItgrNumber(30, 10),
+                    left: getRandomItgrNumber(30, 10)
+                }
+            })
+        );
+    };
 
     const formSubmitHandler = (userData: any, e: any): void => {
         e.preventDefault();
@@ -98,14 +104,21 @@ const Form: React.FC<FormPropTypes> = (props) => {
             reset();
         }, 2000);
     };
-    // 
+
+    // /. functions
+
     return (
-        <form className="form" onSubmit={handleSubmit(formSubmitHandler)}>
+        <form
+            className="form"
+            onSubmit={handleSubmit(formSubmitHandler)}
+        >
             <div className="form__wrapper">
-                {isAuthorisationPage
-                    ?
+                {isAuthorisationPage ? (
                     <>
-                        <label className="form__label" htmlFor="email">
+                        <label
+                            className="form__label"
+                            htmlFor="email"
+                        >
                             Email Addres
                             <input
                                 id="email"
@@ -116,34 +129,62 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     required: 'Field is required!',
                                     pattern: {
                                         value: /\S+@\S+\.\S+/,
-                                        message: 'Entered value does not match email format'
+                                        message:
+                                            'Entered value does not match email format'
                                     }
                                 })}
                             />
-                            {errors.email && <span className="form__error">{errors.email.message}</span>}
-                            {!errors.email && isAuthError && <span className="form__error">Incorrect email or password</span>}
+                            {errors.email && (
+                                <span className="form__error">
+                                    {errors.email.message}
+                                </span>
+                            )}
+                            {!errors.email && isAuthError && (
+                                <span className="form__error">
+                                    Incorrect email or password
+                                </span>
+                            )}
                         </label>
-                        <label className="form__label" htmlFor="password">
+                        <label
+                            className="form__label"
+                            htmlFor="password"
+                        >
                             Password
                             <input
                                 id="password"
-                                type={passwordStatuses.isAuthPasswordVisible ? 'text' : 'password'}
+                                type={
+                                    passwordStatuses.isAuthPasswordVisible
+                                        ? 'text'
+                                        : 'password'
+                                }
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
                                     minLength: {
                                         value: 2,
-                                        message: 'Minimum length is should be 2 symbols'
+                                        message:
+                                            'Minimum length is should be 2 symbols'
                                     }
                                 })}
                             />
                             <PswrdIcon inputName={'auth-password'} />
-                            {errors.password && <span className="form__error">{errors.password.message}</span>}
-                            {!errors.password && isAuthError && <span className="form__error">Incorrect email or password</span>}
+                            {errors.password && (
+                                <span className="form__error">
+                                    {errors.password.message}
+                                </span>
+                            )}
+                            {!errors.password && isAuthError && (
+                                <span className="form__error">
+                                    Incorrect email or password
+                                </span>
+                            )}
                         </label>
 
                         <div className="form__terms">
-                            <label className="form__label form__label--remember" htmlFor="remember" >
+                            <label
+                                className="form__label form__label--remember"
+                                htmlFor="remember"
+                            >
                                 <input
                                     className="form__input form__input--checkbox"
                                     type="checkbox"
@@ -151,19 +192,31 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     onClick={inputRememberHandler}
                                 />
                                 <span className="form__fake-checkbox">
-                                    <BsCheck2 size={'14px'} color={'#fff'} />
+                                    <BsCheck2
+                                        size={'14px'}
+                                        color={'#fff'}
+                                    />
                                 </span>
                                 Remember me
                             </label>
-                            <span className="form__restore">Forgot Password?</span>
+                            <span className="form__restore">
+                                Forgot Password?
+                            </span>
                         </div>
                     </>
-                    :
+                ) : (
                     <>
-                        <label className="form__label" htmlFor="fullName">
+                        <label
+                            className="form__label"
+                            htmlFor="fullName"
+                        >
                             <span className="form__label-text">
                                 FullName
-                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && (
+                                    <span className="form__label-required">
+                                        *
+                                    </span>
+                                )}
                             </span>
                             <input
                                 className="form__input form__input--email"
@@ -178,13 +231,24 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     }
                                 })}
                             />
-                            {errors.fullName && <span className="form__error">{errors.fullName.message}</span>}
+                            {errors.fullName && (
+                                <span className="form__error">
+                                    {errors.fullName.message}
+                                </span>
+                            )}
                         </label>
 
-                        <label className="form__label" htmlFor="email">
+                        <label
+                            className="form__label"
+                            htmlFor="email"
+                        >
                             <span className="form__label-text">
                                 Email Addres
-                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && (
+                                    <span className="form__label-required">
+                                        *
+                                    </span>
+                                )}
                             </span>
                             <input
                                 id="email"
@@ -195,45 +259,81 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     required: 'Field is required!',
                                     pattern: {
                                         value: /\S+@\S+\.\S+/,
-                                        message: 'Entered value does not match email format'
+                                        message:
+                                            'Entered value does not match email format'
                                     }
                                 })}
                             />
-                            {errors.email && <span className="form__error">{errors.email.message}</span>}
-                            {!errors.email && isRegistrError && <span className="form__error">Email already in use</span>}
+                            {errors.email && (
+                                <span className="form__error">
+                                    {errors.email.message}
+                                </span>
+                            )}
+                            {!errors.email && isRegistrError && (
+                                <span className="form__error">
+                                    Email already in use
+                                </span>
+                            )}
                         </label>
 
-                        <label className="form__label" htmlFor="password">
+                        <label
+                            className="form__label"
+                            htmlFor="password"
+                        >
                             <span className="form__label-text">
                                 Password
-                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && (
+                                    <span className="form__label-required">
+                                        *
+                                    </span>
+                                )}
                             </span>
                             <input
                                 id="password"
-                                type={passwordStatuses.isRegistrPasswordVisible ? 'text' : 'password'}
+                                type={
+                                    passwordStatuses.isRegistrPasswordVisible
+                                        ? 'text'
+                                        : 'password'
+                                }
                                 className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
                                     minLength: {
                                         value: 6,
-                                        message: 'Minimum length is should be 6 symbols'
+                                        message:
+                                            'Minimum length is should be 6 symbols'
                                     }
                                 })}
                             />
                             <PswrdIcon inputName={'registr-password'} />
-                            {errors.password && <p className="form__error">{errors.password?.message}</p>}
+                            {errors.password && (
+                                <p className="form__error">
+                                    {errors.password?.message}
+                                </p>
+                            )}
                         </label>
 
-                        <label className="form__label" htmlFor="confirm-password">
+                        <label
+                            className="form__label"
+                            htmlFor="confirm-password"
+                        >
                             <span className="form__label-text">
                                 Confirm Password
-                                {!isAuthorisationPage && <span className="form__label-required">*</span>}
+                                {!isAuthorisationPage && (
+                                    <span className="form__label-required">
+                                        *
+                                    </span>
+                                )}
                             </span>
                             <input
                                 id="confirm-password"
-                                type={passwordStatuses.isConfirmPasswordVisible ? 'text' : 'password'}
+                                type={
+                                    passwordStatuses.isConfirmPasswordVisible
+                                        ? 'text'
+                                        : 'password'
+                                }
                                 className="form__input form__input--password"
-                                onPaste={(e) => {
+                                onPaste={e => {
                                     e.preventDefault();
                                     return false;
                                 }}
@@ -241,16 +341,26 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                     required: 'Field is required!',
                                     minLength: {
                                         value: 6,
-                                        message: 'Minimum length is should be 6 symbols'
+                                        message:
+                                            'Minimum length is should be 6 symbols'
                                     },
-                                    validate: (value) => value === passwordValue || 'The password do not match'
+                                    validate: value =>
+                                        value === passwordValue ||
+                                        'The password do not match'
                                 })}
                             />
                             <PswrdIcon inputName={'confirm-password'} />
-                            {errors.confirmPassword && <p className="form__error">{errors.confirmPassword.message}</p>}
+                            {errors.confirmPassword && (
+                                <p className="form__error">
+                                    {errors.confirmPassword.message}
+                                </p>
+                            )}
                         </label>
 
-                        <label className="form__label form__label--terms" htmlFor="terms" >
+                        <label
+                            className="form__label form__label--terms"
+                            htmlFor="terms"
+                        >
                             <input
                                 className="form__input form__input--checkbox"
                                 type="checkbox"
@@ -259,9 +369,14 @@ const Form: React.FC<FormPropTypes> = (props) => {
                                 required
                             />
                             <span className="form__fake-checkbox">
-                                <BsCheck2 size={'14px'} color={'#fff'} />
+                                <BsCheck2
+                                    size={'14px'}
+                                    color={'#fff'}
+                                />
                             </span>
-                            <span className="form__terms-text"> I have read and agree to the{' '}
+                            <span className="form__terms-text">
+                                {' '}
+                                I have read and agree to the{' '}
                                 <a
                                     href="#"
                                     className="form__terms-link"
@@ -272,7 +387,7 @@ const Form: React.FC<FormPropTypes> = (props) => {
                             </span>
                         </label>
                     </>
-                }
+                )}
 
                 <button
                     className="form__button"
@@ -287,15 +402,21 @@ const Form: React.FC<FormPropTypes> = (props) => {
                     status={modalStatus.isModalTermsVisible}
                 >
                     <div className="modal__scroll-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                        id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                        id, quam non fugit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                        id, quam non fugit. Dsit amet consectetur adipisicing elit. Rerum, laboriosam quod dolorem ab
-                        quisquam ipsam aliquid tempora quia aliquam at consequatur saepe iusto perferendis magni inventore,
-                        id, quam non fugit.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Rerum, laboriosam quod dolorem ab quisquam ipsam aliquid
+                        tempora quia aliquam at consequatur saepe iusto
+                        perferendis magni inventore, id, quam non fugit. Dsit
+                        amet consectetur adipisicing elit. Rerum, laboriosam
+                        quod dolorem ab quisquam ipsam aliquid tempora quia
+                        aliquam at consequatur saepe iusto perferendis magni
+                        inventore, id, quam non fugit.Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit. Rerum, laboriosam quod
+                        dolorem ab quisquam ipsam aliquid tempora quia aliquam
+                        at consequatur saepe iusto perferendis magni inventore,
+                        id, quam non fugit. Dsit amet consectetur adipisicing
+                        elit. Rerum, laboriosam quod dolorem ab quisquam ipsam
+                        aliquid tempora quia aliquam at consequatur saepe iusto
+                        perferendis magni inventore, id, quam non fugit.
                     </div>
                 </Modal>
             </div>

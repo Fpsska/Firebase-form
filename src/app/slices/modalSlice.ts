@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { coordinatesTypes, modalPositionsTypes, modalStatusTypes } from '../../Types/modalSliceTypes';
+import {
+    coordinatesTypes,
+    modalPositionsTypes,
+    modalStatusTypes
+} from '../../Types/modalSliceTypes';
 
 // /. imports
 
 interface modalSliceTypes {
-    modalStatus: modalStatusTypes,
-    modalPositions: modalPositionsTypes
+    modalStatus: modalStatusTypes;
+    modalPositions: modalPositionsTypes;
 }
 
 // /. interfaces
@@ -32,7 +36,10 @@ const modalSlice = createSlice({
     name: 'modalSlice',
     initialState,
     reducers: {
-        switchModalVisibleStatus(state, action: PayloadAction<{ name: string, status: boolean }>) {
+        switchModalVisibleStatus(
+            state,
+            action: PayloadAction<{ name: string; status: boolean }>
+        ) {
             const { name, status } = action.payload;
             switch (name) {
                 case 'auth-modal':
@@ -49,7 +56,13 @@ const modalSlice = createSlice({
                     break;
             }
         },
-        setNewModalPosition(state, action: PayloadAction<{ name: string, coordinates: coordinatesTypes }>) {
+        setNewModalPosition(
+            state,
+            action: PayloadAction<{
+                name: string;
+                coordinates: coordinatesTypes;
+            }>
+        ) {
             const { name, coordinates } = action.payload;
             switch (name) {
                 case 'auth-modal':
@@ -69,10 +82,7 @@ const modalSlice = createSlice({
     }
 });
 
-export const {
-    switchModalVisibleStatus,
-    setNewModalPosition
-} = modalSlice.actions;
-
+export const { switchModalVisibleStatus, setNewModalPosition } =
+    modalSlice.actions;
 
 export default modalSlice.reducer;

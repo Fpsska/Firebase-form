@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { formFieldsTypes, passwordStatusesTypes } from '../../Types/formSliceTypes';
+import {
+    formFieldsTypes,
+    passwordStatusesTypes
+} from '../../Types/formSliceTypes';
 
 // /. imports
 
 interface formSliceTypes {
-    formAuthFields: formFieldsTypes[],
-    formRegistrationFields: formFieldsTypes[],
-    isUserRemembered: boolean,
-    isTermsAccepted: boolean,
-    passwordStatuses: passwordStatusesTypes,
-    isAuthError: boolean,
-    isRegistrError: boolean
+    formAuthFields: formFieldsTypes[];
+    formRegistrationFields: formFieldsTypes[];
+    isUserRemembered: boolean;
+    isTermsAccepted: boolean;
+    passwordStatuses: passwordStatusesTypes;
+    isAuthError: boolean;
+    isRegistrError: boolean;
 }
 
 // /. interfaces
@@ -86,7 +89,10 @@ const formSlice = createSlice({
         switchTermsAcceptedStatus(state, actions: PayloadAction<boolean>) {
             state.isTermsAccepted = actions.payload;
         },
-        switchPasswordVisibleStatuses(state, actions: PayloadAction<{ name: string, status: boolean }>) {
+        switchPasswordVisibleStatuses(
+            state,
+            actions: PayloadAction<{ name: string; status: boolean }>
+        ) {
             const { name, status } = actions.payload;
             switch (name) {
                 case 'auth-password':
@@ -116,6 +122,5 @@ export const {
     switchAuthErrorStatus,
     switchRegistrErrorStatus
 } = formSlice.actions;
-
 
 export default formSlice.reducer;

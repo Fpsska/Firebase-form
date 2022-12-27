@@ -5,20 +5,22 @@ import formSlice from './slices/formSlice';
 import userSlice from './slices/userSlice';
 import modalSlice from './slices/modalSlice';
 
+// /. imports
+
 export const store = configureStore({
-  reducer: {
-    mainSlice: mainSlice,
-    formSlice: formSlice,
-    userSlice: userSlice,
-    modalSlice: modalSlice
-  }
+    reducer: {
+        mainSlice: mainSlice,
+        formSlice: formSlice,
+        userSlice: userSlice,
+        modalSlice: modalSlice
+    }
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
 >;

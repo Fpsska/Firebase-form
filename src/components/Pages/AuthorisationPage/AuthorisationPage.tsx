@@ -10,32 +10,40 @@ import SectionMark from '../../SectionMark/SectionMark';
 import Form from '../../Form/Form';
 import Modal from '../../Modal/Modal';
 
-import { saveNewUser, switchUserAuthoriseStatus } from '../../../app/slices/userSlice';
-import { switchAuthorisationPageStatus, switchHomePageStatus } from '../../../app/slices/mainSlice';
+import {
+    saveNewUser,
+    switchUserAuthoriseStatus
+} from '../../../app/slices/userSlice';
+import {
+    switchAuthorisationPageStatus,
+    switchHomePageStatus
+} from '../../../app/slices/mainSlice';
 import { switchAuthErrorStatus } from '../../../app/slices/formSlice';
 
 // /. imports
 
-
 const AuthorisationPage: React.FC = () => {
-
     const { modalStatus } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    // /. hooks
+
     const handleLogin = (email: string, password: string): void => {
         const auth = getAuth();
-        
+
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 console.log(user);
-                dispatch(saveNewUser({
-                    email: user.email,
-                    token: user.refreshToken,
-                    id: user.uid,
-                    lastSignInTime: user.metadata.lastSignInTime
-                }));
+                dispatch(
+                    saveNewUser({
+                        email: user.email,
+                        token: user.refreshToken,
+                        id: user.uid,
+                        lastSignInTime: user.metadata.lastSignInTime
+                    })
+                );
                 dispatch(switchUserAuthoriseStatus(true));
                 dispatch(switchAuthorisationPageStatus(false));
                 dispatch(switchHomePageStatus(true));
@@ -43,7 +51,7 @@ const AuthorisationPage: React.FC = () => {
 
                 dispatch(switchAuthErrorStatus(false)); // reset auth-error status
             })
-            .catch((err) => {
+            .catch(err => {
                 console.error(err.message);
                 dispatch(switchAuthErrorStatus(true));
                 setTimeout(() => {
@@ -51,7 +59,9 @@ const AuthorisationPage: React.FC = () => {
                 }, 5000);
             });
     };
-    // 
+
+    // /. functions
+
     return (
         <div className="authorisation">
             <div className="authorisation__wrapper">
@@ -71,6 +81,5 @@ const AuthorisationPage: React.FC = () => {
         </div>
     );
 };
-
 
 export default AuthorisationPage;

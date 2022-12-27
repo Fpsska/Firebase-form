@@ -15,27 +15,27 @@ import './modal.scss';
 // /. imports
 
 interface ModalPropsTypes {
-    name: string,
-    title: string,
-    children: any,
-    status: boolean,
+    name: string;
+    title: string;
+    children: any;
+    status: boolean;
 }
 
 // /. interfaces
 
-const Modal: React.FC<ModalPropsTypes> = (props) => {
-
-    const {
-        name,
-        title,
-        children,
-        status
-    } = props;
+const Modal: React.FC<ModalPropsTypes> = props => {
+    const { name, title, children, status } = props;
 
     const { modalPositions } = useAppSelector(state => state.modalSlice);
-    const [position, setPosition] = useState<coordinatesTypes>(modalPositions.modalAuthPosition);
+
+    const [position, setPosition] = useState<coordinatesTypes>(
+        modalPositions.modalAuthPosition
+    );
     const [isVisible, setVisibleStatus] = useState<boolean>(false);
-    const [initOffsetPosition, setInitOffsetPosition] = useState<{ offsetY: number, offsetX: number }>({
+    const [initOffsetPosition, setInitOffsetPosition] = useState<{
+        offsetY: number;
+        offsetX: number;
+    }>({
         offsetY: 0,
         offsetX: 0
     });
@@ -44,17 +44,22 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
 
     const { handleModalCase } = useDefineModalStatus();
 
+    // /. hooks
+
     const closeModal = (): void => {
         handleModalCase(name);
         setVisibleStatus(false);
     };
 
+    // /. functions
 
-    useEffect(() => {  // set current status-prop like visibleStatus initial value
+    useEffect(() => {
+        // set current status-prop like visibleStatus initial value
         setVisibleStatus(status);
     }, [status]);
 
-    useEffect(() => { // set current handled modal of modalPositions state
+    useEffect(() => {
+        // set current handled modal of modalPositions state
         switch (name) {
             case 'auth-modal':
                 setPosition(modalPositions.modalAuthPosition);
@@ -84,12 +89,20 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
 
         const modalDragEnd = (e: any): void => {
             modalRef.current.classList.remove('hidden');
-            modalRef.current.style.top = `${e.pageY - initOffsetPosition.offsetY}px`;
-            modalRef.current.style.left = `${e.pageX - initOffsetPosition.offsetX}px`;
+            modalRef.current.style.top = `${
+                e.pageY - initOffsetPosition.offsetY
+            }px`;
+            modalRef.current.style.left = `${
+                e.pageX - initOffsetPosition.offsetX
+            }px`;
         };
 
         const areaHandler = (e: any): void => {
-            if (isVisible && modalRef.current && !modalRef.current.contains(e.target)) {
+            if (
+                isVisible &&
+                modalRef.current &&
+                !modalRef.current.contains(e.target)
+            ) {
                 handleModalCase(name);
                 setVisibleStatus(false);
             }
@@ -116,6 +129,8 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
         };
     }, [isVisible, name]);
 
+    // /. effects
+
     return (
         <div
             ref={modalRef}
@@ -128,13 +143,19 @@ const Modal: React.FC<ModalPropsTypes> = (props) => {
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>
                 <hr />
-                <div className="modal__body">
-                    {children}
-                </div>
-                <button className="modal__button modal__button--close" onClick={closeModal} aria-label="close burger menu">
+                <div className="modal__body">{children}</div>
+                <button
+                    className="modal__button modal__button--close"
+                    onClick={closeModal}
+                    aria-label="close burger menu"
+                >
                     <IoMdClose size={24} />
                 </button>
-                <img className="modal__image" src={logo} alt="logo" />
+                <img
+                    className="modal__image"
+                    src={logo}
+                    alt="logo"
+                />
             </div>
         </div>
     );

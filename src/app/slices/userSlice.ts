@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // /. imports
 
 interface userSliceTypes {
-    currentEmail: null,
-    currentToken: null,
-    currentID: null,
-    lastSignInTime: null,
-    isUserAuthorise: boolean
+    currentEmail: null;
+    currentToken: null;
+    currentID: null;
+    lastSignInTime: null;
+    isUserAuthorise: boolean;
 }
 
 // /. interfaces
@@ -43,10 +43,7 @@ const userSlice = createSlice({
     }
 });
 
-export const {
-    saveNewUser,
-    deleteCurrentUser,
-    switchUserAuthoriseStatus
-} = userSlice.actions;
+export const { saveNewUser, deleteCurrentUser, switchUserAuthoriseStatus } =
+    userSlice.actions;
 
 export default userSlice.reducer;

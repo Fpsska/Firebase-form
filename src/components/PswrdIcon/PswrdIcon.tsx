@@ -4,24 +4,26 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
-
 import { switchPasswordVisibleStatuses } from '../../app/slices/formSlice';
 
 // /. imports
 
 interface PswrdIconPropTypes {
-    inputName: string
+    inputName: string;
 }
 
-const PswrdIcon: React.FC<PswrdIconPropTypes> = (props) => {
+// /. interfaces
 
+const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
     const { inputName } = props;
 
     const { passwordStatuses } = useAppSelector(state => state.formSlice);
-    
+
     const [statusName, setStatusName] = useState<boolean>();
 
     const dispatch = useAppDispatch();
+
+    // /. hooks
 
     useEffect(() => {
         switch (inputName) {
@@ -37,35 +39,39 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = (props) => {
         }
     }, [inputName, passwordStatuses]);
 
+    // /. effects
+
     return (
         <>
-            {
-                statusName
-                    ?
-                    <BsEyeSlash
-                        className="form__icon-password"
-                        size={20}
-                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                            {
+            {statusName ? (
+                <BsEyeSlash
+                    className="form__icon-password"
+                    size={20}
+                    onClick={() =>
+                        dispatch(
+                            switchPasswordVisibleStatuses({
                                 name: inputName,
                                 status: false
-                            }
-                        ))}
-                        aria-label="show password"
-                    />
-                    :
-                    <BsEye
-                        className="form__icon-password"
-                        size={20}
-                        onClick={() => dispatch(switchPasswordVisibleStatuses(
-                            {
+                            })
+                        )
+                    }
+                    aria-label="show password"
+                />
+            ) : (
+                <BsEye
+                    className="form__icon-password"
+                    size={20}
+                    onClick={() =>
+                        dispatch(
+                            switchPasswordVisibleStatuses({
                                 name: inputName,
                                 status: true
-                            }
-                        ))}
-                        aria-label="hide password"
-                    />
-            }
+                            })
+                        )
+                    }
+                    aria-label="hide password"
+                />
+            )}
         </>
     );
 };

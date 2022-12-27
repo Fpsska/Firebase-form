@@ -2,11 +2,15 @@ import { useLayoutEffect, useState } from 'react';
 
 // /. imports
 
-const isOChasDarkTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches;
+const isOChasDarkTheme = window?.matchMedia(
+    '(prefers-color-scheme: dark)'
+).matches;
 const defaultTheme = isOChasDarkTheme ? 'minimalism' : 'default';
 
 export function useTheme() {
-    const [theme, setTheme] = useState<any>(localStorage.getItem('app-theme') || defaultTheme);
+    const [theme, setTheme] = useState<any>(
+        localStorage.getItem('app-theme') || defaultTheme
+    );
 
     useLayoutEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
@@ -15,5 +19,3 @@ export function useTheme() {
 
     return { theme, setTheme };
 }
-
-

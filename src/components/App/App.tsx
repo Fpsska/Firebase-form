@@ -15,17 +15,29 @@ import HomePage from '../Pages/HomePage/HomePage';
 // /. imports
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/Authorisation-Form" element={<Layout />}>
-          <Route index element={<AuthorisationPage />} />
-          <Route path="registration" element={<RegistrationPage />} />
-          <Route path="home" element={<HomePage />} />
-        </Route>
-      </Routes>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Routes>
+                <Route
+                    path="/Authorisation-Form"
+                    element={<Layout />}
+                >
+                    <Route
+                        index
+                        element={<AuthorisationPage />}
+                    />
+                    <Route
+                        path="registration"
+                        element={<RegistrationPage />}
+                    />
+                    <Route
+                        path="home"
+                        element={<HomePage />}
+                    />
+                </Route>
+            </Routes>
+        </div>
+    );
 };
 
 export default App;

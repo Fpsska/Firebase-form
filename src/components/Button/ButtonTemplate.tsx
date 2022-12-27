@@ -15,37 +15,64 @@ import './buttonTemplate.scss';
 
 // /. imports
 
-const ButtonTemplate: React.FC = () => {
+interface propTypes {
+    text: any; //  JSX.Element
+}
 
+// /. interfaces
+
+const ButtonTemplate: React.FC<propTypes> = ({ text }) => {
     const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
     const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
+
     const dispatch = useAppDispatch();
+
+    // /. hooks
 
     const generalButtonHandler = (): void => {
         if (isAuthorisationPage) {
-            dispatch(switchModalVisibleStatus({ name: 'auth-modal', status: true }));
-            dispatch(setNewModalPosition(
-                {
+            dispatch(
+                switchModalVisibleStatus({ name: 'auth-modal', status: true })
+            );
+            dispatch(
+                setNewModalPosition({
                     name: 'auth-modal',
-                    coordinates: { top: getRandomItgrNumber(50, 10), left: getRandomItgrNumber(50, 10) }
-                }
-            ));
+                    coordinates: {
+                        top: getRandomItgrNumber(50, 10),
+                        left: getRandomItgrNumber(50, 10)
+                    }
+                })
+            );
         } else {
-            dispatch(switchModalVisibleStatus({ name: 'registr-modal', status: true }));
-            dispatch(setNewModalPosition(
-                {
+            dispatch(
+                switchModalVisibleStatus({
                     name: 'registr-modal',
-                    coordinates: { top: getRandomItgrNumber(90, 10), left: getRandomItgrNumber(90, 10) }
-                }
-            ));
+                    status: true
+                })
+            );
+            dispatch(
+                setNewModalPosition({
+                    name: 'registr-modal',
+                    coordinates: {
+                        top: getRandomItgrNumber(90, 10),
+                        left: getRandomItgrNumber(90, 10)
+                    }
+                })
+            );
         }
         setDisabledStatus(true);
     };
-    
+
+    // /. functions
+
     return (
-        <button className="button" disabled={disabledStatus} onClick={generalButtonHandler} >
+        <button
+            className="button"
+            disabled={disabledStatus}
+            onClick={generalButtonHandler}
+        >
             <FcGoogle size={19} />
-            <span className="button__text">{isAuthorisationPage ? 'Continue with Google' : 'Sign up with Google'}</span>
+            <span className="button__text">{text}</span>
         </button>
     );
 };

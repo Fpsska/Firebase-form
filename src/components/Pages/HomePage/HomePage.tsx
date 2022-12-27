@@ -21,23 +21,31 @@ import Modal from '../../Modal/Modal';
 
 import './homePage.scss';
 
-// /. imports  
+// /. imports
 
 const HomePage: React.FC = () => {
-
-    const { currentEmail, isUserAuthorise, lastSignInTime } = useAppSelector(state => state.userSlice);
+    const { currentEmail, isUserAuthorise, lastSignInTime } = useAppSelector(
+        state => state.userSlice
+    );
     const { modalStatus } = useAppSelector(state => state.modalSlice);
-    
+
     const dispatch = useAppDispatch();
 
+    // /. hooks
+
     const logOutHandler = (): void => {
-        dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: !modalStatus.isModalExitVisible }));
-        dispatch(setNewModalPosition(
-            {
+        dispatch(
+            switchModalVisibleStatus({
+                name: 'exit-modal',
+                status: !modalStatus.isModalExitVisible
+            })
+        );
+        dispatch(
+            setNewModalPosition({
                 name: 'exit-modal',
                 coordinates: { top: 15, left: 20 }
-            }
-        ));
+            })
+        );
     };
 
     const acceptHandler = (): void => {
@@ -45,21 +53,40 @@ const HomePage: React.FC = () => {
         dispatch(switchAuthorisationPageStatus(true));
         dispatch(switchUserAuthoriseStatus(false));
         dispatch(switchHomePageStatus(false));
-        dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: false }));
+        dispatch(
+            switchModalVisibleStatus({ name: 'exit-modal', status: false })
+        );
     };
 
     const candelHandler = (): void => {
-        dispatch(switchModalVisibleStatus({ name: 'exit-modal', status: false }));
+        dispatch(
+            switchModalVisibleStatus({ name: 'exit-modal', status: false })
+        );
     };
-    // 
+
+    // /. functions
+
     return isUserAuthorise ? (
         <div className="home">
             <div className="home__wrapper">
                 <ul className="home__user-data user-data">
-                    <li className="user-data__template">lastSignInTime: <span className="user-data__info">{lastSignInTime}</span></li>
-                    <li className="user-data__template">email: <span className="user-data__info">{currentEmail}</span></li>
+                    <li className="user-data__template">
+                        lastSignInTime:{' '}
+                        <span className="user-data__info">
+                            {lastSignInTime}
+                        </span>
+                    </li>
+                    <li className="user-data__template">
+                        email:{' '}
+                        <span className="user-data__info">{currentEmail}</span>
+                    </li>
                 </ul>
-                <button className="home__button" onClick={logOutHandler}>Log out from {currentEmail}</button>
+                <button
+                    className="home__button"
+                    onClick={logOutHandler}
+                >
+                    Log out from {currentEmail}
+                </button>
                 <Modal
                     name={'exit-modal'}
                     title={'Exit modal!'}
@@ -67,8 +94,18 @@ const HomePage: React.FC = () => {
                 >
                     <p className="modal__text">Are you sure to want exit?</p>
                     <div className="modal__controls">
-                        <button className="modal__button modal__button--accept" onClick={acceptHandler}>Ok</button>
-                        <button className="modal__button modal__button--cancel" onClick={candelHandler}>Cancel</button>
+                        <button
+                            className="modal__button modal__button--accept"
+                            onClick={acceptHandler}
+                        >
+                            Ok
+                        </button>
+                        <button
+                            className="modal__button modal__button--cancel"
+                            onClick={candelHandler}
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </Modal>
             </div>
@@ -79,4 +116,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-

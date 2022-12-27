@@ -9,8 +9,9 @@ import './footer.scss';
 // /. imports
 
 const Footer: React.FC = () => {
-
     const { isHomePage } = useAppSelector(state => state.mainSlice);
+
+    // /. hooks
 
     return (
         <footer className="footer">
