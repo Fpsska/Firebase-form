@@ -1,19 +1,24 @@
 .header {
     position: relative;
+
     &__wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     &__text {
         display: flex;
         flex-direction: column;
         justify-content: center;
+
         :not(:last-child) {
             margin: 0 0 5px 0;
         }
+
         margin: 0 0 28px 0;
     }
+
     &__title {
         font-size: 22px;
         font-weight: 600;
@@ -21,6 +26,7 @@
         text-align: center;
         color: var(--header-text-color);
     }
+
     &__subtitle {
         font-weight: 400;
         line-height: 134%;
@@ -28,11 +34,14 @@
         text-align: center;
         color: var(--header-text-color);
     }
+
     &__image {
-        width: 168px;
-        height: 92px;
+        display: inline-block;
+        vertical-align: middle;
+        object-fit: cover;
+        flex: 0 0 92px;
+        height: 168px;
+        overflow: hidden;
         margin: 0 0 15px 0;
-        -o-object-fit: cover;
-           object-fit: cover;
     }
 }

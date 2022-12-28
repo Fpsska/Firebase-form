@@ -2,41 +2,25 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-
-import { switchAuthorisationPageStatus } from '../../app/slices/mainSlice';
+import { useAppSelector } from '../../app/hooks';
 
 import './relocate.scss';
 
 // /. imports
 
 const Relocate: React.FC = () => {
-    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
-
-    const dispatch = useAppDispatch();
+    const { pageStatuses } = useAppSelector(state => state.mainSlice);
 
     // /. hooks
 
-    const relocateToAuthPage = (): void => {
-        dispatch(switchAuthorisationPageStatus(false));
-    };
-
-    const relocateToLoginPage = (): void => {
-        dispatch(switchAuthorisationPageStatus(true));
-    };
-
-    // /. functions
-
     return (
         <div className="relocate">
-            {isAuthorisationPage ? (
+            {pageStatuses.isAuthPage ? (
                 <p className="relocate__create">
                     Don`t have an account?{' '}
                     <Link
                         className="relocate__link"
                         to="/Authorisation-Form/Registration"
-                        onClick={relocateToAuthPage}
-                        state={'create-page'}
                     >
                         Sign Up
                     </Link>
@@ -47,8 +31,6 @@ const Relocate: React.FC = () => {
                     <Link
                         className="relocate__link"
                         to="/Authorisation-Form"
-                        onClick={relocateToLoginPage}
-                        state={'auth-page'}
                     >
                         Log in
                     </Link>

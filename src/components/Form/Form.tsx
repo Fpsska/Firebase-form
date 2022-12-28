@@ -8,6 +8,8 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
+import { useLocationData } from '../../hooks/useLocationData';
+
 import {
     switchUserRememberedStatus,
     switchTermsAcceptedStatus
@@ -43,7 +45,7 @@ interface useFormTypes {
 const Form: React.FC<FormPropTypes> = props => {
     const { formActionHandler } = props;
 
-    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
+    const { pageStatuses } = useAppSelector(state => state.mainSlice);
     const { modalStatus } = useAppSelector(state => state.modalSlice);
     const {
         isUserRemembered,
@@ -54,6 +56,7 @@ const Form: React.FC<FormPropTypes> = props => {
     } = useAppSelector(state => state.formSlice);
 
     const dispatch = useAppDispatch();
+    const { state } = useLocationData();
 
     const {
         register,
@@ -69,6 +72,10 @@ const Form: React.FC<FormPropTypes> = props => {
 
     // /. hooks
 
+    // const isAuthPage = state === 'auth-page';
+
+    // /. variables
+
     const inputRememberHandler = (): void => {
         dispatch(switchUserRememberedStatus(!isUserRemembered));
     };
@@ -76,7 +83,9 @@ const Form: React.FC<FormPropTypes> = props => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
     };
 
-    const linkTermsHandler = (): void => {
+    const linkTermsHandler = (e: any): void => {
+        e.preventDefault();
+
         dispatch(
             switchModalVisibleStatus({
                 name: 'terms-modal',
@@ -113,7 +122,7 @@ const Form: React.FC<FormPropTypes> = props => {
             onSubmit={handleSubmit(formSubmitHandler)}
         >
             <div className="form__wrapper">
-                {isAuthorisationPage ? (
+                {pageStatuses.isAuthPage ? (
                     <>
                         <label
                             className="form__label"
@@ -212,7 +221,7 @@ const Form: React.FC<FormPropTypes> = props => {
                         >
                             <span className="form__label-text">
                                 FullName
-                                {!isAuthorisationPage && (
+                                {!pageStatuses.isAuthPage && (
                                     <span className="form__label-required">
                                         *
                                     </span>
@@ -244,7 +253,7 @@ const Form: React.FC<FormPropTypes> = props => {
                         >
                             <span className="form__label-text">
                                 Email Addres
-                                {!isAuthorisationPage && (
+                                {!pageStatuses.isAuthPage && (
                                     <span className="form__label-required">
                                         *
                                     </span>
@@ -282,7 +291,7 @@ const Form: React.FC<FormPropTypes> = props => {
                         >
                             <span className="form__label-text">
                                 Password
-                                {!isAuthorisationPage && (
+                                {!pageStatuses.isAuthPage && (
                                     <span className="form__label-required">
                                         *
                                     </span>
@@ -319,7 +328,7 @@ const Form: React.FC<FormPropTypes> = props => {
                         >
                             <span className="form__label-text">
                                 Confirm Password
-                                {!isAuthorisationPage && (
+                                {!pageStatuses.isAuthPage && (
                                     <span className="form__label-required">
                                         *
                                     </span>
@@ -380,7 +389,7 @@ const Form: React.FC<FormPropTypes> = props => {
                                 <a
                                     href="#"
                                     className="form__terms-link"
-                                    onClick={linkTermsHandler}
+                                    onClick={e => linkTermsHandler(e)}
                                 >
                                     Terms of Service
                                 </a>
@@ -391,9 +400,10 @@ const Form: React.FC<FormPropTypes> = props => {
 
                 <button
                     className="form__button"
+                    type="submit"
                     disabled={!isValid}
                 >
-                    {isAuthorisationPage ? 'Log in' : 'Get Started'}
+                    {pageStatuses.isAuthPage ? 'Log in' : 'Get Started'}
                 </button>
 
                 <Modal

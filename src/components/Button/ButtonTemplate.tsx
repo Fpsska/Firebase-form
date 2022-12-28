@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 
 import { FcGoogle } from 'react-icons/fc';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
+
+import { useLocationData } from '../../hooks/useLocationData';
 
 import {
     switchModalVisibleStatus,
@@ -22,15 +24,19 @@ interface propTypes {
 // /. interfaces
 
 const ButtonTemplate: React.FC<propTypes> = ({ text }) => {
-    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
+    const { pageStatuses } = useAppSelector(state => state.mainSlice);
+
     const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
+    const { state } = useLocationData();
 
     // /. hooks
 
     const generalButtonHandler = (): void => {
-        if (isAuthorisationPage) {
+        // const isAuthPage = state === 'auth-page';
+
+        if (pageStatuses.isAuthPage) {
             dispatch(
                 switchModalVisibleStatus({ name: 'auth-modal', status: true })
             );

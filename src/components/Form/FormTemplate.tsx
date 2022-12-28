@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useAppSelector } from '../../app/hooks';
 
+import { useLocationData } from '../../hooks/useLocationData';
+
 // /. imports
 
 interface FormTemplatePropTypes {
@@ -17,9 +19,14 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = props => {
     const { type, htmlFor, label, placeholder } = props;
 
     const { passwordStatuses } = useAppSelector(state => state.formSlice);
-    const { isAuthorisationPage } = useAppSelector(state => state.mainSlice);
+
+    const { state } = useLocationData();
 
     // /. hooks
+
+    const isAuthPage = state === 'auth-page';
+
+    // /. variables
 
     return (
         <label
@@ -28,9 +35,7 @@ const FormTemplate: React.FC<FormTemplatePropTypes> = props => {
         >
             <span className="form__label-text">
                 {label}
-                {!isAuthorisationPage && (
-                    <span className="form__label-required">*</span>
-                )}
+                {!isAuthPage && <span className="form__label-required">*</span>}
             </span>
             <input
                 className={`form__input ${

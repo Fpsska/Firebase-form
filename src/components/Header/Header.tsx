@@ -1,45 +1,38 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { useAppSelector } from '../../app/hooks';
 
 import ButtonTemplate from '../Button/ButtonTemplate';
 import Theme from '../Theme/Theme';
 
+import { useLocationData } from '../../hooks/useLocationData';
+
 import logo from '../../assets/images/logo_icon.png';
 
 import './header.scss';
-import { useLocationData } from '../../hooks/useLocationData';
 
 // /. imports
 
 const Header: React.FC = () => {
-    const { isAuthorisationPage, isHomePage } = useAppSelector(
-        state => state.mainSlice
-    );
+    const { pageStatuses } = useAppSelector(state => state.mainSlice);
     const { isUserAuthorise } = useAppSelector(state => state.userSlice);
 
-    const { state } = useLocationData();
+    const { pathname } = useLocationData();
 
     // /. hooks
 
-    useEffect(() => {
-        console.log(state);
-    }, [state]);
-
-    // /. effects
-
-    const defineButtonTextContent = (value: string): string => {
-        switch (value) {
-            case null:
+    const defineButtonTextContent = (currentPath: string): string => {
+        switch (currentPath) {
+            case '/Authorisation-Form':
                 return 'Continue with Google';
-            case 'auth-page':
-                return 'Continue with Google';
-            case 'create-page':
+            case '/Authorisation-Form/Registration':
                 return 'Sign up with Google';
             default:
-                return '';
+                return 'Continue with Google';
         }
     };
+
+    // /. functions
 
     return (
         <header className="header">
@@ -52,23 +45,23 @@ const Header: React.FC = () => {
 
                 <div className="header__text">
                     <h1 className="header__title">
-                        {isAuthorisationPage
+                        {pageStatuses.isAuthPage
                             ? 'Log in to your Account'
-                            : isHomePage && isUserAuthorise
+                            : pageStatuses.isHomePage && isUserAuthorise
                             ? 'Welcome to your profile page!'
                             : 'Create an Account'}
                     </h1>
-                    {!isHomePage && !isUserAuthorise && (
+                    {!pageStatuses.isHomePage && !isUserAuthorise && (
                         <p className="header__subtitle">
-                            {isAuthorisationPage
+                            {pageStatuses.isAuthPage
                                 ? 'Welcome back, please enter your details.'
                                 : 'Sign up now to get started with an account.'}
                         </p>
                     )}
                 </div>
 
-                {!isHomePage && (
-                    <ButtonTemplate text={defineButtonTextContent(state)} />
+                {!pageStatuses.isHomePage && (
+                    <ButtonTemplate text={defineButtonTextContent(pathname)} />
                 )}
             </div>
 

@@ -8,10 +8,7 @@ import {
     deleteCurrentUser,
     switchUserAuthoriseStatus
 } from '../../../app/slices/userSlice';
-import {
-    switchAuthorisationPageStatus,
-    switchHomePageStatus
-} from '../../../app/slices/mainSlice';
+
 import {
     switchModalVisibleStatus,
     setNewModalPosition
@@ -50,9 +47,7 @@ const HomePage: React.FC = () => {
 
     const acceptHandler = (): void => {
         dispatch(deleteCurrentUser());
-        dispatch(switchAuthorisationPageStatus(true));
         dispatch(switchUserAuthoriseStatus(false));
-        dispatch(switchHomePageStatus(false));
         dispatch(
             switchModalVisibleStatus({ name: 'exit-modal', status: false })
         );

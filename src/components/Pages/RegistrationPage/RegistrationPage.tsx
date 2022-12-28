@@ -14,10 +14,7 @@ import {
     saveNewUser,
     switchUserAuthoriseStatus
 } from '../../../app/slices/userSlice';
-import {
-    switchAuthorisationPageStatus,
-    switchHomePageStatus
-} from '../../../app/slices/mainSlice';
+
 import { switchRegistrErrorStatus } from '../../../app/slices/formSlice';
 
 // /. imports
@@ -45,8 +42,6 @@ const RegistrationPage: React.FC = () => {
                     })
                 );
                 dispatch(switchUserAuthoriseStatus(true));
-                dispatch(switchAuthorisationPageStatus(false));
-                dispatch(switchHomePageStatus(true));
                 navigate('/Authorisation-Form/home');
             })
             .catch(err => {

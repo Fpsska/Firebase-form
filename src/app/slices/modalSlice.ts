@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 
 import {
     coordinatesTypes,
@@ -40,6 +40,7 @@ const modalSlice = createSlice({
             state,
             action: PayloadAction<{ name: string; status: boolean }>
         ) {
+            // console.log(current(state.modalStatus));
             const { name, status } = action.payload;
             switch (name) {
                 case 'auth-modal':
