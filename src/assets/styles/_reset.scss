@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+body {
+    font-family: Plus Jakarta Sans, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+input {
+    outline: none;
+
+    &::-webkit-autofill,
+    &::-webkit-autofill:hover,
+    &::-webkit-autofill:focus,
+    &::-webkit-autofill:active {
+        transition: background-color 5000s;
+        -webkit-text-fill-color: #fff !important;
+    }
+}

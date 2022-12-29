@@ -1,9 +1,9 @@
 .modal {
     position: fixed;
     display: block;
-    cursor: -webkit-grab;
     cursor: grab;
     z-index: 5;
+
     &__wrapper {
         max-width: 500px;
         width: 100%;
@@ -11,83 +11,101 @@
         border-radius: 10px;
         background-color: var(--modal-background-color);
     }
+
     &__body {
         min-height: 80px;
         color: var(--modal-text-color);
     }
+
     &__scroll-content {
         overflow-y: scroll;
         min-height: 100px;
         height: 150px;
+
         &::-webkit-scrollbar {
             width: 0;
             background: transparent;
         }
     }
+
     &__button {
         background-color: transparent;
         transition: all 0.15s linear;
         color: var(--modal-button-color);
         padding: 0;
     }
+
     &__button--close {
         position: absolute;
         right: 0;
         top: 0;
         margin: 10px 5px 10px 5px;
         transform: scale(1);
+
         &:hover {
             color: red;
             transform: scale(1.1);
         }
     }
+
     &__button--accept {
         &:hover {
             color: green;
         }
     }
+
     &__button--cancel {
         &:hover {
             color: red;
         }
     }
+
     &__image {
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 4rem;
-        height: 4rem;
+        width: 3.2rem;
+        height: 3.2rem;
+        overflow: hidden;
         -webkit-animation: spin infinite 20s linear;
         animation: spin infinite 20s linear;
+
         @-webkit-keyframes spin {
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
         }
+
         @keyframes spin {
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
         }
     }
+
     &__title {
         margin: 0 0 10px 0;
         padding: 0 10px 0 0;
         color: var(--modal-text-color);
     }
+
     &__text {
         margin: 0 0 30px 0;
     }
+
     &__controls {
         margin: 0 0 20px 0;
         position: absolute;
         bottom: 0;
+
         :not(:last-child) {
             margin: 0 10px 0 0;
         }

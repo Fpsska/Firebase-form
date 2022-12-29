@@ -1,0 +1,51 @@
+#root,
+.App,
+.page {
+    height: 100%;
+}
+
+.App {
+    background-color: #06123af0;
+    background-image: url(../images/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-y: scroll;
+    min-height: 700px;
+
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 0;
+        border: none;
+    }
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px;
+    max-width: 392px;
+    margin: 0 auto;
+
+    &__preloader {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba($color: #000000, $alpha: 0.4);
+    }
+}
