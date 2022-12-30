@@ -6,15 +6,15 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
-import SectionMark from '../../SectionMark/SectionMark';
-import Form from '../../Form/Form';
-import Modal from '../../Modal/Modal';
-
 import {
     saveNewUser,
     switchUserAuthoriseStatus
 } from '../../../app/slices/userSlice';
 import { switchAuthErrorStatus } from '../../../app/slices/formSlice';
+
+import SectionMark from '../../SectionMark/SectionMark';
+import Form from '../../Form/Form';
+import Modal from '../../Modal/Modal';
 
 // /. imports
 
@@ -31,7 +31,6 @@ const AuthorisationPage: React.FC = () => {
 
         signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
-                console.log(user);
                 dispatch(
                     saveNewUser({
                         email: user.email,
@@ -41,10 +40,21 @@ const AuthorisationPage: React.FC = () => {
                     })
                 );
                 navigate('/Authorisation-Form/home');
+
                 dispatch(switchUserAuthoriseStatus(true));
+                localStorage.setItem('isUserAuthStatus', JSON.stringify(true));
+                localStorage.setItem(
+                    'userData',
+                    JSON.stringify({
+                        email: user.email,
+                        lastSignInTime: user.metadata.lastSignInTime
+                    })
+                );
+
                 dispatch(switchAuthErrorStatus(false)); // reset auth-error status
+                console.log(user);
             })
-            .catch(err => {
+            .catch((err: any) => {
                 console.error(err.message);
                 dispatch(switchAuthErrorStatus(true));
                 setTimeout(() => {

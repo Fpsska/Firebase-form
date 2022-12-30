@@ -20,10 +20,12 @@ import './homePage.scss';
 
 // /. imports
 
-const HomePage: React.FC = () => {
-    const { currentEmail, isUserAuthorise, lastSignInTime } = useAppSelector(
+const HomePage: React.FC<any> = () => {
+    // { isUserAuth }
+    const { currentEmail, lastSignInTime, isUserAuthorise } = useAppSelector(
         state => state.userSlice
     );
+
     const { modalStatus } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
@@ -47,13 +49,16 @@ const HomePage: React.FC = () => {
 
     const acceptHandler = (): void => {
         dispatch(deleteCurrentUser());
+
         dispatch(switchUserAuthoriseStatus(false));
+        localStorage.clear();
+
         dispatch(
             switchModalVisibleStatus({ name: 'exit-modal', status: false })
         );
     };
 
-    const candelHandler = (): void => {
+    const cancelHandler = (): void => {
         dispatch(
             switchModalVisibleStatus({ name: 'exit-modal', status: false })
         );
@@ -97,7 +102,7 @@ const HomePage: React.FC = () => {
                         </button>
                         <button
                             className="modal__button modal__button--cancel"
-                            onClick={candelHandler}
+                            onClick={cancelHandler}
                         >
                             Cancel
                         </button>
@@ -106,7 +111,10 @@ const HomePage: React.FC = () => {
             </div>
         </div>
     ) : (
-        <Navigate to="/Authorisation-Form" />
+        <Navigate
+            to="/Authorisation-Form"
+            replace={true}
+        />
     );
 };
 

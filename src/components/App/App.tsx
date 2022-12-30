@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 
 import { Route, Routes } from 'react-router';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useLocationData } from '../../hooks/useLocationData';
 
 import { switchPageStatus } from '../../app/slices/mainSlice';
+
+import { switchUserAuthoriseStatus } from '../../app/slices/userSlice';
 
 import Layout from '../Common/Layout';
 import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';
@@ -21,6 +23,8 @@ import '../../assets/styles/_media.scss';
 // /. imports
 
 const App: React.FC = () => {
+    const { isUserAuthorise } = useAppSelector(state => state.userSlice);
+
     const dispatch = useAppDispatch();
     const location = useLocationData();
 
@@ -29,6 +33,20 @@ const App: React.FC = () => {
     useEffect(() => {
         dispatch(switchPageStatus({ locationData: location }));
     }, [location]);
+
+    useEffect(() => {
+        const getStorageAuthData = (): void => {
+            const authStatus = localStorage.getItem('isUserAuthStatus');
+            if (authStatus) {
+                dispatch(switchUserAuthoriseStatus(JSON.parse(authStatus)));
+            }
+        };
+
+        window.addEventListener('storage', getStorageAuthData);
+        return () => {
+            window.removeEventListener('storage', getStorageAuthData);
+        };
+    }, [isUserAuthorise]);
 
     // /. effects
 
@@ -49,7 +67,7 @@ const App: React.FC = () => {
                     />
                     <Route
                         path="home"
-                        element={<HomePage />}
+                        element={<HomePage />} // isUserAuth={isUserAuth}
                     />
                 </Route>
             </Routes>

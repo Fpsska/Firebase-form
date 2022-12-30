@@ -3,21 +3,26 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // /. imports
 
 interface userSliceTypes {
-    currentEmail: null;
-    currentToken: null;
-    currentID: null;
-    lastSignInTime: null;
+    currentEmail: null | string;
+    currentToken: null | string;
+    currentID: null | string;
+    lastSignInTime: null | string;
     isUserAuthorise: boolean;
 }
 
 // /. interfaces
 
+const storageAuthStatus = JSON.parse(
+    localStorage.getItem('isUserAuthStatus') || 'false'
+);
+const storageUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+
 const initialState: userSliceTypes = {
-    currentEmail: null,
+    currentEmail: storageUserData.email,
     currentToken: null,
     currentID: null,
-    lastSignInTime: null,
-    isUserAuthorise: false
+    lastSignInTime: storageUserData.lastSignInTime,
+    isUserAuthorise: storageAuthStatus
 };
 
 const userSlice = createSlice({
@@ -26,6 +31,7 @@ const userSlice = createSlice({
     reducers: {
         saveNewUser(state, action) {
             const { email, token, id, lastSignInTime } = action.payload;
+            // /. payload
             state.currentEmail = email;
             state.currentToken = token;
             state.currentID = id;

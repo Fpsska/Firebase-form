@@ -6,16 +6,16 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 
-import SectionMark from '../../SectionMark/SectionMark';
-import Form from '../../Form/Form';
-import Modal from '../../Modal/Modal';
-
 import {
     saveNewUser,
     switchUserAuthoriseStatus
 } from '../../../app/slices/userSlice';
 
 import { switchRegistrErrorStatus } from '../../../app/slices/formSlice';
+
+import SectionMark from '../../SectionMark/SectionMark';
+import Form from '../../Form/Form';
+import Modal from '../../Modal/Modal';
 
 // /. imports
 
@@ -32,7 +32,6 @@ const RegistrationPage: React.FC = () => {
 
         createUserWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
-                console.log(user);
                 dispatch(
                     saveNewUser({
                         email: user.email,
@@ -41,10 +40,21 @@ const RegistrationPage: React.FC = () => {
                         lastSignInTime: user.metadata.lastSignInTime
                     })
                 );
+
                 dispatch(switchUserAuthoriseStatus(true));
+                localStorage.setItem('isUserAuthStatus', JSON.stringify(true));
+                localStorage.setItem(
+                    'userData',
+                    JSON.stringify({
+                        email: user.email,
+                        lastSignInTime: user.metadata.lastSignInTime
+                    })
+                );
+
                 navigate('/Authorisation-Form/home');
+                console.log(user);
             })
-            .catch(err => {
+            .catch((err: any) => {
                 dispatch(switchRegistrErrorStatus(true));
                 setTimeout(() => {
                     dispatch(switchRegistrErrorStatus(false));
