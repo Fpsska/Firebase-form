@@ -24,6 +24,7 @@ import '../../assets/styles/_media.scss';
 
 const App: React.FC = () => {
     const { isUserAuthorise } = useAppSelector(state => state.userSlice);
+    const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const location = useLocationData();

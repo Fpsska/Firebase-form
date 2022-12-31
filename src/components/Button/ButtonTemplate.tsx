@@ -6,8 +6,6 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
-import { useLocationData } from '../../hooks/useLocationData';
-
 import {
     switchModalVisibleStatus,
     setNewModalPosition
@@ -29,13 +27,10 @@ const ButtonTemplate: React.FC<propTypes> = ({ text }) => {
     const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
-    const { state } = useLocationData();
 
     // /. hooks
 
     const generalButtonHandler = (): void => {
-        // const isAuthPage = state === 'auth-page';
-
         if (pageStatuses.isAuthPage) {
             dispatch(
                 switchModalVisibleStatus({ name: 'auth-modal', status: true })
@@ -66,7 +61,7 @@ const ButtonTemplate: React.FC<propTypes> = ({ text }) => {
                 })
             );
         }
-        setDisabledStatus(true);
+        // setDisabledStatus(true);
     };
 
     // /. functions

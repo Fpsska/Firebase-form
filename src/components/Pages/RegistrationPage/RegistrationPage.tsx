@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useNavigate } from 'react-router';
 
@@ -20,7 +20,7 @@ import Modal from '../../Modal/Modal';
 // /. imports
 
 const RegistrationPage: React.FC = () => {
-    const { modalStatus } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -70,7 +70,7 @@ const RegistrationPage: React.FC = () => {
                 <Modal
                     name={'registr-modal'}
                     title={'Rigistration modal!'}
-                    status={modalStatus.isModalRegistrVisible}
+                    status={modalStatuses.isModalRegistrVisible}
                 >
                     Technical works..In progess..
                 </Modal>

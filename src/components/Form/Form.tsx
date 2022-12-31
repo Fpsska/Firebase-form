@@ -46,7 +46,7 @@ const Form: React.FC<FormPropTypes> = props => {
     const { formActionHandler } = props;
 
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
-    const { modalStatus } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses } = useAppSelector(state => state.modalSlice);
     const {
         isUserRemembered,
         isTermsAccepted,
@@ -89,7 +89,7 @@ const Form: React.FC<FormPropTypes> = props => {
         dispatch(
             switchModalVisibleStatus({
                 name: 'terms-modal',
-                status: !modalStatus.isModalTermsVisible
+                status: !modalStatuses.isModalTermsVisible
             })
         );
         dispatch(
@@ -409,7 +409,7 @@ const Form: React.FC<FormPropTypes> = props => {
                 <Modal
                     name={'terms-modal'}
                     title={'Terms modal!'}
-                    status={modalStatus.isModalTermsVisible}
+                    status={modalStatuses.isModalTermsVisible}
                 >
                     <div className="modal__scroll-content">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.

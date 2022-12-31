@@ -26,7 +26,7 @@ const HomePage: React.FC<any> = () => {
         state => state.userSlice
     );
 
-    const { modalStatus } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
 
@@ -36,7 +36,7 @@ const HomePage: React.FC<any> = () => {
         dispatch(
             switchModalVisibleStatus({
                 name: 'exit-modal',
-                status: !modalStatus.isModalExitVisible
+                status: !modalStatuses.isModalExitVisible
             })
         );
         dispatch(
@@ -90,23 +90,27 @@ const HomePage: React.FC<any> = () => {
                 <Modal
                     name={'exit-modal'}
                     title={'Exit modal!'}
-                    status={modalStatus.isModalExitVisible}
+                    status={modalStatuses.isModalExitVisible}
                 >
-                    <p className="modal__text">Are you sure to want exit?</p>
-                    <div className="modal__controls">
-                        <button
-                            className="modal__button modal__button--accept"
-                            onClick={acceptHandler}
-                        >
-                            Ok
-                        </button>
-                        <button
-                            className="modal__button modal__button--cancel"
-                            onClick={cancelHandler}
-                        >
-                            Cancel
-                        </button>
-                    </div>
+                    <>
+                        <p className="modal__text">
+                            Are you sure to want exit?
+                        </p>
+                        <div className="modal__controls">
+                            <button
+                                className="modal__button modal__button--accept"
+                                onClick={acceptHandler}
+                            >
+                                Ok
+                            </button>
+                            <button
+                                className="modal__button modal__button--cancel"
+                                onClick={cancelHandler}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </>
                 </Modal>
             </div>
         </div>

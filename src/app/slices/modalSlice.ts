@@ -9,14 +9,14 @@ import {
 // /. imports
 
 interface modalSliceTypes {
-    modalStatus: modalStatusTypes;
+    modalStatuses: modalStatusTypes;
     modalPositions: modalPositionsTypes;
 }
 
 // /. interfaces
 
 const initialState: modalSliceTypes = {
-    modalStatus: {
+    modalStatuses: {
         isModalAuthVisible: false,
         isModalRegistrVisible: false,
         isModalTermsVisible: false,
@@ -40,20 +40,20 @@ const modalSlice = createSlice({
             state,
             action: PayloadAction<{ name: string; status: boolean }>
         ) {
-            // console.log(current(state.modalStatus));
             const { name, status } = action.payload;
+            // /. payload
             switch (name) {
                 case 'auth-modal':
-                    state.modalStatus.isModalAuthVisible = status;
+                    state.modalStatuses.isModalAuthVisible = status;
                     break;
                 case 'registr-modal':
-                    state.modalStatus.isModalRegistrVisible = status;
+                    state.modalStatuses.isModalRegistrVisible = status;
                     break;
                 case 'terms-modal':
-                    state.modalStatus.isModalTermsVisible = status;
+                    state.modalStatuses.isModalTermsVisible = status;
                     break;
                 case 'exit-modal':
-                    state.modalStatus.isModalExitVisible = status;
+                    state.modalStatuses.isModalExitVisible = status;
                     break;
             }
         },
@@ -65,6 +65,7 @@ const modalSlice = createSlice({
             }>
         ) {
             const { name, coordinates } = action.payload;
+            // /. payload
             switch (name) {
                 case 'auth-modal':
                     state.modalPositions.modalAuthPosition = coordinates;

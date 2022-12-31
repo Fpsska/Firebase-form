@@ -2,11 +2,11 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 
 import { IoMdClose } from 'react-icons/io';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+
+import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
 
 import { coordinatesTypes } from '../../Types/modalSliceTypes';
-
-import { useDefineModalStatus } from '../../hooks/useDefineModalStatus';
 
 import logo from '../../assets/images/react-logo_icon.svg';
 
@@ -14,24 +14,26 @@ import './modal.scss';
 
 // /. imports
 
-interface ModalPropsTypes {
+interface propTypes {
     name: string;
     title: string;
-    children: any;
+    children: string | JSX.Element;
     status: boolean;
 }
 
 // /. interfaces
 
-const Modal: React.FC<ModalPropsTypes> = props => {
+const Modal: React.FC<propTypes> = props => {
     const { name, title, children, status } = props;
 
     const { modalPositions } = useAppSelector(state => state.modalSlice);
 
-    const [position, setPosition] = useState<coordinatesTypes>(
-        modalPositions.modalAuthPosition
-    );
     const [isVisible, setVisibleStatus] = useState<boolean>(false);
+    const [position, setPosition] = useState<coordinatesTypes>({
+        top: 0,
+        left: 0
+    });
+
     const [initOffsetPosition, setInitOffsetPosition] = useState<{
         offsetY: number;
         offsetX: number;
@@ -42,24 +44,34 @@ const Modal: React.FC<ModalPropsTypes> = props => {
 
     const modalRef = useRef<HTMLDivElement>(null!);
 
-    const { handleModalCase } = useDefineModalStatus();
+    const dispatch = useAppDispatch();
 
     // /. hooks
 
     const closeModal = (): void => {
-        handleModalCase(name);
-        setVisibleStatus(false);
+        switch (name) {
+            case name:
+                dispatch(
+                    switchModalVisibleStatus({
+                        name,
+                        status: false
+                    })
+                );
+                break;
+            default:
+                return;
+        }
     };
 
     // /. functions
 
     useEffect(() => {
-        // set current status-prop like visibleStatus initial value
+        // update isVisible status by every changes of status-prop
         setVisibleStatus(status);
     }, [status]);
 
     useEffect(() => {
-        // set current handled modal of modalPositions state
+        // set position for current modal
         switch (name) {
             case 'auth-modal':
                 setPosition(modalPositions.modalAuthPosition);
@@ -73,6 +85,8 @@ const Modal: React.FC<ModalPropsTypes> = props => {
             case 'exit-modal':
                 setPosition(modalPositions.modalExitPosition);
                 break;
+            default:
+                return;
         }
     }, [modalPositions, name]);
 
@@ -80,7 +94,7 @@ const Modal: React.FC<ModalPropsTypes> = props => {
         const modalDragStart = (e: any): void => {
             setTimeout(() => {
                 modalRef.current.classList.add('hidden');
-            }, 0);
+            });
             setInitOffsetPosition({
                 offsetY: e.offsetY,
                 offsetX: e.offsetY
@@ -103,8 +117,8 @@ const Modal: React.FC<ModalPropsTypes> = props => {
                 modalRef.current &&
                 !modalRef.current.contains(e.target)
             ) {
-                handleModalCase(name);
                 setVisibleStatus(false);
+                closeModal();
             }
             // refEl.current HTML-el !== null/undefined && refEl.current.contains(e.target) === false =>
             // => valid HTML-el is exist
@@ -112,8 +126,8 @@ const Modal: React.FC<ModalPropsTypes> = props => {
 
         const keyHandler = (e: KeyboardEvent): void => {
             if (isVisible && e.code === 'Escape') {
-                handleModalCase(name);
                 setVisibleStatus(false);
+                closeModal();
             }
         };
 
@@ -134,7 +148,6 @@ const Modal: React.FC<ModalPropsTypes> = props => {
     return (
         <div
             ref={modalRef}
-            id={name}
             className={isVisible ? 'modal' : 'modal hidden'}
             draggable="true"
             style={{ top: `${position.top}%`, left: `${position.left}%` }}
@@ -147,7 +160,7 @@ const Modal: React.FC<ModalPropsTypes> = props => {
                 <button
                     className="modal__button modal__button--close"
                     onClick={closeModal}
-                    aria-label="close burger menu"
+                    aria-label={`${isVisible ? 'close' : 'open'} modal`}
                 >
                     <IoMdClose size={24} />
                 </button>

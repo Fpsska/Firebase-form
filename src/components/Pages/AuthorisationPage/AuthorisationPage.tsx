@@ -19,7 +19,7 @@ import Modal from '../../Modal/Modal';
 // /. imports
 
 const AuthorisationPage: React.FC = () => {
-    const { modalStatus } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -71,12 +71,14 @@ const AuthorisationPage: React.FC = () => {
                 <Modal
                     name={'auth-modal'}
                     title={'Authorisation modal!'}
-                    status={modalStatus.isModalAuthVisible}
+                    status={modalStatuses.isModalAuthVisible}
                 >
-                    Sorry, this method is temporarily unavailable
-                    <br />
-                    <br />
-                    Stasy privet ;)
+                    <>
+                        Sorry, this method is temporarily unavailable
+                        <br />
+                        <br />
+                        Stasy privet ;)
+                    </>
                 </Modal>
                 <SectionMark />
                 <Form formActionHandler={handleLogin} />
