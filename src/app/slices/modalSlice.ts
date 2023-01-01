@@ -55,6 +55,8 @@ const modalSlice = createSlice({
                 case 'exit-modal':
                     state.modalStatuses.isModalExitVisible = status;
                     break;
+                default:
+                    return;
             }
         },
         setNewModalPosition(
@@ -79,6 +81,8 @@ const modalSlice = createSlice({
                 case 'exit-modal':
                     state.modalPositions.modalExitPosition = coordinates;
                     break;
+                default:
+                    return;
             }
         }
     }

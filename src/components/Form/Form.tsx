@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { BsCheck2 } from 'react-icons/bs';
 
@@ -29,6 +29,7 @@ import './form.scss';
 
 interface propTypes {
     formActionHandler: (arg1: string, arg2: string) => void;
+    wrapperRef?: any;
 }
 
 interface useFormTypes {
@@ -40,8 +41,8 @@ interface useFormTypes {
 
 // /. interfaces
 
-const Form = forwardRef<HTMLDivElement, propTypes>((props, ref) => {
-    const { formActionHandler } = props;
+const Form: React.FC<propTypes> = props => {
+    const { formActionHandler, wrapperRef } = props;
 
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
@@ -406,7 +407,7 @@ const Form = forwardRef<HTMLDivElement, propTypes>((props, ref) => {
                             name={'terms-modal'}
                             title={'Terms modal!'}
                             status={modalStatuses.isModalTermsVisible}
-                            wrapperRef={ref}
+                            wrapperRef={wrapperRef}
                         >
                             <div className="modal__scroll-content">
                                 Lorem ipsum dolor sit amet consectetur
@@ -434,8 +435,6 @@ const Form = forwardRef<HTMLDivElement, propTypes>((props, ref) => {
             </div>
         </form>
     );
-});
-
-Form.displayName = 'Form';
+};
 
 export default Form;

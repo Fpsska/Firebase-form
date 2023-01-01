@@ -64,15 +64,15 @@ const App: React.FC = () => {
                 >
                     <Route
                         index
-                        element={<AuthorisationPage ref={appRef} />}
+                        element={<AuthorisationPage wrapperRef={appRef} />}
                     />
                     <Route
                         path="registration"
-                        element={<RegistrationPage ref={appRef} />}
+                        element={<RegistrationPage wrapperRef={appRef} />}
                     />
                     <Route
                         path="home"
-                        element={<HomePage ref={appRef} />}
+                        element={<HomePage wrapperRef={appRef} />}
                     />
                 </Route>
             </Routes>

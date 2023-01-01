@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { Navigate } from 'react-router';
 
@@ -20,7 +20,7 @@ import './homePage.scss';
 
 // /. imports
 
-const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
+const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
     const { currentEmail, lastSignInTime, isUserAuthorise } = useAppSelector(
         state => state.userSlice
     );
@@ -35,15 +35,15 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
         dispatch(
             switchModalVisibleStatus({
                 name: 'exit-modal',
-                status: !modalStatuses.isModalExitVisible
+                status: true
             })
         );
-        dispatch(
-            setNewModalPosition({
-                name: 'exit-modal',
-                coordinates: { top: 15, left: 20 }
-            })
-        );
+        // dispatch(
+        //     setNewModalPosition({
+        //         name: 'exit-modal',
+        //         coordinates: { top: 15, left: 20 }
+        //     })
+        // );
     };
 
     const acceptHandler = (): void => {
@@ -90,7 +90,7 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
                     name={'exit-modal'}
                     title={'Exit modal!'}
                     status={modalStatuses.isModalExitVisible}
-                    wrapperRef={ref}
+                    wrapperRef={wrapperRef}
                 >
                     <>
                         <p className="modal__text">
@@ -120,8 +120,6 @@ const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
             replace={true}
         />
     );
-});
-
-HomePage.displayName = 'HomePage';
+};
 
 export default HomePage;

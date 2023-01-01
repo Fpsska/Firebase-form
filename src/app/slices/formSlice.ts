@@ -104,6 +104,8 @@ const formSlice = createSlice({
                 case 'confirm-password':
                     state.passwordStatuses.isConfirmPasswordVisible = status;
                     break;
+                default:
+                    return;
             }
         },
         switchAuthErrorStatus(state, action: PayloadAction<boolean>) {

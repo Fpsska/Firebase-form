@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { useNavigate } from 'react-router';
 
@@ -19,7 +19,7 @@ import Modal from '../../Modal/Modal';
 
 // /. imports
 
-const RegistrationPage = forwardRef<HTMLDivElement>((_, ref) => {
+const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
@@ -73,7 +73,7 @@ const RegistrationPage = forwardRef<HTMLDivElement>((_, ref) => {
                             name={'registr-modal'}
                             title={'Rigistration modal!'}
                             status={modalStatuses.isModalRegistrVisible}
-                            wrapperRef={ref}
+                            wrapperRef={wrapperRef}
                         >
                             Technical works..In progess..
                         </Modal>
@@ -82,13 +82,11 @@ const RegistrationPage = forwardRef<HTMLDivElement>((_, ref) => {
                 <SectionMark />
                 <Form
                     formActionHandler={handleRegistration}
-                    ref={ref}
+                    wrapperRef={wrapperRef}
                 />
             </div>
         </div>
     );
-});
-
-RegistrationPage.displayName = 'RegistrationPage';
+};
 
 export default RegistrationPage;

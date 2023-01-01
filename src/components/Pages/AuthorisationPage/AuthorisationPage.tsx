@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ import Modal from '../../Modal/Modal';
 
 // /. imports
 
-const AuthorisationPage = forwardRef<HTMLDivElement>((_, ref) => {
+const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
@@ -74,7 +74,7 @@ const AuthorisationPage = forwardRef<HTMLDivElement>((_, ref) => {
                             name={'auth-modal'}
                             title={'Authorisation modal!'}
                             status={modalStatuses.isModalAuthVisible}
-                            wrapperRef={ref}
+                            wrapperRef={wrapperRef}
                         >
                             <>
                                 Sorry, this method is temporarily unavailable
@@ -90,8 +90,6 @@ const AuthorisationPage = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
         </div>
     );
-});
-
-AuthorisationPage.displayName = 'AuthorisationPage';
+};
 
 export default AuthorisationPage;

@@ -49,7 +49,7 @@ const Modal: React.FC<propTypes> = props => {
 
     // /. hooks
 
-    const closeModal = (): void => {
+    const closeModal = useCallback((): void => {
         switch (name) {
             case name:
                 dispatch(
@@ -62,11 +62,12 @@ const Modal: React.FC<propTypes> = props => {
             default:
                 return;
         }
-    };
+    }, [name]);
 
     // /. functions
 
     useEffect(() => {
+        // logic of dragging html-el
         if (!modalRef.current || !wrapperRef.current) return;
 
         const modal = modalRef.current;
@@ -134,6 +135,7 @@ const Modal: React.FC<propTypes> = props => {
     // }, [modalPositions, name]);
 
     useEffect(() => {
+        // handle of hiding modal HTML-el
         const areaHandler = (e: any): void => {
             if (
                 isVisible &&
@@ -143,7 +145,8 @@ const Modal: React.FC<propTypes> = props => {
                 setVisibleStatus(false);
                 closeModal();
             }
-            // refEl.current HTML-el !== null/undefined && refEl.current.contains(e.target) === false =>
+            // refEl.current HTML-el !== null/undefined
+            // refEl.current.contains(e.target) === false
             // => valid HTML-el is exist
         };
 
@@ -160,7 +163,7 @@ const Modal: React.FC<propTypes> = props => {
             document.removeEventListener('click', areaHandler, true);
             document.removeEventListener('keydown', keyHandler);
         };
-    }, [isVisible, name]);
+    }, [isVisible, name, closeModal]);
 
     // /. effects
 
@@ -170,8 +173,8 @@ const Modal: React.FC<propTypes> = props => {
             role="alert"
             className={!isClicked ? 'modal' : 'modal hidden'}
             // style={{
-            //     top: `${initPosition.top}%`,
-            //     left: `${initPosition.left}%`
+            //     left: `${coords.current.startX}%`,
+            //     top: `${coords.current.startY}%`
             // }}
         >
             <div className="modal__wrapper">
