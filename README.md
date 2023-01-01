@@ -9,6 +9,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [react-hook-form](https://react-hook-form.com/)
 
 ### `Watch demo` _[Authorisation-Form](https://fpsska.github.io/Authorisation-Form/)_
+##
+
+_Use for quick test-authorize:_
+
+login: `user@gmail.com`
+
+password: `123456`
+##
 
 ## Available Scripts
 
