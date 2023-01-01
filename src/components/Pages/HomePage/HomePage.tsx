@@ -86,32 +86,36 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                 >
                     Log out from {currentEmail}
                 </button>
-                <Modal
-                    name={'exit-modal'}
-                    title={'Exit modal!'}
-                    status={modalStatuses.isModalExitVisible}
-                    wrapperRef={wrapperRef}
-                >
-                    <>
-                        <p className="modal__text">
-                            Are you sure to want exit?
-                        </p>
-                        <div className="modal__controls">
-                            <button
-                                className="modal__button modal__button--accept"
-                                onClick={acceptHandler}
-                            >
-                                Ok
-                            </button>
-                            <button
-                                className="modal__button modal__button--cancel"
-                                onClick={cancelHandler}
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </>
-                </Modal>
+                <>
+                    {modalStatuses.isModalExitVisible && (
+                        <Modal
+                            name={'exit-modal'}
+                            title={'Exit modal!'}
+                            status={modalStatuses.isModalExitVisible}
+                            wrapperRef={wrapperRef}
+                        >
+                            <>
+                                <p className="modal__text">
+                                    Are you sure to want exit?
+                                </p>
+                                <div className="modal__controls">
+                                    <button
+                                        className="modal__button modal__button--accept"
+                                        onClick={acceptHandler}
+                                    >
+                                        Ok
+                                    </button>
+                                    <button
+                                        className="modal__button modal__button--cancel"
+                                        onClick={cancelHandler}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </>
+                        </Modal>
+                    )}
+                </>
             </div>
         </div>
     ) : (
