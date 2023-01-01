@@ -13,6 +13,8 @@
     overflow-y: scroll;
     min-height: 700px;
 
+    position: relative;
+
     &::-webkit-scrollbar {
         width: 0;
     }

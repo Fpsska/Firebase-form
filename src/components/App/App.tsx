@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { Route, Routes } from 'react-router';
 
@@ -24,10 +24,11 @@ import '../../assets/styles/_media.scss';
 
 const App: React.FC = () => {
     const { isUserAuthorise } = useAppSelector(state => state.userSlice);
-    const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
     const location = useLocationData();
+
+    const appRef = useRef<HTMLDivElement>(null);
 
     // /. hooks
 
@@ -52,7 +53,10 @@ const App: React.FC = () => {
     // /. effects
 
     return (
-        <div className="App">
+        <div
+            className="App"
+            ref={appRef}
+        >
             <Routes>
                 <Route
                     path="/Authorisation-Form"
@@ -60,15 +64,15 @@ const App: React.FC = () => {
                 >
                     <Route
                         index
-                        element={<AuthorisationPage />}
+                        element={<AuthorisationPage ref={appRef} />}
                     />
                     <Route
                         path="registration"
-                        element={<RegistrationPage />}
+                        element={<RegistrationPage ref={appRef} />}
                     />
                     <Route
                         path="home"
-                        element={<HomePage />} // isUserAuth={isUserAuth}
+                        element={<HomePage ref={appRef} />}
                     />
                 </Route>
             </Routes>

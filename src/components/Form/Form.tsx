@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { BsCheck2 } from 'react-icons/bs';
 
@@ -7,8 +7,6 @@ import { useForm } from 'react-hook-form';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import { getRandomItgrNumber } from '../../helpers/getRandomNum';
-
-import { useLocationData } from '../../hooks/useLocationData';
 
 import {
     switchUserRememberedStatus,
@@ -29,7 +27,7 @@ import './form.scss';
 
 // /. imports
 
-interface FormPropTypes {
+interface propTypes {
     formActionHandler: (arg1: string, arg2: string) => void;
 }
 
@@ -42,7 +40,7 @@ interface useFormTypes {
 
 // /. interfaces
 
-const Form: React.FC<FormPropTypes> = props => {
+const Form = forwardRef<HTMLDivElement, propTypes>((props, ref) => {
     const { formActionHandler } = props;
 
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
@@ -56,7 +54,6 @@ const Form: React.FC<FormPropTypes> = props => {
     } = useAppSelector(state => state.formSlice);
 
     const dispatch = useAppDispatch();
-    const { state } = useLocationData();
 
     const {
         register,
@@ -72,13 +69,10 @@ const Form: React.FC<FormPropTypes> = props => {
 
     // /. hooks
 
-    // const isAuthPage = state === 'auth-page';
-
-    // /. variables
-
     const inputRememberHandler = (): void => {
         dispatch(switchUserRememberedStatus(!isUserRemembered));
     };
+
     const inputTermsHandler = (): void => {
         dispatch(switchTermsAcceptedStatus(!isTermsAccepted));
     };
@@ -406,32 +400,42 @@ const Form: React.FC<FormPropTypes> = props => {
                     {pageStatuses.isAuthPage ? 'Log in' : 'Get Started'}
                 </button>
 
-                <Modal
-                    name={'terms-modal'}
-                    title={'Terms modal!'}
-                    status={modalStatuses.isModalTermsVisible}
-                >
-                    <div className="modal__scroll-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Rerum, laboriosam quod dolorem ab quisquam ipsam aliquid
-                        tempora quia aliquam at consequatur saepe iusto
-                        perferendis magni inventore, id, quam non fugit. Dsit
-                        amet consectetur adipisicing elit. Rerum, laboriosam
-                        quod dolorem ab quisquam ipsam aliquid tempora quia
-                        aliquam at consequatur saepe iusto perferendis magni
-                        inventore, id, quam non fugit.Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Rerum, laboriosam quod
-                        dolorem ab quisquam ipsam aliquid tempora quia aliquam
-                        at consequatur saepe iusto perferendis magni inventore,
-                        id, quam non fugit. Dsit amet consectetur adipisicing
-                        elit. Rerum, laboriosam quod dolorem ab quisquam ipsam
-                        aliquid tempora quia aliquam at consequatur saepe iusto
-                        perferendis magni inventore, id, quam non fugit.
-                    </div>
-                </Modal>
+                <>
+                    {modalStatuses.isModalTermsVisible && (
+                        <Modal
+                            name={'terms-modal'}
+                            title={'Terms modal!'}
+                            status={modalStatuses.isModalTermsVisible}
+                            wrapperRef={ref}
+                        >
+                            <div className="modal__scroll-content">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Rerum, laboriosam quod dolorem
+                                ab quisquam ipsam aliquid tempora quia aliquam
+                                at consequatur saepe iusto perferendis magni
+                                inventore, id, quam non fugit. Dsit amet
+                                consectetur adipisicing elit. Rerum, laboriosam
+                                quod dolorem ab quisquam ipsam aliquid tempora
+                                quia aliquam at consequatur saepe iusto
+                                perferendis magni inventore, id, quam non
+                                fugit.Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Rerum, laboriosam quod dolorem
+                                ab quisquam ipsam aliquid tempora quia aliquam
+                                at consequatur saepe iusto perferendis magni
+                                inventore, id, quam non fugit. Dsit amet
+                                consectetur adipisicing elit. Rerum, laboriosam
+                                quod dolorem ab quisquam ipsam aliquid tempora
+                                quia aliquam at consequatur saepe iusto
+                                perferendis magni inventore, id, quam non fugit.
+                            </div>
+                        </Modal>
+                    )}
+                </>
             </div>
         </form>
     );
-};
+});
+
+Form.displayName = 'Form';
 
 export default Form;

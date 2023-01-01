@@ -1,6 +1,8 @@
 .modal {
-    position: fixed;
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+
     cursor: grab;
     z-index: 5;
 
@@ -113,7 +115,5 @@
 }
 
 .modal.hidden {
-    height: 0;
-    display: none;
-    opacity: 0;
+    opacity: .5;
 }

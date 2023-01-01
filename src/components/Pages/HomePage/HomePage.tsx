@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { Navigate } from 'react-router';
 
@@ -20,8 +20,7 @@ import './homePage.scss';
 
 // /. imports
 
-const HomePage: React.FC<any> = () => {
-    // { isUserAuth }
+const HomePage = forwardRef<HTMLDivElement>((_, ref) => {
     const { currentEmail, lastSignInTime, isUserAuthorise } = useAppSelector(
         state => state.userSlice
     );
@@ -91,6 +90,7 @@ const HomePage: React.FC<any> = () => {
                     name={'exit-modal'}
                     title={'Exit modal!'}
                     status={modalStatuses.isModalExitVisible}
+                    wrapperRef={ref}
                 >
                     <>
                         <p className="modal__text">
@@ -120,6 +120,8 @@ const HomePage: React.FC<any> = () => {
             replace={true}
         />
     );
-};
+});
+
+HomePage.displayName = 'HomePage';
 
 export default HomePage;

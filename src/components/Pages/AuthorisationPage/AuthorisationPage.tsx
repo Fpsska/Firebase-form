@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ import Modal from '../../Modal/Modal';
 
 // /. imports
 
-const AuthorisationPage: React.FC = () => {
+const AuthorisationPage = forwardRef<HTMLDivElement>((_, ref) => {
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
     const dispatch = useAppDispatch();
@@ -68,23 +68,30 @@ const AuthorisationPage: React.FC = () => {
     return (
         <div className="authorisation">
             <div className="authorisation__wrapper">
-                <Modal
-                    name={'auth-modal'}
-                    title={'Authorisation modal!'}
-                    status={modalStatuses.isModalAuthVisible}
-                >
-                    <>
-                        Sorry, this method is temporarily unavailable
-                        <br />
-                        <br />
-                        Stasy privet ;)
-                    </>
-                </Modal>
+                <>
+                    {modalStatuses.isModalAuthVisible && (
+                        <Modal
+                            name={'auth-modal'}
+                            title={'Authorisation modal!'}
+                            status={modalStatuses.isModalAuthVisible}
+                            wrapperRef={ref}
+                        >
+                            <>
+                                Sorry, this method is temporarily unavailable
+                                <br />
+                                <br />
+                                Stasy privet ;)
+                            </>
+                        </Modal>
+                    )}
+                </>
                 <SectionMark />
                 <Form formActionHandler={handleLogin} />
             </div>
         </div>
     );
-};
+});
+
+AuthorisationPage.displayName = 'AuthorisationPage';
 
 export default AuthorisationPage;
