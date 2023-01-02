@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { BsCheck2 } from 'react-icons/bs';
 
@@ -19,6 +19,8 @@ import {
 } from '../../app/slices/modalSlice';
 
 import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
+
+import { useCookie } from '../../hooks/useCookie';
 
 import Modal from '../Modal/Modal';
 import PswrdIcon from '../PswrdIcon/PswrdIcon';
@@ -46,13 +48,13 @@ const Form: React.FC<propTypes> = props => {
 
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
-    const {
-        isUserRemembered,
-        isTermsAccepted,
-        isAuthError,
-        isRegistrError,
-        passwordStatuses
-    } = useAppSelector(state => state.formSlice);
+    const { isTermsAccepted, isAuthError, isRegistrError, passwordStatuses } =
+        useAppSelector(state => state.formSlice);
+
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<any>('');
+    const [isUserRemembered, setUserRememberedStatus] =
+        useState<boolean>(false);
 
     const dispatch = useAppDispatch();
 
@@ -67,11 +69,16 @@ const Form: React.FC<propTypes> = props => {
     });
 
     const passwordValue = watch('password');
+    const { setCookie, getCookie } = useCookie();
 
     // /. hooks
 
-    const inputRememberHandler = (): void => {
-        dispatch(switchUserRememberedStatus(!isUserRemembered));
+    const inputRememberHandler = (e: any): void => {
+        if (isValid) {
+            setUserRememberedStatus(!isUserRemembered);
+            // + save flag isUserRemembered in localStorage
+            // use as checked value of for save
+        }
     };
 
     const inputTermsHandler = (): void => {
@@ -87,15 +94,15 @@ const Form: React.FC<propTypes> = props => {
                 status: !modalStatuses.isModalTermsVisible
             })
         );
-        dispatch(
-            setNewModalPosition({
-                name: 'terms-modal',
-                coordinates: {
-                    top: getRandomItgrNumber(30, 10),
-                    left: getRandomItgrNumber(30, 10)
-                }
-            })
-        );
+        // dispatch(
+        //     setNewModalPosition({
+        //         name: 'terms-modal',
+        //         coordinates: {
+        //             top: getRandomItgrNumber(30, 10),
+        //             left: getRandomItgrNumber(30, 10)
+        //         }
+        //     })
+        // );
     };
 
     const formSubmitHandler = (userData: any, e: any): void => {
@@ -103,13 +110,31 @@ const Form: React.FC<propTypes> = props => {
 
         dispatch(switchPreloaderVisibleStatus(true));
         formActionHandler(userData.email, userData.password);
+
+        if (isUserRemembered) {
+            setCookie({
+                label: 'login',
+                value: email,
+                daysToLive: 10
+            });
+            setCookie({
+                label: 'password',
+                value: password,
+                daysToLive: 10
+            });
+        }
+
         setTimeout(() => {
             dispatch(switchPreloaderVisibleStatus(false));
-            reset();
+            // reset();
         }, 2000);
     };
 
     // /. functions
+
+    useEffect(() => {
+        console.log('EMAIL:', email, 'isRemembered:', isUserRemembered);
+    }, [email, isUserRemembered]);
 
     return (
         <form
@@ -125,9 +150,9 @@ const Form: React.FC<propTypes> = props => {
                         >
                             Email Addres
                             <input
+                                className="form__input form__input--email"
                                 id="email"
                                 type="text"
-                                className="form__input form__input--email"
                                 placeholder="johndoe@gmail.com"
                                 {...register('email', {
                                     required: 'Field is required!',
@@ -135,7 +160,8 @@ const Form: React.FC<propTypes> = props => {
                                         value: /\S+@\S+\.\S+/,
                                         message:
                                             'Entered value does not match email format'
-                                    }
+                                    },
+                                    onChange: e => setEmail(e.target.value)
                                 })}
                             />
                             {errors.email && (
@@ -155,20 +181,21 @@ const Form: React.FC<propTypes> = props => {
                         >
                             Password
                             <input
+                                className="form__input form__input--password"
                                 id="password"
                                 type={
                                     passwordStatuses.isAuthPasswordVisible
                                         ? 'text'
                                         : 'password'
                                 }
-                                className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
                                     minLength: {
                                         value: 2,
                                         message:
                                             'Minimum length is should be 2 symbols'
-                                    }
+                                    },
+                                    onChange: e => setPassword(e.target.value)
                                 })}
                             />
                             <PswrdIcon inputName={'auth-password'} />
@@ -191,9 +218,10 @@ const Form: React.FC<propTypes> = props => {
                             >
                                 <input
                                     className="form__input form__input--checkbox"
-                                    type="checkbox"
                                     id="remember"
-                                    onClick={inputRememberHandler}
+                                    type="checkbox"
+                                    disabled={!isValid}
+                                    checked={isUserRemembered}
                                 />
                                 <span className="form__fake-checkbox">
                                     <BsCheck2
@@ -201,7 +229,12 @@ const Form: React.FC<propTypes> = props => {
                                         color={'#fff'}
                                     />
                                 </span>
-                                Remember me
+                                <span
+                                    className="form__label-text"
+                                    onClick={e => inputRememberHandler(e)}
+                                >
+                                    Remember me
+                                </span>
                             </label>
                             <span className="form__restore">
                                 Forgot Password?

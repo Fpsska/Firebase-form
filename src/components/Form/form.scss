@@ -3,6 +3,7 @@
         display: flex;
         flex-direction: column;
     }
+
     &__label {
         position: relative;
         cursor: pointer;
@@ -12,10 +13,12 @@
         font-weight: 500;
         line-height: 15px;
         color: var(--label-text-color);
+
         &:not(:last-child) {
             margin: 0 0 15px 0;
         }
     }
+
     &__label-required {
         color: red;
         margin: 0 0 0 1px;
@@ -36,6 +39,7 @@
         font-weight: 400;
         line-height: 122%;
     }
+
     &__input {
         margin: 5px 0 0 0;
         border: 1px solid var(--input-border-color);
@@ -45,31 +49,39 @@
         color: var(--input-text-color);
         line-height: 22px;
         font-weight: 500;
+
         &::-webkit-input-placeholder {
             color: (--input-placeholder-color);
         }
+
         &::-moz-placeholder {
             color: (--input-placeholder-color);
         }
+
         &:-ms-input-placeholder {
             color: (--input-placeholder-color);
         }
+
         &::-ms-input-placeholder {
             color: (--input-placeholder-color);
         }
+
         &::placeholder {
             color: (--input-placeholder-color);
         }
     }
+
     &__input--password {
         padding: 15px 45px 15px 15px;
     }
+
     &__icon-password {
         color: var(--password-icon-color);
         position: absolute;
         right: 1.3rem;
         top: 2.7rem;
     }
+
     &__input--checkbox {
         position: absolute;
         bottom: 0;
@@ -81,17 +93,27 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        pointer-events: none;
         width: 1px;
         height: 1px;
         margin: 0;
         padding: 0;
-        &:checked + .form__fake-checkbox {
+
+        &:checked+.form__fake-checkbox {
             background-color: #1676f3;
         }
-        &:checked + .form__fake-checkbox svg {
+
+        &:checked+.form__fake-checkbox svg {
             transform: scale(1);
         }
+
+        &:disabled~.form__label-text {
+            // border: 1px solid rgba($color: red, $alpha: .65);
+            // color: rgba($color: red, $alpha: .65);
+            opacity: .65;
+        }
     }
+
     &__fake-checkbox {
         background-color: rgba(28, 55, 90, 0.16);
         border-radius: 4px;
@@ -108,8 +130,10 @@
         svg {
             transform: scale(0);
             transition: transform 0.15s linear;
+            pointer-events: none;
         }
     }
+
     &__button {
         padding: 18px 14px;
         background-color: var(--buttonForm-background-color);
@@ -119,35 +143,43 @@
         font-weight: 600;
         transform: scale(1);
         transition: transform 0.35s linear;
+
         &:active {
             transform: scale(1.05);
         }
+
         &:disabled {
             opacity: 0.6;
         }
     }
+
     &__terms {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
     }
+
     &__terms-link {
         text-decoration: underline;
         color: var(--link-text-color);
+
         &:hover {
             color: #0666e4;
         }
     }
+
     &__restore {
         font-size: 13px;
         font-weight: 600;
         line-height: 16.38px;
         color: var(--restore-text-color);
         margin: 0 0 0 10px;
+
         &:hover {
             cursor: not-allowed;
         }
     }
+
     &__error {
         color: var(--input-err-color);
         margin: 5px 0 0 0;
