@@ -14,7 +14,7 @@ export function useCookie(): any {
 
         const expires = 'expires=' + date.toUTCString(); // Wed, 14 Jun 2017 07:00:00 GMT format
         document.cookie = `${label}=${value}; ${expires}; path=/`;
-        console.log('setted', document.cookie);
+        // console.log('setted', document.cookie);
     };
 
     const getCookie = (label: string): string | null => {
@@ -28,7 +28,7 @@ export function useCookie(): any {
                 result = item.substring(label.length + 1); // expected login= / password=
             }
         });
-        console.log('getted:', result);
+        // console.log('getted:', result);
         return result;
     };
 

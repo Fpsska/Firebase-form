@@ -50,7 +50,7 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
         dispatch(deleteCurrentUser());
 
         dispatch(switchUserAuthoriseStatus(false));
-        localStorage.clear();
+        localStorage.setItem('isUserAuthStatus', JSON.stringify(false));
 
         dispatch(
             switchModalVisibleStatus({ name: 'exit-modal', status: false })

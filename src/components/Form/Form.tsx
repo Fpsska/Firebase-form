@@ -51,33 +51,34 @@ const Form: React.FC<propTypes> = props => {
     const { isTermsAccepted, isAuthError, isRegistrError, passwordStatuses } =
         useAppSelector(state => state.formSlice);
 
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<any>('');
     const [isUserRemembered, setUserRememberedStatus] =
         useState<boolean>(false);
 
     const dispatch = useAppDispatch();
 
+    const { setCookie, getCookie } = useCookie();
+
     const {
         register,
+        setValue,
         formState: { errors, isValid },
         handleSubmit,
-        reset,
         watch
     } = useForm<useFormTypes>({
         mode: 'onChange'
     });
 
     const passwordValue = watch('password');
-    const { setCookie, getCookie } = useCookie();
 
     // /. hooks
 
-    const inputRememberHandler = (e: any): void => {
+    const inputRememberHandler = (): void => {
         if (isValid) {
             setUserRememberedStatus(!isUserRemembered);
-            // + save flag isUserRemembered in localStorage
-            // use as checked value of for save
+            localStorage.setItem(
+                'isUserRemembered',
+                JSON.stringify(!isUserRemembered)
+            );
         }
     };
 
@@ -114,27 +115,35 @@ const Form: React.FC<propTypes> = props => {
         if (isUserRemembered) {
             setCookie({
                 label: 'login',
-                value: email,
-                daysToLive: 10
-            });
-            setCookie({
-                label: 'password',
-                value: password,
-                daysToLive: 10
+                value: userData.email,
+                daysToLive: 1
             });
         }
 
         setTimeout(() => {
             dispatch(switchPreloaderVisibleStatus(false));
-            // reset();
         }, 2000);
     };
 
     // /. functions
 
     useEffect(() => {
-        console.log('EMAIL:', email, 'isRemembered:', isUserRemembered);
-    }, [email, isUserRemembered]);
+        // remember checkbox condition when component is re-render
+        const isStorageUserRemembered =
+            localStorage.getItem('isUserRemembered');
+        if (isStorageUserRemembered) {
+            setUserRememberedStatus(JSON.parse(isStorageUserRemembered));
+        }
+    }, [isUserRemembered]);
+
+    useEffect(() => {
+        // set login value by first render of component
+        if (isUserRemembered) {
+            setValue('email', getCookie('login'));
+        }
+    }, [isUserRemembered]);
+
+    // /. effects
 
     return (
         <form
@@ -148,7 +157,7 @@ const Form: React.FC<propTypes> = props => {
                             className="form__label"
                             htmlFor="email"
                         >
-                            Email Addres
+                            Email Address
                             <input
                                 className="form__input form__input--email"
                                 id="email"
@@ -160,8 +169,7 @@ const Form: React.FC<propTypes> = props => {
                                         value: /\S+@\S+\.\S+/,
                                         message:
                                             'Entered value does not match email format'
-                                    },
-                                    onChange: e => setEmail(e.target.value)
+                                    }
                                 })}
                             />
                             {errors.email && (
@@ -194,8 +202,7 @@ const Form: React.FC<propTypes> = props => {
                                         value: 2,
                                         message:
                                             'Minimum length is should be 2 symbols'
-                                    },
-                                    onChange: e => setPassword(e.target.value)
+                                    }
                                 })}
                             />
                             <PswrdIcon inputName={'auth-password'} />
@@ -222,6 +229,7 @@ const Form: React.FC<propTypes> = props => {
                                     type="checkbox"
                                     disabled={!isValid}
                                     checked={isUserRemembered}
+                                    onChange={() => null}
                                 />
                                 <span className="form__fake-checkbox">
                                     <BsCheck2
@@ -231,7 +239,7 @@ const Form: React.FC<propTypes> = props => {
                                 </span>
                                 <span
                                     className="form__label-text"
-                                    onClick={e => inputRememberHandler(e)}
+                                    onClick={inputRememberHandler}
                                 >
                                     Remember me
                                 </span>
