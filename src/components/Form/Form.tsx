@@ -141,10 +141,12 @@ const Form: React.FC<propTypes> = props => {
 
     useEffect(() => {
         // set login value by first render of component
-        if (isUserRemembered) {
+        const isLoginCookieEmpty = getCookie('login') as null;
+
+        if (isUserRemembered && pageStatuses.isAuthPage && isLoginCookieEmpty) {
             setValue('email', getCookie('login'));
         }
-    }, [isUserRemembered]);
+    }, [isUserRemembered, pageStatuses]);
 
     // /. effects
 
@@ -376,8 +378,9 @@ const Form: React.FC<propTypes> = props => {
                             <input
                                 className="form__input form__input--checkbox"
                                 type="checkbox"
-                                onClick={inputTermsHandler}
+                                id="terms"
                                 required
+                                onClick={inputTermsHandler}
                             />
                             <span className="form__fake-checkbox">
                                 <BsCheck2
