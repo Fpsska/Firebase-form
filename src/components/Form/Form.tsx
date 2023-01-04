@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { BsCheck2 } from 'react-icons/bs';
 
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
@@ -34,7 +34,7 @@ interface propTypes {
     wrapperRef?: any;
 }
 
-interface useFormTypes {
+interface IFormFields {
     email: string;
     password: string;
     confirmPassword: string;
@@ -61,10 +61,10 @@ const Form: React.FC<propTypes> = props => {
     const {
         register,
         setValue,
-        formState: { errors, isValid },
         handleSubmit,
-        watch
-    } = useForm<useFormTypes>({
+        watch,
+        formState: { errors, isValid }
+    } = useForm<IFormFields>({
         mode: 'onChange'
     });
 
@@ -106,7 +106,10 @@ const Form: React.FC<propTypes> = props => {
         // );
     };
 
-    const formSubmitHandler = (userData: any, e: any): void => {
+    const formSubmitHandler: SubmitHandler<IFormFields> = (
+        userData: any,
+        e: any
+    ): void => {
         e.preventDefault();
 
         dispatch(switchPreloaderVisibleStatus(true));
@@ -153,14 +156,10 @@ const Form: React.FC<propTypes> = props => {
             <div className="form__wrapper">
                 {pageStatuses.isAuthPage ? (
                     <>
-                        <label
-                            className="form__label"
-                            htmlFor="email"
-                        >
+                        <label className="form__label">
                             Email Address
                             <input
                                 className="form__input form__input--email"
-                                id="email"
                                 type="text"
                                 placeholder="johndoe@gmail.com"
                                 {...register('email', {
@@ -183,14 +182,11 @@ const Form: React.FC<propTypes> = props => {
                                 </span>
                             )}
                         </label>
-                        <label
-                            className="form__label"
-                            htmlFor="password"
-                        >
+                        {/* /. auth email */}
+                        <label className="form__label">
                             Password
                             <input
                                 className="form__input form__input--password"
-                                id="password"
                                 type={
                                     passwordStatuses.isAuthPasswordVisible
                                         ? 'text'
@@ -217,7 +213,7 @@ const Form: React.FC<propTypes> = props => {
                                 </span>
                             )}
                         </label>
-
+                        {/* /. auth password */}
                         <div className="form__terms">
                             <label
                                 className="form__label form__label--remember"
@@ -251,21 +247,13 @@ const Form: React.FC<propTypes> = props => {
                     </>
                 ) : (
                     <>
-                        <label
-                            className="form__label"
-                            htmlFor="fullName"
-                        >
+                        <label className="form__label">
                             <span className="form__label-text">
                                 FullName
-                                {!pageStatuses.isAuthPage && (
-                                    <span className="form__label-required">
-                                        *
-                                    </span>
-                                )}
+                                <span className="form__label-required">*</span>
                             </span>
                             <input
                                 className="form__input form__input--email"
-                                id="fullName"
                                 type="text"
                                 placeholder="John Doe"
                                 {...register('fullName', {
@@ -282,21 +270,14 @@ const Form: React.FC<propTypes> = props => {
                                 </span>
                             )}
                         </label>
+                        {/* /. reg name */}
 
-                        <label
-                            className="form__label"
-                            htmlFor="email"
-                        >
+                        <label className="form__label">
                             <span className="form__label-text">
-                                Email Addres
-                                {!pageStatuses.isAuthPage && (
-                                    <span className="form__label-required">
-                                        *
-                                    </span>
-                                )}
+                                Email Address
+                                <span className="form__label-required">*</span>
                             </span>
                             <input
-                                id="email"
                                 type="text"
                                 className="form__input form__input--email"
                                 placeholder="johndoe@gmail.com"
@@ -320,27 +301,20 @@ const Form: React.FC<propTypes> = props => {
                                 </span>
                             )}
                         </label>
+                        {/* /. reg email */}
 
-                        <label
-                            className="form__label"
-                            htmlFor="password"
-                        >
+                        <label className="form__label">
                             <span className="form__label-text">
                                 Password
-                                {!pageStatuses.isAuthPage && (
-                                    <span className="form__label-required">
-                                        *
-                                    </span>
-                                )}
+                                <span className="form__label-required">*</span>
                             </span>
                             <input
-                                id="password"
+                                className="form__input form__input--password"
                                 type={
                                     passwordStatuses.isRegistrPasswordVisible
                                         ? 'text'
                                         : 'password'
                                 }
-                                className="form__input form__input--password"
                                 {...register('password', {
                                     required: 'Field is required!',
                                     minLength: {
@@ -357,27 +331,20 @@ const Form: React.FC<propTypes> = props => {
                                 </p>
                             )}
                         </label>
+                        {/* /. reg password */}
 
-                        <label
-                            className="form__label"
-                            htmlFor="confirm-password"
-                        >
+                        <label className="form__label">
                             <span className="form__label-text">
                                 Confirm Password
-                                {!pageStatuses.isAuthPage && (
-                                    <span className="form__label-required">
-                                        *
-                                    </span>
-                                )}
+                                <span className="form__label-required">*</span>
                             </span>
                             <input
-                                id="confirm-password"
+                                className="form__input form__input--password"
                                 type={
                                     passwordStatuses.isConfirmPasswordVisible
                                         ? 'text'
                                         : 'password'
                                 }
-                                className="form__input form__input--password"
                                 onPaste={e => {
                                     e.preventDefault();
                                     return false;
@@ -401,7 +368,7 @@ const Form: React.FC<propTypes> = props => {
                                 </p>
                             )}
                         </label>
-
+                        {/* /. reg confirm password */}
                         <label
                             className="form__label form__label--terms"
                             htmlFor="terms"
@@ -409,7 +376,6 @@ const Form: React.FC<propTypes> = props => {
                             <input
                                 className="form__input form__input--checkbox"
                                 type="checkbox"
-                                id="terms"
                                 onClick={inputTermsHandler}
                                 required
                             />
