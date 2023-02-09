@@ -55,6 +55,12 @@ const modalSlice = createSlice({
                 case 'exit-modal':
                     state.modalStatuses.isModalExitVisible = status;
                     break;
+                case 'reset':
+                    state.modalStatuses.isModalAuthVisible = status;
+                    state.modalStatuses.isModalRegistrVisible = status;
+                    state.modalStatuses.isModalTermsVisible = status;
+                    state.modalStatuses.isModalExitVisible = status;
+                    break;
                 default:
                     return;
             }

@@ -1,5 +1,7 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 
+import { useLocation } from 'react-router';
+
 import { IoMdClose } from 'react-icons/io';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -50,25 +52,19 @@ const Modal: React.FC<propTypes> = props => {
     // /. hooks
 
     const closeModal = useCallback((): void => {
-        switch (name) {
-            case name:
-                dispatch(
-                    switchModalVisibleStatus({
-                        name,
-                        status: false
-                    })
-                );
-                break;
-            default:
-                return;
-        }
+        dispatch(
+            switchModalVisibleStatus({
+                name,
+                status: false
+            })
+        );
     }, [name]);
 
     // /. functions
 
     useEffect(() => {
         // logic of dragging html-el
-        if (!modalRef.current || !wrapperRef.current) return;
+        if (!modalRef.current || !wrapperRef) return;
 
         const modal = modalRef.current;
         const wrapper = wrapperRef.current;
@@ -137,17 +133,15 @@ const Modal: React.FC<propTypes> = props => {
     useEffect(() => {
         // handle of hiding modal HTML-el
         const areaHandler = (e: any): void => {
-            if (
+            const isValidCondition =
                 isVisible &&
                 modalRef.current &&
-                !modalRef.current.contains(e.target)
-            ) {
+                !modalRef.current.contains(e.target);
+
+            if (isValidCondition) {
                 setVisibleStatus(false);
                 closeModal();
             }
-            // refEl.current HTML-el !== null/undefined
-            // refEl.current.contains(e.target) === false
-            // => valid HTML-el is exist
         };
 
         const keyHandler = (e: KeyboardEvent): void => {

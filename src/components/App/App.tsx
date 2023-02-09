@@ -9,6 +9,8 @@ import { switchPageStatus } from '../../app/slices/mainSlice';
 
 import { switchUserAuthoriseStatus } from '../../app/slices/userSlice';
 
+import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
+
 import Layout from '../Common/Layout';
 import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
@@ -34,6 +36,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         dispatch(switchPageStatus({ locationData: location }));
+        dispatch(switchModalVisibleStatus({ name: 'reset', status: false }));
     }, [location]);
 
     useEffect(() => {
