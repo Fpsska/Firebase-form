@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { handleObjProperties } from '../../helpers/handleObjProperties';
+
 // /. imports
 
 interface mainSliceTypes {
     isPreloaderVisible: boolean;
-    pageStatuses: any;
+    pageStatuses: { [key: string]: boolean };
 }
 
 // /. interfaces
@@ -35,19 +37,22 @@ const mainSlice = createSlice({
 
             switch (pathName) {
                 case '/authorisation-form':
-                    state.pageStatuses.isAuthPage = true;
-                    state.pageStatuses.isRegistrPage = false;
-                    state.pageStatuses.isHomePage = false;
+                    state.pageStatuses = handleObjProperties(
+                        'isAuthPage',
+                        state.pageStatuses
+                    );
                     break;
                 case '/authorisation-form/registration':
-                    state.pageStatuses.isRegistrPage = true;
-                    state.pageStatuses.isAuthPage = false;
-                    state.pageStatuses.isHomePage = false;
+                    state.pageStatuses = handleObjProperties(
+                        'isRegistrPage',
+                        state.pageStatuses
+                    );
                     break;
                 case '/authorisation-form/home':
-                    state.pageStatuses.isHomePage = true;
-                    state.pageStatuses.isRegistrPage = false;
-                    state.pageStatuses.isAuthPage = false;
+                    state.pageStatuses = handleObjProperties(
+                        'isHomePage',
+                        state.pageStatuses
+                    );
                     break;
                 default:
                     return;

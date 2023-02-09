@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 
+import { handleObjProperties } from '../../helpers/handleObjProperties';
+
 import {
     coordinatesTypes,
     modalPositionsTypes,
@@ -56,10 +58,10 @@ const modalSlice = createSlice({
                     state.modalStatuses.isModalExitVisible = status;
                     break;
                 case 'reset':
-                    state.modalStatuses.isModalAuthVisible = status;
-                    state.modalStatuses.isModalRegistrVisible = status;
-                    state.modalStatuses.isModalTermsVisible = status;
-                    state.modalStatuses.isModalExitVisible = status;
+                    state.modalStatuses = handleObjProperties(
+                        'reset',
+                        state.modalStatuses
+                    );
                     break;
                 default:
                     return;

@@ -11,8 +11,5 @@ export interface modalPositionsTypes {
 }
 
 export interface modalStatusTypes {
-    isModalAuthVisible: boolean;
-    isModalRegistrVisible: boolean;
-    isModalTermsVisible: boolean;
-    isModalExitVisible: boolean;
+    [key: string]: boolean;
 }
