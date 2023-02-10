@@ -1,4 +1,7 @@
-export function handleObjProperties(activeFlag: string, obj: any) {
+export function handleObjProperties(
+    activeFlag: string,
+    obj: any
+): { [key: string]: boolean } {
     const newStatusesObj = Object.keys(obj).reduce((acc, key) => {
         if (activeFlag === 'reset') {
             return {
