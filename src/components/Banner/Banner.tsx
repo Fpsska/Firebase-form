@@ -2,18 +2,30 @@ import React from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
-import { switchCookieBannerVisibleStatus } from '../../app/slices/mainSlice';
+import {
+    switchCookieBannerVisibleStatus,
+    switchCookieAcceptedStatus
+} from '../../app/slices/cookieSlice';
 
 import './banner.scss';
 
 // /. imports
 
 const Banner: React.FC = () => {
-    const { isCookieBannerVisible } = useAppSelector(state => state.mainSlice);
+    const { isCookieBannerVisible } = useAppSelector(
+        state => state.cookieSlice
+    );
 
     const dispatch = useAppDispatch();
 
     // /. hooks
+
+    const onAcceptBtnClick = (): void => {
+        dispatch(switchCookieBannerVisibleStatus(false));
+        dispatch(switchCookieAcceptedStatus(true));
+    };
+
+    // /. functions
 
     return (
         <div className={isCookieBannerVisible ? 'banner' : 'banner hide'}>
@@ -21,13 +33,18 @@ const Banner: React.FC = () => {
                 <h2 className="banner__title">This site uses cookies</h2>
                 <p className="banner__description">
                     Some of them are essential to enhance you the best browser
-                    experience. Learn more
+                    experience.{' '}
+                    <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Learn more
+                    </a>
                 </p>
                 <button
                     className="banner__button-accept"
-                    onClick={() =>
-                        dispatch(switchCookieBannerVisibleStatus(false))
-                    }
+                    onClick={onAcceptBtnClick}
                 >
                     got it
                 </button>

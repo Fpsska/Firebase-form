@@ -47,6 +47,7 @@ const Form: React.FC<propTypes> = props => {
     const { formActionHandler, wrapperRef } = props;
 
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
+    const { isCookieAccepted } = useAppSelector(state => state.cookieSlice);
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
     const { isTermsAccepted, isAuthError, isRegistrError, passwordStatuses } =
         useAppSelector(state => state.formSlice);
@@ -73,7 +74,7 @@ const Form: React.FC<propTypes> = props => {
     // /. hooks
 
     const inputRememberHandler = (): void => {
-        if (isValid) {
+        if (isValid && isCookieAccepted) {
             setUserRememberedStatus(!isUserRemembered);
             localStorage.setItem(
                 'isUserRemembered',
@@ -143,10 +144,16 @@ const Form: React.FC<propTypes> = props => {
         // set login value by first render of component
         const isLoginCookieEmpty = getCookie('login') as null;
 
-        if (isUserRemembered && pageStatuses.isAuthPage && isLoginCookieEmpty) {
+        const validCondition =
+            isCookieAccepted &&
+            isUserRemembered &&
+            pageStatuses.isAuthPage &&
+            isLoginCookieEmpty;
+
+        if (validCondition) {
             setValue('email', getCookie('login'));
         }
-    }, [isUserRemembered, pageStatuses]);
+    }, [isCookieAccepted, isUserRemembered, pageStatuses]);
 
     // /. effects
 
@@ -225,7 +232,7 @@ const Form: React.FC<propTypes> = props => {
                                     className="form__input form__input--checkbox"
                                     id="remember"
                                     type="checkbox"
-                                    disabled={!isValid}
+                                    disabled={!isValid || !isCookieAccepted}
                                     checked={isUserRemembered}
                                     onChange={() => null}
                                 />

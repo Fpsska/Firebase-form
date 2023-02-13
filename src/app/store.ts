@@ -4,15 +4,17 @@ import mainSlice from './slices/mainSlice';
 import formSlice from './slices/formSlice';
 import userSlice from './slices/userSlice';
 import modalSlice from './slices/modalSlice';
+import cookieSlice from './slices/cookieSlice';
 
 // /. imports
 
 export const store = configureStore({
     reducer: {
-        mainSlice: mainSlice,
-        formSlice: formSlice,
-        userSlice: userSlice,
-        modalSlice: modalSlice
+        mainSlice,
+        formSlice,
+        userSlice,
+        modalSlice,
+        cookieSlice
     }
 });
 
