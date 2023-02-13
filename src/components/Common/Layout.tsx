@@ -7,6 +7,8 @@ import { useAppSelector } from '../../app/hooks';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
+import Banner from '../Banner/Banner';
+
 import Preloader from './Preloader/Preloader';
 
 // /. imports
@@ -30,6 +32,7 @@ const Layout: React.FC = () => {
                 </>
             </main>
             <Footer />
+            <Banner />
         </div>
     );
 };

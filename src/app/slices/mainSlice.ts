@@ -6,6 +6,7 @@ import { handleObjProperties } from '../../helpers/handleObjProperties';
 
 interface mainSliceTypes {
     isPreloaderVisible: boolean;
+    isCookieBannerVisible: boolean;
     pageStatuses: { [key: string]: boolean };
 }
 
@@ -13,6 +14,7 @@ interface mainSliceTypes {
 
 const initialState: mainSliceTypes = {
     isPreloaderVisible: false,
+    isCookieBannerVisible: true,
     pageStatuses: {
         isAuthPage: true,
         isRegistrPage: false,
@@ -28,6 +30,9 @@ const mainSlice = createSlice({
     reducers: {
         switchPreloaderVisibleStatus(state, action: PayloadAction<boolean>) {
             state.isPreloaderVisible = action.payload;
+        },
+        switchCookieBannerVisibleStatus(state, action: PayloadAction<boolean>) {
+            state.isCookieBannerVisible = action.payload;
         },
         switchPageStatus(state, action: PayloadAction<{ locationData: any }>) {
             const { locationData } = action.payload;
@@ -61,7 +66,10 @@ const mainSlice = createSlice({
     }
 });
 
-export const { switchPreloaderVisibleStatus, switchPageStatus } =
-    mainSlice.actions;
+export const {
+    switchPreloaderVisibleStatus,
+    switchCookieBannerVisibleStatus,
+    switchPageStatus
+} = mainSlice.actions;
 
 export default mainSlice.reducer;
