@@ -19,6 +19,10 @@ interface formSliceTypes {
 
 // /. interfaces
 
+const storageUserRememberStatus = JSON.parse(
+    localStorage.getItem('isUserRemembered') || 'false'
+);
+
 const initialState: formSliceTypes = {
     formAuthFields: [
         {
@@ -66,13 +70,13 @@ const initialState: formSliceTypes = {
             placeholder: ''
         }
     ],
-    isUserRemembered: false,
-    isTermsAccepted: false,
     passwordStatuses: {
         isAuthPasswordVisible: false,
         isRegistrPasswordVisible: false,
         isConfirmPasswordVisible: false
     },
+    isUserRemembered: storageUserRememberStatus,
+    isTermsAccepted: false,
     isAuthError: false,
     isRegistrError: false
 };

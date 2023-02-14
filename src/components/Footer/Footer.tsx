@@ -1,23 +1,22 @@
 import React from 'react';
 
 import { useAppSelector } from '../../app/hooks';
-import { useLocationData } from '../../hooks/useLocationData';
 
-import Relocate from '../Relocate/Relocate';
+import Banner from '../Banner/Banner';
 
 import './footer.scss';
 
 // /. imports
 
 const Footer: React.FC = () => {
-    const { pageStatuses } = useAppSelector(state => state.mainSlice);
+    const { isCookieAccepted } = useAppSelector(state => state.cookieSlice);
 
     // /. hooks
 
     return (
         <footer className="footer">
             <div className="footer__wrapper">
-                {pageStatuses.isHomePage ? <></> : <Relocate />}
+                {!isCookieAccepted && <Banner />}
             </div>
         </footer>
     );

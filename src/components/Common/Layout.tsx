@@ -6,16 +6,16 @@ import { useAppSelector } from '../../app/hooks';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-
-import Banner from '../Banner/Banner';
+import Relocate from '../Relocate/Relocate';
 
 import Preloader from './Preloader/Preloader';
 
 // /. imports
 
 const Layout: React.FC = () => {
-    const { isPreloaderVisible } = useAppSelector(state => state.mainSlice);
-    const { isCookieAccepted } = useAppSelector(state => state.cookieSlice);
+    const { isPreloaderVisible, pageStatuses } = useAppSelector(
+        state => state.mainSlice
+    );
 
     // /. hooks
 
@@ -30,10 +30,10 @@ const Layout: React.FC = () => {
                             <Preloader />
                         </div>
                     )}
+                    {pageStatuses.isHomePage ? <></> : <Relocate />}
                 </>
             </main>
             <Footer />
-            <>{!isCookieAccepted && <Banner />}</>
         </div>
     );
 };

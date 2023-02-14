@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { BsCheck2 } from 'react-icons/bs';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-
-import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 
 import {
     switchUserRememberedStatus,
@@ -49,11 +47,13 @@ const Form: React.FC<propTypes> = props => {
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
     const { isCookieAccepted } = useAppSelector(state => state.cookieSlice);
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
-    const { isTermsAccepted, isAuthError, isRegistrError, passwordStatuses } =
-        useAppSelector(state => state.formSlice);
-
-    const [isUserRemembered, setUserRememberedStatus] =
-        useState<boolean>(false);
+    const {
+        isUserRemembered,
+        isTermsAccepted,
+        isAuthError,
+        isRegistrError,
+        passwordStatuses
+    } = useAppSelector(state => state.formSlice);
 
     const dispatch = useAppDispatch();
 
@@ -75,7 +75,7 @@ const Form: React.FC<propTypes> = props => {
 
     const inputRememberHandler = (): void => {
         if (isValid && isCookieAccepted) {
-            setUserRememberedStatus(!isUserRemembered);
+            dispatch(switchUserRememberedStatus(!isUserRemembered));
             localStorage.setItem(
                 'isUserRemembered',
                 JSON.stringify(!isUserRemembered)
@@ -130,15 +130,6 @@ const Form: React.FC<propTypes> = props => {
     };
 
     // /. functions
-
-    useEffect(() => {
-        // remember checkbox condition when component is re-render
-        const isStorageUserRemembered =
-            localStorage.getItem('isUserRemembered');
-        if (isStorageUserRemembered) {
-            setUserRememberedStatus(JSON.parse(isStorageUserRemembered));
-        }
-    }, [isUserRemembered]);
 
     useEffect(() => {
         // set login value by first render of component
