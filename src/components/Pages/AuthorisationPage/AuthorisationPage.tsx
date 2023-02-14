@@ -39,9 +39,7 @@ const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                         lastSignInTime: user.metadata.lastSignInTime
                     })
                 );
-                navigate('/Authorisation-Form/home');
 
-                dispatch(switchUserAuthoriseStatus(true));
                 localStorage.setItem('isUserAuthStatus', JSON.stringify(true));
                 localStorage.setItem(
                     'userData',
@@ -51,8 +49,12 @@ const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                     })
                 );
 
-                dispatch(switchAuthErrorStatus(false)); // reset auth-error status
                 console.log(user);
+            })
+            .then(() => {
+                navigate('/Authorisation-Form/home');
+                dispatch(switchUserAuthoriseStatus(true));
+                dispatch(switchAuthErrorStatus(false)); // reset auth-error status
             })
             .catch((err: any) => {
                 console.error(err.message);

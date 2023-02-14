@@ -22,7 +22,9 @@ const Banner: React.FC = () => {
 
     const onAcceptBtnClick = (): void => {
         dispatch(switchCookieBannerVisibleStatus(false));
+
         dispatch(switchCookieAcceptedStatus(true));
+        localStorage.setItem('isCookieAccepted', JSON.stringify(true));
     };
 
     // /. functions

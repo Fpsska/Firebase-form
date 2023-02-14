@@ -9,9 +9,13 @@ interface cookieSliceTypes {
 
 // /. interfaces
 
+const storageCookieStatus = JSON.parse(
+    localStorage.getItem('isCookieAccepted') || 'false'
+);
+
 const initialState: cookieSliceTypes = {
     isCookieBannerVisible: true,
-    isCookieAccepted: false
+    isCookieAccepted: storageCookieStatus
 };
 
 // /. initialState

@@ -15,6 +15,7 @@ import Preloader from './Preloader/Preloader';
 
 const Layout: React.FC = () => {
     const { isPreloaderVisible } = useAppSelector(state => state.mainSlice);
+    const { isCookieAccepted } = useAppSelector(state => state.cookieSlice);
 
     // /. hooks
 
@@ -32,7 +33,7 @@ const Layout: React.FC = () => {
                 </>
             </main>
             <Footer />
-            <Banner />
+            <>{!isCookieAccepted && <Banner />}</>
         </div>
     );
 };
