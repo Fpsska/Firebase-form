@@ -26,6 +26,8 @@ import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
 
 import PswrdIcon from '../PswrdIcon/PswrdIcon';
 
+import ButtonSubmit from './ButtonSubmit';
+
 import './form.scss';
 
 // /. imports
@@ -279,13 +281,10 @@ const RegisteredForm: React.FC = () => {
                     </a>
                 </span>
             </label>
-            <button
-                className="form__button"
-                type="submit"
-                disabled={!isValid}
-            >
-                {pageStatuses.isAuthPage ? 'Log in' : 'Get Started'}
-            </button>
+            <ButtonSubmit
+                isValid={isValid}
+                pageStatuses={pageStatuses}
+            />
         </form>
     );
 };

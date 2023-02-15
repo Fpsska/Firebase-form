@@ -26,6 +26,8 @@ import {
 
 import PswrdIcon from '../PswrdIcon/PswrdIcon';
 
+import ButtonSubmit from './ButtonSubmit';
+
 import './form.scss';
 
 // /. imports
@@ -236,13 +238,10 @@ const AuthForm: React.FC = () => {
                 </label>
                 <span className="form__restore">Forgot Password?</span>
             </div>
-            <button
-                className="form__button"
-                type="submit"
-                disabled={!isValid}
-            >
-                {pageStatuses.isAuthPage ? 'Log in' : 'Get Started'}
-            </button>
+            <ButtonSubmit
+                isValid={isValid}
+                pageStatuses={pageStatuses}
+            />
         </form>
     );
 };
