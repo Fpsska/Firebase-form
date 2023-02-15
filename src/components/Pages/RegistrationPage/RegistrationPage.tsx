@@ -1,20 +1,9 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router';
-
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-
-import {
-    saveNewUser,
-    switchUserAuthoriseStatus
-} from '../../../app/slices/userSlice';
-
-import { switchRegistrErrorStatus } from '../../../app/slices/formSlice';
+import { useAppSelector } from '../../../app/hooks';
 
 import SectionMark from '../../SectionMark/SectionMark';
-import Form from '../../Form/Form';
+import RegisteredForm from '../../Form/RegisteredForm';
 import Modal from '../../Modal/Modal';
 
 // /. imports
@@ -22,51 +11,13 @@ import Modal from '../../Modal/Modal';
 const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
     const { modalStatuses } = useAppSelector(state => state.modalSlice);
 
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
     // /. hooks
-
-    const handleRegistration = (email: string, password: string): void => {
-        const auth = getAuth();
-
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(({ user }) => {
-                dispatch(
-                    saveNewUser({
-                        email: user.email,
-                        token: user.refreshToken,
-                        id: user.uid,
-                        lastSignInTime: user.metadata.lastSignInTime
-                    })
-                );
-
-                dispatch(switchUserAuthoriseStatus(true));
-                localStorage.setItem('isUserAuthStatus', JSON.stringify(true));
-                localStorage.setItem(
-                    'userData',
-                    JSON.stringify({
-                        email: user.email,
-                        lastSignInTime: user.metadata.lastSignInTime
-                    })
-                );
-
-                navigate('/Authorisation-Form/home');
-                console.log(user);
-            })
-            .catch((err: any) => {
-                dispatch(switchRegistrErrorStatus(true));
-                setTimeout(() => {
-                    dispatch(switchRegistrErrorStatus(false));
-                }, 5000);
-            });
-    };
-
-    // /. functions
 
     return (
         <div className="registration">
             <div className="registration__wrapper">
+                <SectionMark />
+                <RegisteredForm />
                 <>
                     {modalStatuses.isModalRegistrVisible && (
                         <Modal
@@ -79,11 +30,39 @@ const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                         </Modal>
                     )}
                 </>
-                <SectionMark />
-                <Form
-                    formActionHandler={handleRegistration}
-                    wrapperRef={wrapperRef}
-                />
+                {/* /. registration modal */}
+                <>
+                    {modalStatuses.isModalTermsVisible && (
+                        <Modal
+                            name={'terms-modal'}
+                            title={'Terms modal!'}
+                            status={modalStatuses.isModalTermsVisible}
+                            wrapperRef={wrapperRef}
+                        >
+                            <div className="modal__scroll-content">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Rerum, laboriosam quod dolorem
+                                ab quisquam ipsam aliquid tempora quia aliquam
+                                at consequatur saepe iusto perferendis magni
+                                inventore, id, quam non fugit. Dsit amet
+                                consectetur adipisicing elit. Rerum, laboriosam
+                                quod dolorem ab quisquam ipsam aliquid tempora
+                                quia aliquam at consequatur saepe iusto
+                                perferendis magni inventore, id, quam non
+                                fugit.Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Rerum, laboriosam quod dolorem
+                                ab quisquam ipsam aliquid tempora quia aliquam
+                                at consequatur saepe iusto perferendis magni
+                                inventore, id, quam non fugit. Dsit amet
+                                consectetur adipisicing elit. Rerum, laboriosam
+                                quod dolorem ab quisquam ipsam aliquid tempora
+                                quia aliquam at consequatur saepe iusto
+                                perferendis magni inventore, id, quam non fugit.
+                            </div>
+                        </Modal>
+                    )}
+                </>
+                {/* /. terms modal */}
             </div>
         </div>
     );

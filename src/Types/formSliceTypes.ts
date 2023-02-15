@@ -7,7 +7,5 @@ export interface formFieldsTypes {
 }
 
 export interface passwordStatusesTypes {
-    isAuthPasswordVisible: boolean;
-    isRegistrPasswordVisible: boolean;
-    isConfirmPasswordVisible: boolean;
+    [key: string]: boolean;
 }
