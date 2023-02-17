@@ -15,6 +15,7 @@
     }
 
     &__body {
+        position: relative;
         min-height: 80px;
         color: var(--modal-text-color);
     }
@@ -94,17 +95,19 @@
     }
 
     &__title {
-        margin: 0 0 10px 0;
         padding: 0 10px 0 0;
         color: var(--modal-text-color);
     }
 
     &__text {
-        margin: 0 0 30px 0;
+        margin: 10px 0 30px 0;
+    }
+
+    &__text_scroll {
+        margin: 10px 0 0 0;
     }
 
     &__controls {
-        margin: 0 0 20px 0;
         position: absolute;
         bottom: 0;
 

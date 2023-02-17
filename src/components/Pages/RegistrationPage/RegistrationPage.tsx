@@ -26,7 +26,9 @@ const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             status={modalStatuses.isModalRegistrVisible}
                             wrapperRef={wrapperRef}
                         >
-                            Technical works..In progess..
+                            <p className="modal__text">
+                                Technical works..In progess..
+                            </p>
                         </Modal>
                     )}
                 </>
@@ -40,24 +42,28 @@ const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             wrapperRef={wrapperRef}
                         >
                             <div className="modal__scroll-content">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Rerum, laboriosam quod dolorem
-                                ab quisquam ipsam aliquid tempora quia aliquam
-                                at consequatur saepe iusto perferendis magni
-                                inventore, id, quam non fugit. Dsit amet
-                                consectetur adipisicing elit. Rerum, laboriosam
-                                quod dolorem ab quisquam ipsam aliquid tempora
-                                quia aliquam at consequatur saepe iusto
-                                perferendis magni inventore, id, quam non
-                                fugit.Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Rerum, laboriosam quod dolorem
-                                ab quisquam ipsam aliquid tempora quia aliquam
-                                at consequatur saepe iusto perferendis magni
-                                inventore, id, quam non fugit. Dsit amet
-                                consectetur adipisicing elit. Rerum, laboriosam
-                                quod dolorem ab quisquam ipsam aliquid tempora
-                                quia aliquam at consequatur saepe iusto
-                                perferendis magni inventore, id, quam non fugit.
+                                <p className="modal__text modal__text_scroll">
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Rerum, laboriosam quod
+                                    dolorem ab quisquam ipsam aliquid tempora
+                                    quia aliquam at consequatur saepe iusto
+                                    perferendis magni inventore, id, quam non
+                                    fugit. Dsit amet consectetur adipisicing
+                                    elit. Rerum, laboriosam quod dolorem ab
+                                    quisquam ipsam aliquid tempora quia aliquam
+                                    at consequatur saepe iusto perferendis magni
+                                    inventore, id, quam non fugit.Lorem ipsum
+                                    dolor sit amet consectetur adipisicing elit.
+                                    Rerum, laboriosam quod dolorem ab quisquam
+                                    ipsam aliquid tempora quia aliquam at
+                                    consequatur saepe iusto perferendis magni
+                                    inventore, id, quam non fugit. Dsit amet
+                                    consectetur adipisicing elit. Rerum,
+                                    laboriosam quod dolorem ab quisquam ipsam
+                                    aliquid tempora quia aliquam at consequatur
+                                    saepe iusto perferendis magni inventore, id,
+                                    quam non fugit.
+                                </p>
                             </div>
                         </Modal>
                     )}

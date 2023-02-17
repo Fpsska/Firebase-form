@@ -24,12 +24,12 @@ const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             status={modalStatuses.isModalAuthVisible}
                             wrapperRef={wrapperRef}
                         >
-                            <>
+                            <p className="modal__text">
                                 Sorry, this method is temporarily unavailable
                                 <br />
                                 <br />
                                 Stasy privet ;)
-                            </>
+                            </p>
                         </Modal>
                     )}
                 </>
