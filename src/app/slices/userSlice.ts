@@ -8,6 +8,7 @@ interface userSliceTypes {
     currentID: null | string;
     lastSignInTime: null | string;
     isUserAuthorise: boolean;
+    sessionTime: number;
 }
 
 // /. interfaces
@@ -16,13 +17,17 @@ const storageAuthStatus = JSON.parse(
     localStorage.getItem('isUserAuthStatus') || 'false'
 );
 const storageUserData = JSON.parse(localStorage.getItem('userData') || '{}');
+const storageSessionTime = JSON.parse(
+    localStorage.getItem('currentSessionTime') || '0'
+);
 
 const initialState: userSliceTypes = {
     currentEmail: storageUserData.email,
     currentToken: null,
     currentID: null,
     lastSignInTime: storageUserData.lastSignInTime,
-    isUserAuthorise: storageAuthStatus
+    isUserAuthorise: storageAuthStatus,
+    sessionTime: storageSessionTime
 };
 
 const userSlice = createSlice({
@@ -45,11 +50,18 @@ const userSlice = createSlice({
         },
         switchUserAuthoriseStatus(state, action: PayloadAction<boolean>) {
             state.isUserAuthorise = action.payload;
+        },
+        setSessionTime(state, action: PayloadAction<number>) {
+            state.sessionTime = action.payload;
         }
     }
 });
 
-export const { saveNewUser, deleteCurrentUser, switchUserAuthoriseStatus } =
-    userSlice.actions;
+export const {
+    saveNewUser,
+    deleteCurrentUser,
+    switchUserAuthoriseStatus,
+    setSessionTime
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { Route, Routes } from 'react-router';
 
-import { useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { useLocationData } from '../../hooks/useLocationData';
 
 import { switchPageStatus } from '../../app/slices/mainSlice';
@@ -23,6 +23,8 @@ import '../../assets/styles/_media.scss';
 // /. imports
 
 const App: React.FC = () => {
+    const { isUserAuthorise } = useAppSelector(state => state.userSlice);
+
     const dispatch = useAppDispatch();
     const location = useLocationData();
 
@@ -34,6 +36,12 @@ const App: React.FC = () => {
         dispatch(switchPageStatus({ locationData: location }));
         dispatch(switchModalVisibleStatus({ name: 'reset', status: false }));
     }, [location]);
+
+    useEffect(() => {
+        if (!isUserAuthorise) {
+            localStorage.removeItem('currentSessionTime');
+        }
+    }, [isUserAuthorise]);
 
     // /. effects
 

@@ -6,7 +6,7 @@ import './theme.scss';
 
 // /. imports
 
-const Theme: React.FC = () => {
+const ThemeButton: React.FC = () => {
     const { theme, setTheme } = useTheme();
     const [isActive, setActiveStatus] = useState<boolean>(
         theme === 'default' ? false : true
@@ -37,4 +37,4 @@ const Theme: React.FC = () => {
     );
 };
 
-export default Theme;
+export default ThemeButton;

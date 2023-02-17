@@ -3,7 +3,7 @@ import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 
 import ButtonTemplate from '../Button/ButtonTemplate';
-import Theme from '../Theme/Theme';
+import Theme from '../ThemeButton/ThemeButton';
 
 import { useLocationData } from '../../hooks/useLocationData';
 

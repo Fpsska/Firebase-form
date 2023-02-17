@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+
+import { setSessionTime } from '../../app/slices/userSlice';
+
 import './timer.scss';
 
 // /. imports
 
 const Timer: React.FC = () => {
-    const [initTime, setInitTime] = useState<number>(0);
+    const { sessionTime } = useAppSelector(state => state.userSlice);
 
     const [timerSeconds, setTimerSeconds] = useState<string>('00');
     const [timerMinutes, setTimerMinutes] = useState<string>('00');
@@ -14,28 +18,32 @@ const Timer: React.FC = () => {
 
     const [isTimesActivated, setTimerActivated] = useState<boolean>(true);
 
+    const dispatch = useAppDispatch();
+
     // /. hooks
 
     useEffect(() => {
+        // session timer logic
         let timerUp: null | any = null;
         if (isTimesActivated) {
             timerUp = setInterval((): void => {
-                setInitTime(prev => prev + 10);
+                // setInitTime(prev => prev + 10);
+                dispatch(setSessionTime(sessionTime + 10));
                 // increase the time value
                 const days = (
-                    '0' + Math.floor((initTime / (1000 * 60 * 60 * 24)) % 60)
+                    '0' + Math.floor((sessionTime / (1000 * 60 * 60 * 24)) % 60)
                 ).slice(-2);
 
                 const hours = (
-                    '0' + Math.floor((initTime / (1000 * 60 * 60)) % 24)
+                    '0' + Math.floor((sessionTime / (1000 * 60 * 60)) % 24)
                 ).slice(-2);
 
                 const minutes = (
-                    '0' + Math.floor((initTime / (1000 * 60)) % 60)
+                    '0' + Math.floor((sessionTime / (1000 * 60)) % 60)
                 ).slice(-2);
 
                 const seconds = (
-                    '0' + Math.floor((initTime / 1000) % 60)
+                    '0' + Math.floor((sessionTime / 1000) % 60)
                 ).slice(-2);
 
                 setTimerDays(days);
@@ -48,7 +56,12 @@ const Timer: React.FC = () => {
         }
 
         return () => clearInterval(timerUp);
-    }, [isTimesActivated, initTime]);
+    }, [isTimesActivated, sessionTime]);
+
+    useEffect(() => {
+        // saving current time values in local storage
+        localStorage.setItem('currentSessionTime', JSON.stringify(sessionTime));
+    }, [sessionTime]);
 
     // /. effects
 
