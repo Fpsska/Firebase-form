@@ -15,6 +15,7 @@ import {
 } from '../../../app/slices/modalSlice';
 
 import Modal from '../../Modal/Modal';
+import Timer from '../../Timer/Timer';
 
 import './homePage.scss';
 
@@ -74,6 +75,9 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                         <span className="user-data__info">
                             {lastSignInTime}
                         </span>
+                    </li>
+                    <li className="user-data__template user-data__template_timer">
+                        <span>currentSessionTime:</span> <Timer />
                     </li>
                     <li className="user-data__template">
                         email:{' '}
