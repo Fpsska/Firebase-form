@@ -14,7 +14,8 @@ import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
 
 import {
     switchRegistrErrorStatus,
-    switchTermsAcceptedStatus
+    switchTermsAcceptedStatus,
+    switchUserRememberedStatus
 } from '../../app/slices/formSlice';
 
 import {
@@ -23,6 +24,8 @@ import {
 } from '../../app/slices/userSlice';
 
 import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
+
+import { useCookie } from '../../hooks/useCookie';
 
 import PswrdIcon from '../PswrdIcon/PswrdIcon';
 
@@ -63,6 +66,8 @@ const RegisteredForm: React.FC = () => {
 
     const passwordValue = watch('password');
 
+    const { deleteCookie } = useCookie();
+
     // /. hooks
 
     const formSubmitHandler = (userData: any): void => {
@@ -95,9 +100,13 @@ const RegisteredForm: React.FC = () => {
             .then(() => {
                 navigate('/Authorisation-Form/home');
                 dispatch(switchUserAuthoriseStatus(true));
+
+                dispatch(switchUserRememberedStatus(false));
+                localStorage.setItem('isUserRemembered', JSON.stringify(false));
                 setTimeout(() => {
                     dispatch(switchPreloaderVisibleStatus(false));
                 }, 2000);
+                deleteCookie('login');
             })
             .catch((err: any) => {
                 console.error(err.message);
