@@ -79,7 +79,7 @@ const RegisteredForm: React.FC = () => {
                         email: user.email,
                         token: user.refreshToken,
                         id: user.uid,
-                        lastSignInTime: user.metadata.lastSignInTime
+                        lastSignInTime: new Date().toLocaleString()
                     })
                 );
 
@@ -88,7 +88,7 @@ const RegisteredForm: React.FC = () => {
                     'userData',
                     JSON.stringify({
                         email: user.email,
-                        lastSignInTime: user.metadata.lastSignInTime
+                        lastSignInTime: new Date().toLocaleString()
                     })
                 );
             })

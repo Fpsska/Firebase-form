@@ -79,7 +79,7 @@ const AuthForm: React.FC = () => {
                         email: user.email,
                         token: user.refreshToken,
                         id: user.uid,
-                        lastSignInTime: user.metadata.lastSignInTime
+                        lastSignInTime: new Date().toLocaleString()
                     })
                 );
 

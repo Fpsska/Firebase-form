@@ -9,6 +9,8 @@ import { switchPageStatus } from '../../app/slices/mainSlice';
 
 import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
 
+import { setSessionTime } from '../../app/slices/userSlice';
+
 import Layout from '../Common/Layout';
 import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';
 import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
@@ -33,13 +35,15 @@ const App: React.FC = () => {
     // /. hooks
 
     useEffect(() => {
+        // set current page, modal status
         dispatch(switchPageStatus({ locationData: location }));
         dispatch(switchModalVisibleStatus({ name: 'reset', status: false }));
     }, [location]);
 
     useEffect(() => {
+        // reset currentSessionTime
         if (!isUserAuthorise) {
-            localStorage.removeItem('currentSessionTime');
+            dispatch(setSessionTime(0));
         }
     }, [isUserAuthorise]);
 
