@@ -19,7 +19,7 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
 
     const { passwordStatuses } = useAppSelector(state => state.formSlice);
 
-    const [statusName, setStatusName] = useState<boolean>();
+    const [isPasswordVisible, setPasswordVisibleStatus] = useState<boolean>();
 
     const dispatch = useAppDispatch();
 
@@ -28,13 +28,19 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
     useEffect(() => {
         switch (inputName) {
             case 'auth-password':
-                setStatusName(passwordStatuses.isAuthPasswordVisible);
+                setPasswordVisibleStatus(
+                    passwordStatuses.isAuthPasswordVisible
+                );
                 break;
             case 'registr-password':
-                setStatusName(passwordStatuses.isRegistrPasswordVisible);
+                setPasswordVisibleStatus(
+                    passwordStatuses.isRegistrPasswordVisible
+                );
                 break;
             case 'confirm-password':
-                setStatusName(passwordStatuses.isConfirmPasswordVisible);
+                setPasswordVisibleStatus(
+                    passwordStatuses.isConfirmPasswordVisible
+                );
                 break;
         }
     }, [inputName, passwordStatuses]);
@@ -42,10 +48,13 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
     // /. effects
 
     return (
-        <>
-            {statusName ? (
+        <button
+            type="button"
+            className="form__icon-password"
+            aria-label={isPasswordVisible ? 'hide password' : 'show password'}
+        >
+            {isPasswordVisible ? (
                 <BsEyeSlash
-                    className="form__icon-password"
                     size={20}
                     onClick={() =>
                         dispatch(
@@ -55,11 +64,9 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
                             })
                         )
                     }
-                    aria-label="show password"
                 />
             ) : (
                 <BsEye
-                    className="form__icon-password"
                     size={20}
                     onClick={() =>
                         dispatch(
@@ -69,10 +76,9 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
                             })
                         )
                     }
-                    aria-label="hide password"
                 />
             )}
-        </>
+        </button>
     );
 };
 

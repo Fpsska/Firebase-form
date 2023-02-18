@@ -236,7 +236,12 @@ const AuthForm: React.FC = () => {
                         Remember me
                     </span>
                 </label>
-                <span className="form__restore">Forgot Password?</span>
+                <a
+                    className="form__restore"
+                    href="#"
+                >
+                    Forgot Password?
+                </a>
             </div>
             <ButtonSubmit
                 isValid={isValid}

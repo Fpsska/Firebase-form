@@ -12,16 +12,20 @@
     transition: background-color 0.35s linear;
     cursor: pointer;
     position: relative;
+
     &:disabled {
         border: 1px solid rgba($color: #ff0000, $alpha: 0.5);
         cursor: not-allowed;
     }
+
     &:hover {
         background-color: rgba(0, 0, 0, 0.3);
     }
+
     &:active {
         border: 1px solid rgba(#1676f3, 1);
     }
+
     :not(:last-child) {
         margin: 0 10px 0 0;
     }

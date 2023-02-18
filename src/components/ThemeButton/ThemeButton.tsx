@@ -29,8 +29,13 @@ const ThemeButton: React.FC = () => {
     return (
         <button
             className={isActive ? 'theme active' : 'theme'}
+            type="button"
+            aria-label={
+                isActive
+                    ? 'change theme to default'
+                    : 'change theme to minimalism'
+            }
             onClick={themeHandler}
-            aria-label="change theme color"
         >
             <span className="theme__indicator"></span>
         </button>

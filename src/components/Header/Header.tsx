@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAppSelector } from '../../app/hooks';
 
-import ButtonTemplate from '../Button/ButtonTemplate';
+import ButtonConnect from '../ButtonConnect/ButtonConnect';
 import Theme from '../ThemeButton/ThemeButton';
 
 import { useLocationData } from '../../hooks/useLocationData';
@@ -61,7 +61,7 @@ const Header: React.FC = () => {
                 </div>
 
                 {!pageStatuses.isHomePage && (
-                    <ButtonTemplate text={defineButtonTextContent(pathname)} />
+                    <ButtonConnect text={defineButtonTextContent(pathname)} />
                 )}
             </div>
 

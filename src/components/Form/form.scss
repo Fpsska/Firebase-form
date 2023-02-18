@@ -76,10 +76,12 @@
     }
 
     &__icon-password {
-        color: var(--password-icon-color);
-        position: absolute;
-        right: 1.3rem;
-        top: 2.7rem;
+        svg {
+            color: var(--password-icon-color);
+            position: absolute;
+            right: 1.3rem;
+            top: 2.7rem;
+        }
     }
 
     &__input--checkbox {
