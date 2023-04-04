@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [react-icons](https://react-icons.github.io/react-icons/)
 - [react-hook-form](https://react-hook-form.com/)
 
-### `Watch demo` _[Authorisation-Form](https://fpsska.github.io/Authorisation-Form/)_
+### `Watch demo` _[Firebase-form](https://fpsska.github.io/Firebase-form/)_
 ##
 
 _Use for quick test-authorize:_
