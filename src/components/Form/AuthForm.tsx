@@ -103,7 +103,7 @@ const AuthForm: React.FC = () => {
                 console.log(user);
             })
             .then(() => {
-                navigate('/Authorisation-Form/home');
+                navigate('/home');
                 dispatch(switchUserAuthoriseStatus(true));
                 dispatch(switchAuthErrorStatus(false)); // clear auth-error status
                 setTimeout(() => {

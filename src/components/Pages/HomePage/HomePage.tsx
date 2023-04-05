@@ -124,7 +124,7 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
         </div>
     ) : (
         <Navigate
-            to="/Authorisation-Form"
+            to="/"
             replace={true}
         />
     );

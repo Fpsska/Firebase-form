@@ -31,7 +31,10 @@
     },
     "rules": {
         "prettier/prettier": [
-            "warn"
+            "warn",
+            {
+                "endOfLine": "auto" // solve `CR` warn
+            }
         ],
         "no-console": "warn",
         "quotes": [

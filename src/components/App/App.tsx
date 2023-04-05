@@ -56,7 +56,7 @@ const App: React.FC = () => {
         >
             <Routes>
                 <Route
-                    path="/Authorisation-Form"
+                    path="/"
                     element={<Layout />}
                 >
                     <Route

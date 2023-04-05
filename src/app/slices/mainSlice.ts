@@ -36,19 +36,19 @@ const mainSlice = createSlice({
             const pathName = locationData.pathname.toLowerCase();
 
             switch (pathName) {
-                case '/authorisation-form':
+                case '/':
                     state.pageStatuses = handleObjProperties(
                         'isAuthPage',
                         state.pageStatuses
                     );
                     break;
-                case '/authorisation-form/registration':
+                case '/registration':
                     state.pageStatuses = handleObjProperties(
                         'isRegistrPage',
                         state.pageStatuses
                     );
                     break;
-                case '/authorisation-form/home':
+                case '/home':
                     state.pageStatuses = handleObjProperties(
                         'isHomePage',
                         state.pageStatuses

@@ -20,7 +20,7 @@ const Relocate: React.FC = () => {
                     Don`t have an account?{' '}
                     <Link
                         className="relocate__link"
-                        to="/Authorisation-Form/Registration"
+                        to="/Registration"
                     >
                         Sign Up
                     </Link>
@@ -30,7 +30,7 @@ const Relocate: React.FC = () => {
                     Already have an account?{' '}
                     <Link
                         className="relocate__link"
-                        to="/Authorisation-Form"
+                        to="/"
                     >
                         Log in
                     </Link>

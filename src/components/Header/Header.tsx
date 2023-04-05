@@ -23,9 +23,9 @@ const Header: React.FC = () => {
 
     const defineButtonTextContent = (currentPath: string): string => {
         switch (currentPath) {
-            case '/Authorisation-Form':
+            case '/':
                 return 'Continue with Google';
-            case '/Authorisation-Form/Registration':
+            case '/Registration':
                 return 'Sign up with Google';
             default:
                 return 'Continue with Google';

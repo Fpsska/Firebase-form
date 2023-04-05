@@ -98,7 +98,7 @@ const RegisteredForm: React.FC = () => {
                 );
             })
             .then(() => {
-                navigate('/Authorisation-Form/home');
+                navigate('/home');
                 dispatch(switchUserAuthoriseStatus(true));
 
                 dispatch(switchUserRememberedStatus(false));
