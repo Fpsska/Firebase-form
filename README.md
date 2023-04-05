@@ -4,11 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ###### _powered by :_
 
-- [firebase](https://firebase.google.com/)
-- [react-icons](https://react-icons.github.io/react-icons/)
-- [react-hook-form](https://react-hook-form.com/)
+-   [firebase](https://firebase.google.com/)
+-   [react-icons](https://react-icons.github.io/react-icons/)
+-   [react-hook-form](https://react-hook-form.com/)
 
-### `Watch demo` _[Firebase-form](https://fpsska.github.io/Firebase-form/)_
+### `Watch demo` _[Firebase-form](https://firebase-form-lemon.vercel.app/)_
+
 ##
 
 _Use for quick test-authorize:_
@@ -16,6 +17,7 @@ _Use for quick test-authorize:_
 login: `user@gmail.com`
 
 password: `123456`
+
 ##
 
 ## Available Scripts
