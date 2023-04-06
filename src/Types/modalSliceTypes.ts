@@ -13,3 +13,8 @@ export interface modalPositionsTypes {
 export interface modalStatusTypes {
     [key: string]: boolean;
 }
+
+export interface modalSizeTypes {
+    width: number;
+    height: number;
+}

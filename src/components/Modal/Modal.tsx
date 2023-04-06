@@ -1,12 +1,13 @@
 import React, { useEffect, useCallback, useRef, useState } from 'react';
 
-import { useLocation } from 'react-router';
-
 import { IoMdClose } from 'react-icons/io';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
-import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
+import {
+    switchModalVisibleStatus,
+    setModalSize
+} from '../../app/slices/modalSlice';
 
 import { coordinatesTypes } from '../../Types/modalSliceTypes';
 
@@ -21,22 +22,18 @@ interface propTypes {
     title: string;
     children: string | JSX.Element;
     status: boolean;
+    position: coordinatesTypes;
     wrapperRef: any;
 }
 
 // /. interfaces
 
 const Modal: React.FC<propTypes> = props => {
-    const { name, title, children, status, wrapperRef } = props;
+    const { name, title, children, status, position, wrapperRef } = props;
 
-    // const { modalPositions } = useAppSelector(state => state.modalSlice);
     const [isClicked, setClikedStatus] = useState<boolean>(false);
 
     const [isVisible, setVisibleStatus] = useState<boolean>(false);
-    // const [initPosition, setInitPosition] = useState<coordinatesTypes>({
-    //     top: 0,
-    //     left: 0
-    // });
 
     const modalRef = useRef<HTMLDivElement>(null!);
 
@@ -110,26 +107,6 @@ const Modal: React.FC<propTypes> = props => {
         setVisibleStatus(status);
     }, [status]);
 
-    // useEffect(() => {
-    //     // set position for current modal
-    //     switch (name) {
-    //         case 'auth-modal':
-    //             setInitPosition(modalPositions.modalAuthPosition);
-    //             break;
-    //         case 'registr-modal':
-    //             setInitPosition(modalPositions.modalRegistrPosition);
-    //             break;
-    //         case 'terms-modal':
-    //             setInitPosition(modalPositions.modalTermsPosition);
-    //             break;
-    //         case 'exit-modal':
-    //             setInitPosition(modalPositions.modalExitPosition);
-    //             break;
-    //         default:
-    //             return;
-    //     }
-    // }, [modalPositions, name]);
-
     useEffect(() => {
         // handle of hiding modal HTML-el
         const areaHandler = (e: any): void => {
@@ -159,6 +136,14 @@ const Modal: React.FC<propTypes> = props => {
         };
     }, [isVisible, name, closeModal]);
 
+    useEffect(() => {
+        // set new modalSize value
+        if (isVisible) {
+            const { width, height } = modalRef.current.getBoundingClientRect();
+            dispatch(setModalSize({ width, height }));
+        }
+    }, [isVisible]);
+
     // /. effects
 
     return (
@@ -166,10 +151,10 @@ const Modal: React.FC<propTypes> = props => {
             ref={modalRef}
             role="alert"
             className={!isClicked ? 'modal' : 'modal hidden'}
-            // style={{
-            //     left: `${coords.current.startX}%`,
-            //     top: `${coords.current.startY}%`
-            // }}
+            style={{
+                left: `${position.left}px`,
+                top: `${position.top}px`
+            }}
         >
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>

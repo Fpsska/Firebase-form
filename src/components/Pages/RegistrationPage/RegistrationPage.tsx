@@ -9,7 +9,9 @@ import Modal from '../../Modal/Modal';
 // /. imports
 
 const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
-    const { modalStatuses } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses, modalPositions } = useAppSelector(
+        state => state.modalSlice
+    );
 
     // /. hooks
 
@@ -24,10 +26,14 @@ const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             name={'registr-modal'}
                             title={'Rigistration modal!'}
                             status={modalStatuses.isModalRegistrVisible}
+                            position={modalPositions.modalRegistrPosition}
                             wrapperRef={wrapperRef}
                         >
                             <p className="modal__text">
                                 Technical works..In progess..
+                                <br />
+                                <br />
+                                Naaaasteeen&apos;kaa, zdravstvuuuj :3
                             </p>
                         </Modal>
                     )}
@@ -39,6 +45,7 @@ const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             name={'terms-modal'}
                             title={'Terms modal!'}
                             status={modalStatuses.isModalTermsVisible}
+                            position={modalPositions.modalTermsPosition}
                             wrapperRef={wrapperRef}
                         >
                             <div className="modal__scroll-content">

@@ -9,7 +9,9 @@ import AuthForm from '../../Form/AuthForm';
 // /. imports
 
 const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
-    const { modalStatuses } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses, modalPositions } = useAppSelector(
+        state => state.modalSlice
+    );
 
     // /. hooks
 
@@ -22,6 +24,7 @@ const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             name={'auth-modal'}
                             title={'Authorisation modal!'}
                             status={modalStatuses.isModalAuthVisible}
+                            position={modalPositions.modalAuthPosition}
                             wrapperRef={wrapperRef}
                         >
                             <p className="modal__text">

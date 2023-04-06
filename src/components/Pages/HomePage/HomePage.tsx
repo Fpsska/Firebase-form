@@ -14,6 +14,8 @@ import {
     setNewModalPosition
 } from '../../../app/slices/modalSlice';
 
+import { generateElPosition } from '../../../helpers/generateElPosition';
+
 import Modal from '../../Modal/Modal';
 import Timer from '../../Timer/Timer';
 
@@ -26,7 +28,9 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
         state => state.userSlice
     );
 
-    const { modalStatuses } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses, modalPositions, modalSize } = useAppSelector(
+        state => state.modalSlice
+    );
 
     const dispatch = useAppDispatch();
 
@@ -39,12 +43,17 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                 status: true
             })
         );
-        // dispatch(
-        //     setNewModalPosition({
-        //         name: 'exit-modal',
-        //         coordinates: { top: 15, left: 20 }
-        //     })
-        // );
+
+        const { elTopPos, elLeftPos } = generateElPosition(
+            modalSize.width,
+            modalSize.height
+        );
+        dispatch(
+            setNewModalPosition({
+                name: 'exit-modal',
+                coordinates: { top: elTopPos, left: elLeftPos }
+            })
+        );
     };
 
     const acceptHandler = (): void => {
@@ -96,6 +105,7 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                             name={'exit-modal'}
                             title={'Exit modal!'}
                             status={modalStatuses.isModalExitVisible}
+                            position={modalPositions.modalExitPosition}
                             wrapperRef={wrapperRef}
                         >
                             <>

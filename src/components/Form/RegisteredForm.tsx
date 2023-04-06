@@ -8,6 +8,8 @@ import { useForm } from 'react-hook-form';
 
 import { BsCheck2 } from 'react-icons/bs';
 
+import { generateElPosition } from '../../helpers/generateElPosition';
+
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
 import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
@@ -23,7 +25,10 @@ import {
     switchUserAuthoriseStatus
 } from '../../app/slices/userSlice';
 
-import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
+import {
+    switchModalVisibleStatus,
+    setNewModalPosition
+} from '../../app/slices/modalSlice';
 
 import { useCookie } from '../../hooks/useCookie';
 
@@ -50,7 +55,9 @@ const RegisteredForm: React.FC = () => {
     const { isTermsAccepted, isRegistrError, passwordStatuses } =
         useAppSelector(state => state.formSlice);
 
-    const { modalStatuses } = useAppSelector(state => state.modalSlice);
+    const { modalStatuses, modalSize } = useAppSelector(
+        state => state.modalSlice
+    );
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -133,15 +140,20 @@ const RegisteredForm: React.FC = () => {
                 status: !modalStatuses.isModalTermsVisible
             })
         );
-        // dispatch(
-        //     setNewModalPosition({
-        //         name: 'terms-modal',
-        //         coordinates: {
-        //             top: getRandomItgrNumber(30, 10),
-        //             left: getRandomItgrNumber(30, 10)
-        //         }
-        //     })
-        // );
+
+        const { elTopPos, elLeftPos } = generateElPosition(
+            modalSize.width,
+            modalSize.height
+        );
+        dispatch(
+            setNewModalPosition({
+                name: 'terms-modal',
+                coordinates: {
+                    top: elTopPos,
+                    left: elLeftPos
+                }
+            })
+        );
     };
 
     // /. functions

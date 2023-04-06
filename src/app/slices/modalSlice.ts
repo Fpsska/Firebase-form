@@ -5,7 +5,8 @@ import { handleObjProperties } from '../../helpers/handleObjProperties';
 import {
     coordinatesTypes,
     modalPositionsTypes,
-    modalStatusTypes
+    modalStatusTypes,
+    modalSizeTypes
 } from '../../Types/modalSliceTypes';
 
 // /. imports
@@ -13,6 +14,7 @@ import {
 interface modalSliceTypes {
     modalStatuses: modalStatusTypes;
     modalPositions: modalPositionsTypes;
+    modalSize: modalSizeTypes;
 }
 
 // /. interfaces
@@ -29,6 +31,10 @@ const initialState: modalSliceTypes = {
         modalRegistrPosition: { top: 0, left: 0 },
         modalTermsPosition: { top: 0, left: 0 },
         modalExitPosition: { top: 0, left: 0 }
+    },
+    modalSize: {
+        width: 0,
+        height: 0
     }
 };
 
@@ -44,6 +50,7 @@ const modalSlice = createSlice({
         ) {
             const { name, status } = action.payload;
             // /. payload
+
             switch (name) {
                 case 'auth-modal':
                     state.modalStatuses.isModalAuthVisible = status;
@@ -76,6 +83,7 @@ const modalSlice = createSlice({
         ) {
             const { name, coordinates } = action.payload;
             // /. payload
+
             switch (name) {
                 case 'auth-modal':
                     state.modalPositions.modalAuthPosition = coordinates;
@@ -92,11 +100,23 @@ const modalSlice = createSlice({
                 default:
                     return;
             }
+        },
+        setModalSize(
+            state,
+            action: PayloadAction<{ width: number; height: number }>
+        ) {
+            const { width, height } = action.payload;
+            // /. payload
+
+            state.modalSize = {
+                width,
+                height
+            };
         }
     }
 });
 
-export const { switchModalVisibleStatus, setNewModalPosition } =
+export const { switchModalVisibleStatus, setNewModalPosition, setModalSize } =
     modalSlice.actions;
 
 export default modalSlice.reducer;
