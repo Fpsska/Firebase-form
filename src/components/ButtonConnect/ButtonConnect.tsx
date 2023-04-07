@@ -4,7 +4,6 @@ import { FcGoogle } from 'react-icons/fc';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
-import { getRandomItgrNumber } from '../../helpers/getRandomNum';
 import { generateElPosition } from '../../helpers/generateElPosition';
 
 import {
@@ -24,9 +23,7 @@ interface propTypes {
 
 const ButtonConnect: React.FC<propTypes> = ({ text }) => {
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
-    const { modalStatuses, modalSize } = useAppSelector(
-        state => state.modalSlice
-    );
+    const { modalSize } = useAppSelector(state => state.modalSlice);
 
     const [disabledStatus, setDisabledStatus] = useState<boolean>(false);
 
@@ -42,30 +39,33 @@ const ButtonConnect: React.FC<propTypes> = ({ text }) => {
             })
         );
 
-        const { elTopPos, elLeftPos } = generateElPosition(
+        const { newElLeftPos, newElTopPos } = generateElPosition(
             modalSize.width,
             modalSize.height
         );
-        dispatch(
-            setNewModalPosition({
-                name: 'auth-modal',
-                coordinates: {
-                    top: elTopPos,
-                    left: elLeftPos
-                }
-            })
-        );
+
+        if (modalSize.height !== 0 || modalSize.width !== 0) {
+            dispatch(
+                setNewModalPosition({
+                    name: 'auth-modal',
+                    coordinates: {
+                        top: newElTopPos,
+                        left: newElLeftPos
+                    }
+                })
+            );
+        }
     };
 
     const onRegistrBtnClick = (): void => {
         dispatch(
             switchModalVisibleStatus({
                 name: 'registr-modal',
-                status: !modalStatuses.isModalRegistrVisible
+                status: true
             })
         );
 
-        const { elTopPos, elLeftPos } = generateElPosition(
+        const { newElLeftPos, newElTopPos } = generateElPosition(
             modalSize.width,
             modalSize.height
         );
@@ -73,8 +73,8 @@ const ButtonConnect: React.FC<propTypes> = ({ text }) => {
             setNewModalPosition({
                 name: 'registr-modal',
                 coordinates: {
-                    top: elTopPos,
-                    left: elLeftPos
+                    top: newElTopPos,
+                    left: newElLeftPos
                 }
             })
         );

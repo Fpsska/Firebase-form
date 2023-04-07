@@ -44,14 +44,14 @@ const HomePage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
             })
         );
 
-        const { elTopPos, elLeftPos } = generateElPosition(
+        const { newElLeftPos, newElTopPos } = generateElPosition(
             modalSize.width,
             modalSize.height
         );
         dispatch(
             setNewModalPosition({
                 name: 'exit-modal',
-                coordinates: { top: elTopPos, left: elLeftPos }
+                coordinates: { top: newElTopPos, left: newElLeftPos }
             })
         );
     };

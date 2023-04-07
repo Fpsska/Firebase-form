@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 
 import { IoMdClose } from 'react-icons/io';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 
 import {
     switchModalVisibleStatus,
@@ -60,7 +60,15 @@ const Modal: React.FC<propTypes> = props => {
     // /. functions
 
     useEffect(() => {
-        // logic of dragging html-el
+        // get random position of modal
+        if (!modalRef.current) return;
+
+        modalRef.current.style.top = `${position.top}px`;
+        modalRef.current.style.left = `${position.left}px`;
+    }, [position]);
+
+    useEffect(() => {
+        // logic of dragging modal
         if (!modalRef.current || !wrapperRef) return;
 
         const modal = modalRef.current;
@@ -151,10 +159,10 @@ const Modal: React.FC<propTypes> = props => {
             ref={modalRef}
             role="alert"
             className={!isClicked ? 'modal' : 'modal hidden'}
-            style={{
-                left: `${position.left}px`,
-                top: `${position.top}px`
-            }}
+            // style={{
+            //     left: `${position.left}px`,
+            //     top: `${position.top}px`
+            // }}
         >
             <div className="modal__wrapper">
                 <h2 className="modal__title">{title}</h2>

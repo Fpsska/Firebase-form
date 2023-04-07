@@ -137,11 +137,11 @@ const RegisteredForm: React.FC = () => {
         dispatch(
             switchModalVisibleStatus({
                 name: 'terms-modal',
-                status: !modalStatuses.isModalTermsVisible
+                status: true
             })
         );
 
-        const { elTopPos, elLeftPos } = generateElPosition(
+        const { newElLeftPos, newElTopPos } = generateElPosition(
             modalSize.width,
             modalSize.height
         );
@@ -149,8 +149,8 @@ const RegisteredForm: React.FC = () => {
             setNewModalPosition({
                 name: 'terms-modal',
                 coordinates: {
-                    top: elTopPos,
-                    left: elLeftPos
+                    top: newElTopPos,
+                    left: newElLeftPos
                 }
             })
         );

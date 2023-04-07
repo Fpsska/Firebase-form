@@ -1,11 +1,24 @@
-export function generateElPosition(elWidth: number, elHeight: number): any {
+interface returnedDataTypes {
+    newElLeftPos: number;
+    newElTopPos: number;
+}
+
+export function generateElPosition(
+    elWidth: number,
+    elHeight: number
+): returnedDataTypes {
     const { width, height } = document.body.getBoundingClientRect();
 
-    const newBodyWidth = width - elWidth;
-    const newBodyHeight = height - elHeight;
+    // Y = height
+    // X = width
 
-    const elTopPos = Math.floor(Math.random() * newBodyWidth);
-    const elLeftPos = Math.floor(Math.random() * newBodyHeight);
+    const minX = elWidth;
+    const minY = elHeight;
+    const maxX = width - elWidth;
+    const maxY = height - elHeight;
 
-    return { elTopPos, elLeftPos };
+    const newElLeftPos = Math.random() * (maxX - minX) + Number(minX);
+    const newElTopPos = Math.random() * (maxY - minY) + Number(minY);
+
+    return { newElLeftPos, newElTopPos };
 }
