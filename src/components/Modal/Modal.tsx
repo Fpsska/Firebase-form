@@ -65,6 +65,9 @@ const Modal: React.FC<propTypes> = props => {
 
         modalRef.current.style.top = `${position.top}px`;
         modalRef.current.style.left = `${position.left}px`;
+
+        coords.current.lastX = position.left;
+        coords.current.lastY = position.top;
     }, [position]);
 
     useEffect(() => {
