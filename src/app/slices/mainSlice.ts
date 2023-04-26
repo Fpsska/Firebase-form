@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { handleObjProperties } from '../../helpers/handleObjProperties';
+import { handleObjProperties } from 'helpers/handleObjProperties';
 
 // /. imports
 

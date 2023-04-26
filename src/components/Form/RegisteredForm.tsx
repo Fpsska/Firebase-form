@@ -8,31 +8,28 @@ import { useForm } from 'react-hook-form';
 
 import { BsCheck2 } from 'react-icons/bs';
 
-import { generateElPosition } from '../../helpers/generateElPosition';
+import { generateElPosition } from 'helpers/generateElPosition';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 
-import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
+import { switchPreloaderVisibleStatus } from 'app/slices/mainSlice';
 
 import {
     switchRegistrErrorStatus,
     switchTermsAcceptedStatus,
     switchUserRememberedStatus
-} from '../../app/slices/formSlice';
+} from 'app/slices/formSlice';
 
-import {
-    saveNewUser,
-    switchUserAuthoriseStatus
-} from '../../app/slices/userSlice';
+import { saveNewUser, switchUserAuthoriseStatus } from 'app/slices/userSlice';
 
 import {
     switchModalVisibleStatus,
     setNewModalPosition
-} from '../../app/slices/modalSlice';
+} from 'app/slices/modalSlice';
 
-import { useCookie } from '../../hooks/useCookie';
+import { useCookie } from 'hooks/useCookie';
 
-import PswrdIcon from '../PswrdIcon/PswrdIcon';
+import PswrdIcon from 'components/PswrdIcon/PswrdIcon';
 
 import ButtonSubmit from './ButtonSubmit';
 

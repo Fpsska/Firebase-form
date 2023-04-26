@@ -8,23 +8,20 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { BsCheck2 } from 'react-icons/bs';
 
-import { useCookie } from '../../hooks/useCookie';
+import { useCookie } from 'hooks/useCookie';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 
-import { switchPreloaderVisibleStatus } from '../../app/slices/mainSlice';
+import { switchPreloaderVisibleStatus } from 'app/slices/mainSlice';
 
 import {
     switchUserRememberedStatus,
     switchAuthErrorStatus
-} from '../../app/slices/formSlice';
+} from 'app/slices/formSlice';
 
-import {
-    saveNewUser,
-    switchUserAuthoriseStatus
-} from '../../app/slices/userSlice';
+import { saveNewUser, switchUserAuthoriseStatus } from 'app/slices/userSlice';
 
-import PswrdIcon from '../PswrdIcon/PswrdIcon';
+import PswrdIcon from 'components/PswrdIcon/PswrdIcon';
 
 import ButtonSubmit from './ButtonSubmit';
 

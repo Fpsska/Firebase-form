@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import {
-    formFieldsTypes,
-    passwordStatusesTypes
-} from '../../Types/formSliceTypes';
+import { formFieldsTypes, passwordStatusesTypes } from 'types/formSliceTypes';
 
 // /. imports
 

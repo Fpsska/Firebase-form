@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 import { FcGoogle } from 'react-icons/fc';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 
-import { generateElPosition } from '../../helpers/generateElPosition';
+import { generateElPosition } from 'helpers/generateElPosition';
 
 import {
     switchModalVisibleStatus,
     setNewModalPosition
-} from '../../app/slices/modalSlice';
+} from 'app/slices/modalSlice';
 
 import './button-connect.scss';
 

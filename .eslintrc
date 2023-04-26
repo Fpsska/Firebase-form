@@ -1,12 +1,16 @@
 {
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": [
+                    "src"
+                ]
+            }
+        }
+    },
     "env": {
         "browser": true,
         "es2021": true
-    },
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
     },
     "extends": [
         "eslint:recommended",
@@ -33,7 +37,7 @@
         "prettier/prettier": [
             "warn",
             {
-                "endOfLine": "auto" // solve `CR` warn
+                "endOfLine": "auto"
             }
         ],
         "no-console": "warn",

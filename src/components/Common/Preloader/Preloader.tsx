@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './preloader.scss';
 
 const Preloader: React.FC = () => {

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from 'app/hooks';
 
-import SectionMark from '../../SectionMark/SectionMark';
-import RegisteredForm from '../../Form/RegisteredForm';
-import Modal from '../../Modal/Modal';
+import SectionMark from 'components/SectionMark/SectionMark';
+import RegisteredForm from 'components/Form/RegisteredForm';
+import Modal from 'components/Modal/Modal';
 
 // /. imports
 

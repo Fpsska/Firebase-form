@@ -2,12 +2,12 @@ import React from 'react';
 
 import { useLocation } from 'react-router';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from 'app/hooks';
 
-import ButtonConnect from '../ButtonConnect/ButtonConnect';
-import Theme from '../ThemeButton/ThemeButton';
+import ButtonConnect from 'components/ButtonConnect/ButtonConnect';
+import Theme from 'components/ThemeButton/ThemeButton';
 
-import logo from '../../assets/images/logo_icon.png';
+import logo from 'assets/images/logo_icon.png';
 
 import './header.scss';
 

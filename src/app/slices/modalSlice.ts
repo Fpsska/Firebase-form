@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
 
-import { handleObjProperties } from '../../helpers/handleObjProperties';
+import { handleObjProperties } from 'helpers/handleObjProperties';
 
 import {
     coordinatesTypes,
     modalPositionsTypes,
     modalStatusTypes,
     modalSizeTypes
-} from '../../Types/modalSliceTypes';
+} from 'types/modalSliceTypes';
 
 // /. imports
 

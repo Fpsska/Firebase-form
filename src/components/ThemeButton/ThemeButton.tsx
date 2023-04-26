@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from 'hooks/useTheme';
 
 import './theme.scss';
 

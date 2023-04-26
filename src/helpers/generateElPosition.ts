@@ -3,6 +3,8 @@ interface returnedDataTypes {
     newElTopPos: number;
 }
 
+// /. interfaces
+
 export function generateElPosition(
     elWidth: number,
     elHeight: number

@@ -2,16 +2,13 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 
 import { IoMdClose } from 'react-icons/io';
 
-import { useAppDispatch } from '../../app/hooks';
+import { switchModalVisibleStatus, setModalSize } from 'app/slices/modalSlice';
 
-import {
-    switchModalVisibleStatus,
-    setModalSize
-} from '../../app/slices/modalSlice';
+import { coordinatesTypes } from 'types/modalSliceTypes';
 
-import { coordinatesTypes } from '../../Types/modalSliceTypes';
+import logo from 'assets/images/react-logo_icon.svg';
 
-import logo from '../../assets/images/react-logo_icon.svg';
+import { useAppDispatch } from 'app/hooks';
 
 import './modal.scss';
 

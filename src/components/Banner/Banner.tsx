@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 
 import {
     switchCookieBannerVisibleStatus,
     switchCookieAcceptedStatus
-} from '../../app/slices/cookieSlice';
+} from 'app/slices/cookieSlice';
 
 import './banner.scss';
 

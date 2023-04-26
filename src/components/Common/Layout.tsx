@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Outlet } from 'react-router';
 
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from 'app/hooks';
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Relocate from '../Relocate/Relocate';
+import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
+import Relocate from 'components/Relocate/Relocate';
 
 import Preloader from './Preloader/Preloader';
 

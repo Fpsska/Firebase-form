@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useAppSelector } from '../../app/hooks';
+import Banner from 'components/Banner/Banner';
 
-import Banner from '../Banner/Banner';
+import { useAppSelector } from 'app/hooks';
 
 import './footer.scss';
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
-import { switchPasswordVisibleStatuses } from '../../app/slices/formSlice';
+import { switchPasswordVisibleStatuses } from 'app/slices/formSlice';
 
 // /. imports
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 
-import { setSessionTime } from '../../app/slices/userSlice';
+import { setSessionTime } from 'app/slices/userSlice';
 
 import './timer.scss';
 

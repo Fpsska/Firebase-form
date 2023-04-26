@@ -2,24 +2,27 @@ import React, { useEffect, useRef } from 'react';
 
 import { Route, Routes, useLocation } from 'react-router';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import AuthorisationPage from 'pages/AuthorisationPage/AuthorisationPage';
 
-import { switchPageStatus } from '../../app/slices/mainSlice';
+import RegistrationPage from 'pages/RegistrationPage/RegistrationPage';
 
-import { switchModalVisibleStatus } from '../../app/slices/modalSlice';
+import HomePage from 'pages/HomePage/HomePage';
 
-import { setSessionTime } from '../../app/slices/userSlice';
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 
-import Layout from '../Common/Layout';
-import AuthorisationPage from '../Pages/AuthorisationPage/AuthorisationPage';
-import RegistrationPage from '../Pages/RegistrationPage/RegistrationPage';
-import HomePage from '../Pages/HomePage/HomePage';
+import { switchPageStatus } from 'app/slices/mainSlice';
+
+import { switchModalVisibleStatus } from 'app/slices/modalSlice';
+
+import { setSessionTime } from 'app/slices/userSlice';
+
+import Layout from 'components/Common/Layout';
 
 import './App.css';
-import '../../assets/styles/_reset.scss';
-import '../../assets/styles/style.scss';
-import '../../assets/styles/_theme.scss';
-import '../../assets/styles/_media.scss';
+import 'assets/styles/_reset.scss';
+import 'assets/styles/style.scss';
+import 'assets/styles/_theme.scss';
+import 'assets/styles/_media.scss';
 
 // /. imports
 

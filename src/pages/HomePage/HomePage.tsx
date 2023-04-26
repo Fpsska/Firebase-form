@@ -2,22 +2,22 @@ import React from 'react';
 
 import { Navigate } from 'react-router';
 
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import {
     deleteCurrentUser,
     switchUserAuthoriseStatus
-} from '../../../app/slices/userSlice';
+} from 'app/slices/userSlice';
 
 import {
     switchModalVisibleStatus,
     setNewModalPosition
-} from '../../../app/slices/modalSlice';
+} from 'app/slices/modalSlice';
 
-import { generateElPosition } from '../../../helpers/generateElPosition';
+import { generateElPosition } from 'helpers/generateElPosition';
 
-import Modal from '../../Modal/Modal';
-import Timer from '../../Timer/Timer';
+import Modal from 'components/Modal/Modal';
+import Timer from 'components/Timer/Timer';
 
 import './homePage.scss';
 
