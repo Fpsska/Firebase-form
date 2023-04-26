@@ -1,11 +1,11 @@
 import React from 'react';
 
+import { useLocation } from 'react-router';
+
 import { useAppSelector } from '../../app/hooks';
 
 import ButtonConnect from '../ButtonConnect/ButtonConnect';
 import Theme from '../ThemeButton/ThemeButton';
-
-import { useLocationData } from '../../hooks/useLocationData';
 
 import logo from '../../assets/images/logo_icon.png';
 
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
     const { isUserAuthorise } = useAppSelector(state => state.userSlice);
 
-    const { pathname } = useLocationData();
+    const { pathname } = useLocation();
 
     // /. hooks
 

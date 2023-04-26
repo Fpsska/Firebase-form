@@ -7,10 +7,12 @@ const isOChasDarkTheme = window?.matchMedia(
 ).matches;
 const defaultTheme = isOChasDarkTheme ? 'minimalism' : 'default';
 
+const defineInitThemeValue = (): string => {
+    return localStorage.getItem('app-theme') || defaultTheme;
+};
+
 export function useTheme() {
-    const [theme, setTheme] = useState<any>(
-        localStorage.getItem('app-theme') || defaultTheme
-    );
+    const [theme, setTheme] = useState<string>(() => defineInitThemeValue());
 
     useLayoutEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);

@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { useLocationData } from '../../hooks/useLocationData';
 
 import { switchPageStatus } from '../../app/slices/mainSlice';
 
@@ -28,7 +27,7 @@ const App: React.FC = () => {
     const { isUserAuthorise } = useAppSelector(state => state.userSlice);
 
     const dispatch = useAppDispatch();
-    const location = useLocationData();
+    const location = useLocation();
 
     const appRef = useRef<HTMLDivElement>(null);
 
