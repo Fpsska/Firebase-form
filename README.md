@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -   [react-icons](https://react-icons.github.io/react-icons/)
 -   [react-hook-form](https://react-hook-form.com/)
 
-### `Watch demo` _[Firebase-form](https://firebase-form-lemon.vercel.app/)_
+### `Watch demo` _[Firebase-form](https://firebase-form-app.vercel.app/)_
 
 ##
 
