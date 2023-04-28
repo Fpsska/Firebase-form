@@ -16,7 +16,7 @@ import { switchModalVisibleStatus } from 'app/slices/modalSlice';
 
 import { setSessionTime } from 'app/slices/userSlice';
 
-import Layout from 'components/Common/Layout';
+import Layout from 'components/layout/Layout';
 
 import './App.css';
 import 'assets/styles/_reset.scss';

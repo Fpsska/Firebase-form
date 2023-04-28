@@ -4,11 +4,11 @@ import { Outlet } from 'react-router';
 
 import { useAppSelector } from 'app/hooks';
 
-import Header from 'components/Header/Header';
-import Footer from 'components/Footer/Footer';
-import Relocate from 'components/Relocate/Relocate';
+import Header from 'components/layout/Header/Header';
+import Footer from 'components/layout/Footer/Footer';
+import Relocate from 'components/ui/Relocate/Relocate';
 
-import Preloader from './Preloader/Preloader';
+import Preloader from '../ui/Preloader/Preloader';
 
 // /. imports
 

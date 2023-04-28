@@ -6,7 +6,7 @@ import { switchModalVisibleStatus, setModalSize } from 'app/slices/modalSlice';
 
 import { coordinatesTypes } from 'types/modalSliceTypes';
 
-import logo from 'assets/images/react-logo_icon.svg';
+import logo from 'assets/icons/react-logo_icon.svg';
 
 import { useAppDispatch } from 'app/hooks';
 

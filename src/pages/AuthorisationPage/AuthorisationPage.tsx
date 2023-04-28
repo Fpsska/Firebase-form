@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useAppSelector } from 'app/hooks';
 
-import SectionMark from 'components/SectionMark/SectionMark';
-import Modal from 'components/Modal/Modal';
-import AuthForm from 'components/Form/AuthForm';
+import SectionMark from 'components/ui/SectionMark/SectionMark';
+import Modal from 'components/layout/Modal/Modal';
+import AuthForm from 'components/layout/Form/AuthForm';
 
 // /. imports
 

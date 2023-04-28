@@ -16,8 +16,8 @@ import {
 
 import { generateElPosition } from 'helpers/generateElPosition';
 
-import Modal from 'components/Modal/Modal';
-import Timer from 'components/Timer/Timer';
+import Modal from 'components/layout/Modal/Modal';
+import Timer from 'components/ui/Timer/Timer';
 
 import './homePage.scss';
 

@@ -21,7 +21,7 @@ import {
 
 import { saveNewUser, switchUserAuthoriseStatus } from 'app/slices/userSlice';
 
-import PswrdIcon from 'components/PswrdIcon/PswrdIcon';
+import PswrdIcon from 'components/ui/PswrdIcon/PswrdIcon';
 
 import ButtonSubmit from './ButtonSubmit';
 

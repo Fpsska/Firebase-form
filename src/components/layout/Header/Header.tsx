@@ -4,8 +4,8 @@ import { useLocation } from 'react-router';
 
 import { useAppSelector } from 'app/hooks';
 
-import ButtonConnect from 'components/ButtonConnect/ButtonConnect';
-import Theme from 'components/ThemeButton/ThemeButton';
+import ButtonConnect from 'components/ui/ButtonConnect/ButtonConnect';
+import Theme from 'components/ui/ThemeButton/ThemeButton';
 
 import logo from 'assets/images/logo_icon.png';
 

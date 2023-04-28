@@ -29,7 +29,7 @@ import {
 
 import { useCookie } from 'hooks/useCookie';
 
-import PswrdIcon from 'components/PswrdIcon/PswrdIcon';
+import PswrdIcon from 'components/ui/PswrdIcon/PswrdIcon';
 
 import ButtonSubmit from './ButtonSubmit';
 
