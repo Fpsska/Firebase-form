@@ -75,12 +75,15 @@
         padding: 15px 45px 15px 15px;
     }
 
-    &__icon-password {
+    &__button-password {
+        position: absolute;
+        right: 1.3rem;
+        top: 2.7rem;
+        background-color: transparent;
+        border: transparent;
+
         svg {
             color: var(--password-icon-color);
-            position: absolute;
-            right: 1.3rem;
-            top: 2.7rem;
         }
     }
 

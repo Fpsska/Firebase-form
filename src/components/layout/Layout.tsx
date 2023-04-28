@@ -30,7 +30,11 @@ const Layout: React.FC = () => {
                             <Preloader />
                         </div>
                     )}
-                    {pageStatuses.isHomePage ? <></> : <Relocate />}
+                    {pageStatuses.isHomePage ? (
+                        <></>
+                    ) : (
+                        <Relocate additionalClass="indent" />
+                    )}
                 </>
             </main>
             <Footer />

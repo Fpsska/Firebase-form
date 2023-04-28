@@ -4,10 +4,10 @@
     font-weight: 400;
     color: #fff;
     width: 100%;
-    margin: 15px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+
     &::before {
         content: "";
         background: #fff;
@@ -17,6 +17,7 @@
         top: 0;
         margin: 0 20px 0 15px;
     }
+
     &::after {
         content: "";
         background: #fff;
@@ -26,4 +27,8 @@
         top: 0;
         margin: 0 15px 0 20px;
     }
+}
+
+.section-mark.indent {
+    margin: 15px 0;
 }

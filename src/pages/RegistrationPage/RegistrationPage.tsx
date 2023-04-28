@@ -18,7 +18,7 @@ const RegistrationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
     return (
         <div className="registration">
             <div className="registration__wrapper">
-                <SectionMark />
+                <SectionMark additionalClass="indent" />
                 <RegisteredForm />
                 <>
                     {modalStatuses.isModalRegistrVisible && (

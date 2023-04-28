@@ -4,8 +4,16 @@ import './sectionMark.scss';
 
 // /. imports
 
-const SectionMark: React.FC = () => {
-    return <div className="section-mark">OR</div>;
+const SectionMark: React.FC<{ additionalClass?: string }> = ({
+    additionalClass
+}) => {
+    return (
+        <div
+            className={`section-mark ${additionalClass ? additionalClass : ''}`}
+        >
+            OR
+        </div>
+    );
 };
 
 export default SectionMark;

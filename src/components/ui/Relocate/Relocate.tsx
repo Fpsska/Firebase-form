@@ -8,13 +8,15 @@ import './relocate.scss';
 
 // /. imports
 
-const Relocate: React.FC = () => {
+const Relocate: React.FC<{ additionalClass?: string }> = ({
+    additionalClass
+}) => {
     const { pageStatuses } = useAppSelector(state => state.mainSlice);
 
     // /. hooks
 
     return (
-        <div className="relocate">
+        <div className={`relocate ${additionalClass ? additionalClass : ''}`}>
             {pageStatuses.isAuthPage ? (
                 <p className="relocate__create">
                     Don`t have an account?{' '}

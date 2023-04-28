@@ -1,7 +1,7 @@
 .relocate {
     display: flex;
     justify-content: center;
-    margin: 34px 0 0 0;
+
     &__create,
     &__login {
         font-size: 13px;
@@ -10,13 +10,19 @@
         color: var(--relocate-text-color);
         margin: 0;
     }
+
     &__link {
         font-size: 13px;
         font-weight: 600;
         line-height: 16px;
         color: var(--link-text-color);
+
         &:hover {
             color: #0666e4;
         }
     }
+}
+
+.relocate.indent {
+    margin: 34px 0 0 0;
 }

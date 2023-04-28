@@ -31,7 +31,7 @@ import { useCookie } from 'hooks/useCookie';
 
 import PswrdIcon from 'components/ui/PswrdIcon/PswrdIcon';
 
-import ButtonSubmit from './ButtonSubmit';
+import ButtonSubmit from '../../ui/ButtonSubmit/ButtonSubmit';
 
 import './form.scss';
 

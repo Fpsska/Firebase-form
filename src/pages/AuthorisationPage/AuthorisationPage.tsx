@@ -36,7 +36,7 @@ const AuthorisationPage: React.FC<{ wrapperRef: any }> = ({ wrapperRef }) => {
                         </Modal>
                     )}
                 </>
-                <SectionMark />
+                <SectionMark additionalClass="indent" />
                 <AuthForm />
             </div>
         </div>

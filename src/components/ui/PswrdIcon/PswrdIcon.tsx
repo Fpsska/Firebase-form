@@ -50,7 +50,7 @@ const PswrdIcon: React.FC<PswrdIconPropTypes> = props => {
     return (
         <button
             type="button"
-            className="form__icon-password"
+            className="form__button-password"
             aria-label={isPasswordVisible ? 'hide password' : 'show password'}
         >
             {isPasswordVisible ? (
